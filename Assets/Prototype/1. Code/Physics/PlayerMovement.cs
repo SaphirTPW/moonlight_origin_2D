@@ -11,10 +11,22 @@ public class PlayerMovement : MonoBehaviour
     private PlayerController _pc;
     private Rigidbody2D _rb;
 
+    //Movement Variables 
     [SerializeField] private float _playerSpeed;
     [SerializeField] private float _speedMod;
     [SerializeField][Range(0, 0.3f)] private float _playerMoveSmoothing;
     private Vector3 _velocity = Vector3.zero;
+
+    //Jump Variables
+    [SerializeField] private float _playerJumpForce;
+    [SerializeField] private float _playerFallMultiplier = 2.5f;
+    [SerializeField] private float _playerLowMultiplier = 2f;
+    [SerializeField] private float _playerDefaultGravityScale;
+    [SerializeField] private bool _playerGrounded;
+    [SerializeField] private Transform _playerGroundCheck;
+    [SerializeField] private float _groundCheckRad;
+    [SerializeField] private LayerMask _groundIdentifier;
+
     #endregion
 
     #region Unity Methods 
@@ -28,12 +40,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerGroundChecker();
     }
 
     private void FixedUpdate()
     {
-        MovePlayer(_pc.InputDirection.x);
+        PlayerMove(_pc.InputDirection.x);
+        PlayerJump();
     }
     #endregion
 
@@ -41,10 +54,40 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Private Methods 
-    private void MovePlayer(float pDirection)
+    private void PlayerMove(float pDirection)
     {
         Vector2 targetVelocity = new Vector2(pDirection * _playerSpeed * _speedMod, _rb.linearVelocityY);
         _rb.linearVelocity = Vector3.SmoothDamp(_rb.linearVelocity, targetVelocity, ref _velocity, _playerMoveSmoothing);
+    }
+
+    private void PlayerGroundChecker()
+    {
+        _playerGrounded = false;
+
+        Collider2D[] _colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundCheckRad, _groundIdentifier);
+
+        for (int i = 0; i < _colliders.Length; i++)
+        {
+            if (_colliders[i].gameObject != gameObject)
+                _playerGrounded = true;
+        }
+    }
+
+    private void PlayerJump()
+    {
+        if (_rb.linearVelocityY < 0)
+            _rb.gravityScale = _playerFallMultiplier;
+        else if (_rb.linearVelocityY > 0 && !_pc.HoldJump)
+            _rb.gravityScale = _playerLowMultiplier;
+        else
+            _rb.gravityScale = _playerDefaultGravityScale;
+
+        if(_playerGrounded && _pc.Jump)
+        {
+            _playerGrounded = false;
+            _pc.Jump = false;
+            _rb.AddForce(new Vector2(0f, _playerJumpForce), ForceMode2D.Impulse);
+        }
     }
     
     #endregion
