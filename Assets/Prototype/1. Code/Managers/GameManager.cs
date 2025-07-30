@@ -62,14 +62,17 @@ public class GameManager : MonoBehaviour
             case GameState.Start:
                 break;
             case GameState.Playing:
+                HandlePause();
                 break;
             case GameState.Pause:
+                HandlePause();
                 break;
             case GameState.Stop:
                 break;
             case GameState.Dead:
                 break;
             default:
+                HandlePlayerDeath();
                 break;
         }
         OnGameStateChanged?.Invoke(pGameState);
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     private void HandlePause()
     {
-
+        pauseMenuObj.SetActive(PauseManager.isPaused);
     }
 
     private void PauseManagerOnGamePaused(PauseManager.PauseState pauseState)
