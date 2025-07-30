@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     #region Private Variables 
     private PlayerController _pc;
     private Rigidbody2D _rb;
+    private SpriteRenderer _spr;
 
     //Movement Variables 
     [SerializeField] private float _playerSpeed;
@@ -27,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _groundCheckRad;
     [SerializeField] private LayerMask _groundIdentifier;
 
+    //Change Sprite Orientation
+    private bool _facingRight = true;
+
     #endregion
 
     #region Unity Methods 
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _pc = GetComponent<PlayerController>();
         _rb = GetComponent<Rigidbody2D>();
+        _spr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -58,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 targetVelocity = new Vector2(pDirection * _playerSpeed * _speedMod, _rb.linearVelocityY);
         _rb.linearVelocity = Vector3.SmoothDamp(_rb.linearVelocity, targetVelocity, ref _velocity, _playerMoveSmoothing);
+
+        if (pDirection > 0 && !_facingRight)
+            PlayerFlipSprite();
+        else if (pDirection < 0 && _facingRight)
+            PlayerFlipSprite();
     }
 
     private void PlayerGroundChecker()
@@ -88,6 +98,14 @@ public class PlayerMovement : MonoBehaviour
             _pc.Jump = false;
             _rb.AddForce(new Vector2(0f, _playerJumpForce), ForceMode2D.Impulse);
         }
+    }
+
+    private void PlayerFlipSprite()
+    {
+        _facingRight = !_facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
     
     #endregion

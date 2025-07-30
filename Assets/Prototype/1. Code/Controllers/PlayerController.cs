@@ -9,15 +9,18 @@ public class PlayerController : MonoBehaviour
     public Vector2 InputDirection { get => _inputDirection; set => _inputDirection = value; }
     public bool Jump { get => _jump; set => _jump = value; }
     public bool HoldJump { get => _holdJump; set => _holdJump = value; }
+    public bool Attack { get => _attack; set => _attack = value; }
     #endregion
 
     #region Private Variables 
     private Vector2 _inputDirection;
-    private bool _jump;
-    private bool _holdJump;
+    private bool _jump = false;
+    private bool _holdJump = false;
+    [SerializeField] private bool _attack = false;
     
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canJump;
+    [SerializeField] private bool _canAttack;
     #endregion
 
     #region Unity Methods 
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMoveInput();
         HandleJumpInput();
+        HandleAttackInput();
     }
     #endregion
 
@@ -59,6 +63,17 @@ public class PlayerController : MonoBehaviour
                 _holdJump = true;
             else
                 _holdJump = false;
+        }
+    }
+
+    private void HandleAttackInput()
+    {
+        if (_canAttack)
+        {
+            if (Input.GetButtonDown("Attack"))
+            {
+                _attack = true;
+            }
         }
     }
     #endregion
