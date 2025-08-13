@@ -7,12 +7,12 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     #region Public Variables 
-    public float DefenseModifier { get => _defenseModifier; set => _defenseModifier = value; }
+    public float DefenseMod { get => _defenseModifier; set => _defenseModifier = value; }
     #endregion
 
     #region Private Variables 
     [SerializeField] private float _playerMaxHealth;
-    [SerializeField] private float _playerCurrentHealth;
+    private float _playerCurrentHealth;
     [SerializeField] private TMP_Text _playerHealthText;
     private float _defenseModifier = 1f;
     private bool _isDead = false;

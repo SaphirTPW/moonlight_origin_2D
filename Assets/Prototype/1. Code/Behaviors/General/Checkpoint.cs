@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                Debug.Log("Checkpoint Updated");
+                //Debug.Log("Checkpoint Updated");
                 GameManager.Instance.UpdateCheckpoint(transform);
             }
         }

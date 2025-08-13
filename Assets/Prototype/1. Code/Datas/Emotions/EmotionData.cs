@@ -15,7 +15,7 @@ public class EmotionData : ScriptableObject
 
     public float buildUpRate;
     public float coolDownRate;
-    public float crashCoolDonwRate;
+    public float crashCoolDownRate;
     #endregion
 
 }

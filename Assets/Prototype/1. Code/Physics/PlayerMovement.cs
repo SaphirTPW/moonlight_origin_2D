@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     #region Public Variables 
+    public float SpeedMod { get => _speedMod; set => _speedMod = value; }
     #endregion
 
     #region Private Variables 
