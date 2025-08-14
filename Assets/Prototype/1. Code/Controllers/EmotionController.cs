@@ -81,9 +81,9 @@ public class EmotionController : MonoBehaviour
                 EnableEmotion(_emotions[1], ActiveEmotionState.Joy);
             else if (_dPadV > 0)
                 EnableEmotion(_emotions[3], ActiveEmotionState.Sadness);
-            else if (_dPadH > 0)
-                EnableEmotion(_emotions[2], ActiveEmotionState.Anger);
             else if (_dPadH < 0)
+                EnableEmotion(_emotions[2], ActiveEmotionState.Anger);
+            else if (_dPadH > 0)
                 EnableEmotion(_emotions[4], ActiveEmotionState.Fear);
             else if (Input.GetButtonDown("Neutral"))
                 EnableEmotion(_emotions[0], ActiveEmotionState.Neutral);

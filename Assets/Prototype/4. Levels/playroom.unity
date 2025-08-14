@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75486821
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,7 +1252,7 @@ Transform:
   m_GameObject: {fileID: 1058434220}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: -3.75, z: 0}
+  m_LocalPosition: {x: 33, y: -3.75, z: 0}
   m_LocalScale: {x: 2, y: 7.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2417,6 +2417,9 @@ PrefabInstance:
       addedObject: {fileID: 1484301230203224759}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1484301230203224769}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1484301230203224758}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
@@ -2473,7 +2476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c01ca42949be244ab89abadbbe56e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emotionData: {fileID: 11400000, guid: 5f737274b1653a04f8f52b35f7f719be, type: 2}
+  _emotionData: {fileID: 11400000, guid: a0e01965b8324304a8783dfc6fe569ca, type: 2}
+  _passive: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -2492,7 +2496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff90b5440a0e924ba5de73c0124a584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emotionData: {fileID: 11400000, guid: 52684ba64919e6c4e8883ac5df2b71c8, type: 2}
+  _emotionData: {fileID: 11400000, guid: d9d7e6b1bcaf38340a27ab108fa42f59, type: 2}
+  _passive: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -2511,7 +2516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e399e886a4954494883c049c96178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emotionData: {fileID: 11400000, guid: bb968c4c7db9e044f9fe45ece2f538f8, type: 2}
+  _emotionData: {fileID: 11400000, guid: 0751858e8e3be624dbeaf32faf6cdbee, type: 2}
+  _passive: {fileID: 1484301230203224769}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -2530,7 +2536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa50f519f8b4ca24b9a01eea5160dbc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emotionData: {fileID: 11400000, guid: 07a5bd391984d4e438557bfc4ff06740, type: 2}
+  _emotionData: {fileID: 11400000, guid: 8ca35d81f6069f54dbc6f01053dd98b4, type: 2}
+  _passive: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -2550,12 +2557,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: fae9d04c9985ff14a9fcf60c1f239a86, type: 2}
+  _passive: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
   _buildUpRate: 0
   _coolDownRate: 0
   _emotionName: 
+--- !u!114 &1484301230203224769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae39255b5f312f47a9d517f23f5bf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _passiveData: {fileID: 11400000, guid: cfbd497d79aa83c46a00a0b4da0dbaf4, type: 2}
+  _passiveState: 1
+  _sprintTime: 0
+  _maxSprintTime: 3
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2627,11 +2651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7475673482885338773, guid: fa95b65891eaac04b9632ff73de20aed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 7475673482885338773, guid: fa95b65891eaac04b9632ff73de20aed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7475673482885338773, guid: fa95b65891eaac04b9632ff73de20aed, type: 3}
       propertyPath: m_LocalPosition.z

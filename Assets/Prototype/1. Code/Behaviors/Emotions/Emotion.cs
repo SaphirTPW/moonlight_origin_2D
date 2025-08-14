@@ -12,6 +12,7 @@ public class Emotion : MonoBehaviour
 
     #region Private Variables 
     [SerializeField] private EmotionData _emotionData;
+    [SerializeField] private Passive _passive;
     private PlayerHealth _pH;
     private PlayerMovement _pm;
     private PlayerCombat _pCom;
@@ -21,14 +22,9 @@ public class Emotion : MonoBehaviour
     [SerializeField] private float _maxEmotionEnergy = 100f;
     [SerializeField] private float _currentEmotionEnergy;
     [SerializeField] private float _buildUpRate;
-    private float _buildUpTimeBase = 30f;
     [SerializeField] private float _coolDownRate;
-    private float _coolDownTimeBase = 30f;
     [SerializeField] private string _emotionName;
     private float _crashOutCooldownRate;
-    private float _crashOutCooldownTimeBase = 30f;
-
-    private float _elapsedTime = 0f;
 
     private float _defenseModifier;
     private float _speedModifier;
@@ -148,17 +144,6 @@ public class Emotion : MonoBehaviour
     #endregion
 
     #region Protected Methods 
-    
-
-    protected virtual void HandlePassiveAction()
-    {
-
-    }
-
-    protected virtual void CallAbility()
-    {
-
-    }
     #endregion
 
     #region Coroutines

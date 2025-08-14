@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     #region Public Variables 
     public float SpeedMod { get => _speedMod; set => _speedMod = value; }
+    public float PlayerSpeed { get => _playerSpeed; set => _playerSpeed = value; }
     #endregion
 
     #region Private Variables 

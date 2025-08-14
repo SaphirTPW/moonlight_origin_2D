@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool Jump { get => _jump; set => _jump = value; }
     public bool HoldJump { get => _holdJump; set => _holdJump = value; }
     public bool Attack { get => _attack; set => _attack = value; }
+    public bool IsMoving { get => _IsMoving; set => _IsMoving = value; }
     #endregion
 
     #region Private Variables 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool _jump = false;
     private bool _holdJump = false;
     [SerializeField] private bool _attack = false;
+    [SerializeField] private bool _IsMoving = false;
     
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canJump;
@@ -49,6 +51,11 @@ public class PlayerController : MonoBehaviour
         {
             _inputDirection.x = Input.GetAxis("Horizontal");
             _inputDirection.y = Input.GetAxis("Vertical");
+
+            if (_inputDirection.x > 0 || _inputDirection.x < 0)
+                _IsMoving = true;
+            else
+                _IsMoving = false;
         }
     }
 
