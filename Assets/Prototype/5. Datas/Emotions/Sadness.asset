@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Sadness
   m_EditorClassIdentifier: 
   emotionName: Sadness
+  emotionType: 3
   powerModifier: 0.35
   defenseModifier: 0.25
   speedModifier: 0.5

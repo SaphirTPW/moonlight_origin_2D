@@ -386,6 +386,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 519420032}
   - {fileID: 1139965719}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -768,12 +769,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5999999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 191387841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -2417,6 +2418,9 @@ PrefabInstance:
       addedObject: {fileID: 1484301230203224759}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1484301230203224777}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1484301230203224769}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
@@ -2478,12 +2482,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: a0e01965b8324304a8783dfc6fe569ca, type: 2}
   _passive: {fileID: 0}
+  _skills: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
   _buildUpRate: 0
   _coolDownRate: 0
   _emotionName: Sadness
+  _canUseSkill: 0
 --- !u!114 &1484301230203224758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2498,12 +2504,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: d9d7e6b1bcaf38340a27ab108fa42f59, type: 2}
   _passive: {fileID: 0}
+  _skills: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
   _buildUpRate: 0
   _coolDownRate: 0
   _emotionName: Anger
+  _canUseSkill: 0
 --- !u!114 &1484301230203224759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,12 +2526,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: 0751858e8e3be624dbeaf32faf6cdbee, type: 2}
   _passive: {fileID: 1484301230203224769}
+  _skills: {fileID: 1484301230203224777}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
   _buildUpRate: 0
   _coolDownRate: 0
   _emotionName: Joy
+  _canUseSkill: 0
 --- !u!114 &1484301230203224760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2538,12 +2548,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: 8ca35d81f6069f54dbc6f01053dd98b4, type: 2}
   _passive: {fileID: 0}
+  _skills: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
   _buildUpRate: 0
   _coolDownRate: 0
   _emotionName: Fear
+  _canUseSkill: 0
 --- !u!114 &1484301230203224761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2558,12 +2570,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: fae9d04c9985ff14a9fcf60c1f239a86, type: 2}
   _passive: {fileID: 0}
+  _skills: {fileID: 0}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
   _buildUpRate: 0
   _coolDownRate: 0
   _emotionName: 
+  _canUseSkill: 0
 --- !u!114 &1484301230203224769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,6 +2594,24 @@ MonoBehaviour:
   _passiveState: 1
   _sprintTime: 0
   _maxSprintTime: 3
+--- !u!114 &1484301230203224777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f44cb28d24add4469ac2a8b26f3a42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 6c281b29cb958d448b83d3fb5140830f, type: 2}
+  _emotion: {fileID: 1484301230203224759}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _skillCost: 0
+  _jumpForce: 10
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3096,6 +3128,5 @@ SceneRoots:
   - {fileID: 2115875452}
   - {fileID: 173832285}
   - {fileID: 858823282}
-  - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1730848897}

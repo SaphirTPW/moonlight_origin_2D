@@ -69,7 +69,7 @@ public class Passive : MonoBehaviour
     
     public virtual void HandlePassiveOn()
     {
-        if ((int)_passiveState == (int)_ec.CurrentActiveEmotion)
+        if ((int)_passiveData.passiveEmoType == (int)_ec.CurrentActiveEmotion)
         {
             if (_passiveData.passiveType == PassiveData.PassiveType.Auto)
             {

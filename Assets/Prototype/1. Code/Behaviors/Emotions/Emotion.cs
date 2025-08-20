@@ -13,6 +13,7 @@ public class Emotion : MonoBehaviour
     #region Private Variables 
     [SerializeField] private EmotionData _emotionData;
     [SerializeField] private Passive _passive;
+    [SerializeField] private Skill _skills;
     private PlayerHealth _pH;
     private PlayerMovement _pm;
     private PlayerCombat _pCom;
@@ -31,6 +32,7 @@ public class Emotion : MonoBehaviour
     private float _attackModifier;
 
     private bool _isAwake;
+    [SerializeField] private bool _canUseSkill = false;
 
     #endregion
 
@@ -53,6 +55,7 @@ public class Emotion : MonoBehaviour
     public virtual void Update()
     {
         UpdateEmotionState(_emotionState);
+        HandleSKill();
     }
     #endregion
 
@@ -133,6 +136,29 @@ public class Emotion : MonoBehaviour
             _currentEmotionEnergy = 0;
             _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
             _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral);
+        }
+    }
+
+    public virtual void HandleSKill()
+    {
+        if((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion)
+        {
+            if (Input.GetButton("LB"))
+            {
+                _canUseSkill = true;
+            }
+            else if (Input.GetButtonUp("LB"))
+            {
+                _canUseSkill = false;
+            }
+
+            if (_canUseSkill)
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    _skills.EnableSkill(_skills.SkillCost);
+                }
+            }
         }
     }
     public enum EmotionState

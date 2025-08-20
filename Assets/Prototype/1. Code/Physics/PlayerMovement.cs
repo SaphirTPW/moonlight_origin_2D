@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     #region Public Variables 
     public float SpeedMod { get => _speedMod; set => _speedMod = value; }
     public float PlayerSpeed { get => _playerSpeed; set => _playerSpeed = value; }
+    public Rigidbody2D Rb { get => _rb; set => _rb = value; }
     #endregion
 
     #region Private Variables 

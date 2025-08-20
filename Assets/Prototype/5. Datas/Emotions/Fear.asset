@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fear
   m_EditorClassIdentifier: 
   emotionName: Fear
+  emotionType: 4
   powerModifier: 0.5
   defenseModifier: 0.35
   speedModifier: 1.25
