@@ -12,6 +12,8 @@ public class Emotion : MonoBehaviour
 
     #region Private Variables 
     [SerializeField] private EmotionData _emotionData;
+    //"Co" in emotionCoData means "Crash Out"
+    [SerializeField] private EmotionData _emotionCoData;
     [SerializeField] private Passive _passive;
     [SerializeField] private Skill _skills;
     private PlayerHealth _pH;
@@ -30,9 +32,11 @@ public class Emotion : MonoBehaviour
     private float _defenseModifier;
     private float _speedModifier;
     private float _attackModifier;
+    private float _moveSmoothing;
 
     private bool _isAwake;
-    [SerializeField] private bool _canUseSkill = false;
+    [SerializeField] private bool _openSkillTab = false;
+    [SerializeField] private bool _canUseSkill = true;
 
     #endregion
 
@@ -71,6 +75,12 @@ public class Emotion : MonoBehaviour
         _defenseModifier = _emotionData.defenseModifier;
         _speedModifier = _emotionData.speedModifier;
         _attackModifier = _emotionData.powerModifier;
+        _moveSmoothing = _emotionData.moveSmoothing;
+
+        if(_emotionState == EmotionState.CrashOut)
+        {
+
+        }
 
         _emotionState = EmotionState.Sleep;
     }
@@ -101,6 +111,7 @@ public class Emotion : MonoBehaviour
         _pH.DefenseMod = _defenseModifier;
         _pm.SpeedMod = _speedModifier;
         _pCom.AttackMod = _attackModifier;
+        _pm.PlayerMoveSmoothing = _moveSmoothing;
         _isAwake = true;
 
         if (_isAwake)
@@ -110,7 +121,10 @@ public class Emotion : MonoBehaviour
             {
                 _currentEmotionEnergy = _maxEmotionEnergy;
                 if (_emotionName != "Neutral")
+                {
                     _emotionState = EmotionState.CrashOut;
+                    _canUseSkill = false;
+                }
             }
         }
 
@@ -136,23 +150,24 @@ public class Emotion : MonoBehaviour
             _currentEmotionEnergy = 0;
             _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
             _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral);
+            _canUseSkill = true;
         }
     }
 
     public virtual void HandleSKill()
     {
-        if((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion)
+        if((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseSkill)
         {
             if (Input.GetButton("LB"))
             {
-                _canUseSkill = true;
+                _openSkillTab = true;
             }
             else if (Input.GetButtonUp("LB"))
             {
-                _canUseSkill = false;
+                _openSkillTab = false;
             }
 
-            if (_canUseSkill)
+            if (_openSkillTab)
             {
                 if (Input.GetButtonDown("Jump"))
                 {

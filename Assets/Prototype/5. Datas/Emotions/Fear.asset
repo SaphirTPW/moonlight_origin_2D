@@ -17,6 +17,11 @@ MonoBehaviour:
   powerModifier: 0.5
   defenseModifier: 0.35
   speedModifier: 1.25
-  buildUpRate: 1
-  coolDownRate: 1
-  crashCoolDownRate: 1
+  moveSmoothing: 0.65
+  coPowerModifier: 0.35
+  coDefenseModifier: 0.2
+  coSpeedModifier: 2
+  coMoveSmoothing: 0.6
+  buildUpRate: 4
+  coolDownRate: 4
+  crashCoolDownRate: 3

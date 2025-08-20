@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float SpeedMod { get => _speedMod; set => _speedMod = value; }
     public float PlayerSpeed { get => _playerSpeed; set => _playerSpeed = value; }
     public Rigidbody2D Rb { get => _rb; set => _rb = value; }
+    public float PlayerMoveSmoothing { get => _playerMoveSmoothing; set => _playerMoveSmoothing = value; }
     #endregion
 
     #region Private Variables 
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     //Movement Variables 
     [SerializeField] private float _playerSpeed;
     [SerializeField] private float _speedMod;
-    [SerializeField][Range(0, 0.3f)] private float _playerMoveSmoothing;
+    [SerializeField][Range(0, 0.75f)] private float _playerMoveSmoothing;
     private Vector3 _velocity = Vector3.zero;
 
     //Jump Variables

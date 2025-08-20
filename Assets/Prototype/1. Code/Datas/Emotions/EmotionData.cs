@@ -13,6 +13,12 @@ public class EmotionData : ScriptableObject
     public float powerModifier;
     public float defenseModifier;
     public float speedModifier;
+    public float moveSmoothing;
+
+    public float coPowerModifier;
+    public float coDefenseModifier;
+    public float coSpeedModifier;
+    public float coMoveSmoothing;
 
     public float buildUpRate;
     public float coolDownRate;
