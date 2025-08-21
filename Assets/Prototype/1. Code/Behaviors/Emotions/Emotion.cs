@@ -34,6 +34,11 @@ public class Emotion : MonoBehaviour
     private float _attackModifier;
     private float _moveSmoothing;
 
+    private float _coPowerModifier;
+    private float _coDefenseModifier;
+    private float _coSpeedModifier;
+    private float _coMoveSmoothing;
+
     private bool _isAwake;
     [SerializeField] private bool _openSkillTab = false;
     [SerializeField] private bool _canUseSkill = true;
@@ -53,6 +58,7 @@ public class Emotion : MonoBehaviour
     public virtual void Start()
     {
         SetEmotionStat();
+        SetCoEmotionStat();
     }
 
     // Update is called once per frame
@@ -77,12 +83,15 @@ public class Emotion : MonoBehaviour
         _attackModifier = _emotionData.powerModifier;
         _moveSmoothing = _emotionData.moveSmoothing;
 
-        if(_emotionState == EmotionState.CrashOut)
-        {
-
-        }
-
         _emotionState = EmotionState.Sleep;
+    }
+
+    public virtual void SetCoEmotionStat()
+    {
+        _coDefenseModifier = _emotionData.coDefenseModifier;
+        _coPowerModifier = _emotionData.coPowerModifier;
+        _coSpeedModifier = _emotionData.coSpeedModifier;
+        _coMoveSmoothing = _emotionData.coMoveSmoothing;
     }
 
     public virtual void UpdateEmotionState(EmotionState pEmotionState)
@@ -142,6 +151,11 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleCrashOut()
     {
+        _pH.DefenseMod = _coDefenseModifier;
+        _pm.SpeedMod = _coSpeedModifier;
+        _pCom.AttackMod = _coPowerModifier;
+        _pm.PlayerMoveSmoothing = _coMoveSmoothing;
+
         _ec.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
         _currentEmotionEnergy -= Time.deltaTime * _crashOutCooldownRate;
 
