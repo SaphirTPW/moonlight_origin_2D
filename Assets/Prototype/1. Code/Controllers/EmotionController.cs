@@ -13,6 +13,7 @@ public class EmotionController : MonoBehaviour
     public bool CanSwitch { get => _canSwitch; set => _canSwitch = value; }
     public bool CoolDownIsOn { get => _coolDownIsOn; set => _coolDownIsOn = value; }
     public Emotion[] Emotions { get => _emotions; set => _emotions = value; }
+    public TMP_Text EmotionIndacatorText { get => _emotionIndacatorText; set => _emotionIndacatorText = value; }
     #endregion
 
     #region Private Variables 
@@ -33,6 +34,7 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private TMP_Text _angerValueText;
     [SerializeField] private TMP_Text _sadnessValueText;
     [SerializeField] private TMP_Text _fearValueText;
+    [SerializeField] private TMP_Text _emotionIndacatorText;
     #endregion
 
     #region Unity Methods 
@@ -78,15 +80,30 @@ public class EmotionController : MonoBehaviour
             _dPadV = Input.GetAxisRaw("DPAD-V");
 
             if (_dPadV < 0)
+            {
                 EnableEmotion(_emotions[1], ActiveEmotionState.Joy);
+                _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
+            }
             else if (_dPadV > 0)
+            {
                 EnableEmotion(_emotions[3], ActiveEmotionState.Sadness);
+                _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
+            }
             else if (_dPadH < 0)
+            {
                 EnableEmotion(_emotions[2], ActiveEmotionState.Anger);
+                _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
+            }
             else if (_dPadH > 0)
+            {
                 EnableEmotion(_emotions[4], ActiveEmotionState.Fear);
+                _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
+            }
             else if (Input.GetButtonDown("Neutral"))
+            {
                 EnableEmotion(_emotions[0], ActiveEmotionState.Neutral);
+                _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+            }
                 
         }
     }
