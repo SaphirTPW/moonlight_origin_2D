@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerSpeed { get => _playerSpeed; set => _playerSpeed = value; }
     public Rigidbody2D Rb { get => _rb; set => _rb = value; }
     public float PlayerMoveSmoothing { get => _playerMoveSmoothing; set => _playerMoveSmoothing = value; }
+    public bool PlayerGrounded { get => _playerGrounded; set => _playerGrounded = value; }
+    public float PlayerFallMultiplier { get => _playerFallMultiplier; set => _playerFallMultiplier = value; }
     #endregion
 
     #region Private Variables 

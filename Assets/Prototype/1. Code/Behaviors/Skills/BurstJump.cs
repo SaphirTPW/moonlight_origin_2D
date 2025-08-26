@@ -7,6 +7,8 @@ public class BurstJump : Skill
 {
     #region Public Variables 
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _startBurstCount;
+    [SerializeField] private float _burstJumpCount = 1f;
     #endregion
 
     #region Private Variables 
@@ -17,6 +19,7 @@ public class BurstJump : Skill
     public override void Start()
     {
         base.Start();
+        _burstJumpCount = _startBurstCount;
     }
 
     // Update is called once per frame
@@ -46,8 +49,21 @@ public class BurstJump : Skill
 
     private void HandleBurstJump()
     {
-        PM.Rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
+
+        if (!PM.PlayerGrounded && _burstJumpCount != 0)
+        {
+            PM.Rb.linearVelocity = new Vector3(PM.Rb.linearVelocity.x, 0, 0);
+            PM.Rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
+            _burstJumpCount -= 1f;
+        }
+
+        if (CurrentSkillState == SkillState.Ready)
+        {
+            _burstJumpCount = _startBurstCount;
+        }
+        
         CurrentSkillState = SkillState.CoolDown;
+
     }
     #endregion
 

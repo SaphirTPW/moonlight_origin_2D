@@ -2781,6 +2781,10 @@ MonoBehaviour:
   _coolDownTime: 0
   _skillCost: 0
   _jumpForce: 10
+  _startBurstCount: 1
+  _burstJumpCount: 1
+  _airFallMultiplier: 1
+  _startFallMultiplier: 2.5
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0
