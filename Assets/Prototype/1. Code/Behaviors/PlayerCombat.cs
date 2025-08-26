@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -11,17 +12,28 @@ public class PlayerCombat : MonoBehaviour
     #endregion
 
     #region Private Variables 
-    private PlayerController _pc;
+    private PlayerController _pController;
+    private PlayerMovement _pMovement;
 
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _attackRange;
+    [SerializeField] private float _knockBackForce = 50f;
+    [SerializeField] private float _knockBackUp = 10f;
+    [SerializeField] private float _recoilForce;
 
     [SerializeField] private float _attackDamage;
     private float _attackMod = 1f;
     [SerializeField] private float _playerComboCounter;
     [SerializeField] private float _playerComboTime;
     [SerializeField] private float _playerComboTimer;
+
+    private Vector2 _attackDirectionInput;
+    //[SerializeField] private Transform _forwardAttackPoint;
+    [SerializeField] private Transform _startAttackPoint;
+    [SerializeField] private Transform _upAttackPoint;
+    [SerializeField] private Transform _downAttackPoint;
+    //[SerializeField] private Transform _backAttackPoint;
     
     private bool _isAttacking;
 
@@ -31,7 +43,8 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        _pc = GetComponent<PlayerController>();
+        _pController = GetComponent<PlayerController>();
+        _pMovement = GetComponent<PlayerMovement>();
         SetComboTimer();
     }
 
@@ -40,6 +53,7 @@ public class PlayerCombat : MonoBehaviour
     {
         PlayerAttack(_attackDamage);
         EnableComboTimer();
+        SetAttackDirection();
     }
     #endregion
 
@@ -49,19 +63,27 @@ public class PlayerCombat : MonoBehaviour
     #region Private Methods 
     private void PlayerAttack(float pDamage)
     {
-        if (_pc.Attack)
+        if (_pController.Attack)
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
 
             foreach (Collider2D enemy in hitEnemies)
             {
                 enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod);
+                enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
+                PlayerAttackRecoil(enemy.transform, _recoilForce);
                 _isAttacking = true;
                 _playerComboCounter++;
                 SetComboTimer();
             }
-            _pc.Attack = false;
+            _pController.Attack = false;
         }
+    }
+
+    private void PlayerAttackRecoil(Transform pTransform, float pRecoilForce)
+    {
+        Vector2 direction = (transform.position - pTransform.position).normalized;
+        _pMovement.Rb.linearVelocity = direction * pRecoilForce;
     }
 
     private void ResetComboCounter()
@@ -74,6 +96,25 @@ public class PlayerCombat : MonoBehaviour
     private void SetComboTimer()
     {
         _playerComboTimer = _playerComboTime;
+    }
+
+    private void SetAttackDirection()
+    {
+        _attackDirectionInput.x = Input.GetAxisRaw("Horizontal");
+        _attackDirectionInput.y = Input.GetAxisRaw("Vertical");
+
+        if(_attackDirectionInput.y > 0)
+        {
+            _attackPoint.position = _upAttackPoint.position;
+        }
+        else if(_attackDirectionInput.y < 0)
+        {
+            _attackPoint.position = _downAttackPoint.position;
+        }
+        else
+        {
+            _attackPoint.position = _startAttackPoint.position;
+        }
     }
 
     private void EnableComboTimer()

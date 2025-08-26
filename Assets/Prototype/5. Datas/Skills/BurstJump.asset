@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BurstJump
   m_EditorClassIdentifier: 
   skillName: BurstJump
-  skillDesc: "Donne un saut suppl\xE9mentaire."
+  skillDesc: "Donne un saut suppl\xE9mentaire dans les aires"
   skillEmoType: 1
   coolDownTime: 2
   skillCost: 5
