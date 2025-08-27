@@ -616,6 +616,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Proto_Dummy_Actor
       objectReference: {fileID: 0}
+    - target: {fileID: 4925704985739896449, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
+      propertyPath: _enemyMaxHealth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987269080384018072, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6842429125690688647, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -656,20 +664,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7228583238565223742, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
-      propertyPath: _knockbackSpeed
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3469763568394322885, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 467107702}
   m_SourcePrefab: {fileID: 100100000, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
 --- !u!4 &467107700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6842429125690688647, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
   m_PrefabInstance: {fileID: 467107699}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &467107701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3469763568394322885, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
+  m_PrefabInstance: {fileID: 467107699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &467107702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467107701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b04642d94755254e883711dffd69959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,37 +2113,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759295461}
   m_CullTransparentMesh: 1
---- !u!1 &1818296785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1818296786}
-  m_Layer: 0
-  m_Name: DashCrushPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1818296786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818296785}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1043338633}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1944850840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2886,9 +2879,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2552198136806316451, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1719657410}
-    - targetCorrespondingSourceObject: {fileID: 2552198136806316451, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1818296786}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
@@ -2908,9 +2898,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484301230203224758}
-    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1484301230203224786}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484301230203224757}
@@ -2992,8 +2979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: d9d7e6b1bcaf38340a27ab108fa42f59, type: 2}
   _passive: {fileID: 0}
-  _skills:
-  - {fileID: 1484301230203224786}
+  _skills: []
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -3128,37 +3114,10 @@ MonoBehaviour:
   _startCoolDownTime: 0
   _coolDownTime: 0
   _skillCost: 0
+  _dashState: 0
   _dashForce: 20
---- !u!114 &1484301230203224786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484301230203224755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdcdfdf73df4d994da0ddbf2070dc161, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _skillData: {fileID: 11400000, guid: cc3d2551358b8cc4f86c3fd10085dd41, type: 2}
-  _emotion: {fileID: 1484301230203224758}
-  _currentSkillState: 0
-  _startCoolDownTime: 0
-  _coolDownTime: 0
-  _skillCost: 0
-  _attackPoint: {fileID: 1818296786}
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _attackRange: 1
-  _knockBackForce: 10
-  _knockBackUp: 1
-  _recoilForce: 3
-  _dashForce: 5
   _maxDashTime: 1
-  _damage: 20
-  _isActive: 0
+  _dashTime: 0
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0

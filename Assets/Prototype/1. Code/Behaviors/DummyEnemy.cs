@@ -10,7 +10,6 @@ public class DummyEnemy : MonoBehaviour
 
     #region Private Variables 
     private Rigidbody2D _dummyRb;
-    [SerializeField] private float _knockbackSpeed;
     #endregion
 
     #region Unity Methods 
@@ -32,7 +31,7 @@ public class DummyEnemy : MonoBehaviour
     {
         Vector2 direction = (transform.position - pTransform.position).normalized;
         //_dummyRb.linearVelocity = direction * pknockbackForce;
-        _dummyRb.linearVelocity = new Vector2(direction.x * _knockbackSpeed, pknockbackUp) * pknockbackForce;
+        _dummyRb.linearVelocity = new Vector2(direction.x, pknockbackUp) * pknockbackForce;
         Debug.Log("knockback applied.");
     }
     #endregion

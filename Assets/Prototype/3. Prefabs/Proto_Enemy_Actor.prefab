@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5987269080384018072}
   - component: {fileID: 4925704985739896449}
   - component: {fileID: 3375882098015118075}
-  - component: {fileID: 7228583238565223742}
   m_Layer: 7
   m_Name: Proto_Enemy_Actor
   m_TagString: Untagged
@@ -117,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &4925704985739896449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8243762eef5d3d94ba873878bbd22b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMaxHealth: 200
+  _enemyMaxHealth: 1000
   _enemyCurrentHealth: 0
 --- !u!70 &3375882098015118075
 CapsuleCollider2D:
@@ -169,16 +168,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &7228583238565223742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3469763568394322885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b04642d94755254e883711dffd69959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _knockbackSpeed: 0
