@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d030623c35a820b41a0c78fe270c4583, type: 3}
   m_Name: BurstJump
   m_EditorClassIdentifier: 
-  skillName: BurstJump
+  skillName: Burst Jump
   skillDesc: "Donne un saut suppl\xE9mentaire dans les aires"
   skillEmoType: 1
   coolDownTime: 2

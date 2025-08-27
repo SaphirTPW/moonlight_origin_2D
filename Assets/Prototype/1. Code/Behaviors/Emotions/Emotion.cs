@@ -12,10 +12,8 @@ public class Emotion : MonoBehaviour
 
     #region Private Variables 
     [SerializeField] private EmotionData _emotionData;
-    //"Co" in emotionCoData means "Crash Out"
-    [SerializeField] private EmotionData _emotionCoData;
     [SerializeField] private Passive _passive;
-    [SerializeField] private Skill _skills;
+    [SerializeField] private Skill[] _skills;
     private PlayerHealth _pH;
     private PlayerMovement _pm;
     private PlayerCombat _pCom;
@@ -186,7 +184,11 @@ public class Emotion : MonoBehaviour
             {
                 if (Input.GetButtonDown("Jump"))
                 {
-                    _skills.EnableSkill(_skills.SkillCost);
+                    _skills[0].EnableSkill(_skills[0].SkillCost);
+                }
+                else if (Input.GetButtonDown("Cancel"))
+                {
+                    _skills[1].EnableSkill(_skills[1].SkillCost);
                 }
             }
         }

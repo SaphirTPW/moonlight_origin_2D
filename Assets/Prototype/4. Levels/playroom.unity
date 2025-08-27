@@ -1814,7 +1814,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2891,6 +2891,9 @@ PrefabInstance:
       addedObject: {fileID: 1484301230203224777}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1484301230203224778}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1484301230203224769}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
@@ -2938,6 +2941,7 @@ MonoBehaviour:
   _angerValueText: {fileID: 1343785963}
   _sadnessValueText: {fileID: 749996733}
   _fearValueText: {fileID: 2095355602}
+  _emotionIndacatorText: {fileID: 1611898388}
 --- !u!114 &1484301230203224757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2951,9 +2955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: a0e01965b8324304a8783dfc6fe569ca, type: 2}
-  _emotionCoData: {fileID: 0}
   _passive: {fileID: 0}
-  _skills: {fileID: 0}
+  _skills: []
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -2975,9 +2978,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: d9d7e6b1bcaf38340a27ab108fa42f59, type: 2}
-  _emotionCoData: {fileID: 0}
   _passive: {fileID: 0}
-  _skills: {fileID: 0}
+  _skills: []
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -2999,9 +3001,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: 0751858e8e3be624dbeaf32faf6cdbee, type: 2}
-  _emotionCoData: {fileID: 0}
   _passive: {fileID: 1484301230203224769}
-  _skills: {fileID: 1484301230203224777}
+  _skills:
+  - {fileID: 1484301230203224777}
+  - {fileID: 1484301230203224778}
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -3023,9 +3026,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: 8ca35d81f6069f54dbc6f01053dd98b4, type: 2}
-  _emotionCoData: {fileID: 0}
   _passive: {fileID: 0}
-  _skills: {fileID: 0}
+  _skills: []
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -3047,9 +3049,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emotionData: {fileID: 11400000, guid: fae9d04c9985ff14a9fcf60c1f239a86, type: 2}
-  _emotionCoData: {fileID: 0}
   _passive: {fileID: 0}
-  _skills: {fileID: 0}
+  _skills: []
   _emotionState: 0
   _maxEmotionEnergy: 100
   _currentEmotionEnergy: 0
@@ -3095,6 +3096,28 @@ MonoBehaviour:
   _jumpForce: 10
   _startBurstCount: 1
   _burstJumpCount: 1
+--- !u!114 &1484301230203224778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9cafe2f7548ad45999bb24c6161bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 41363b664a95b6b4ca3c255ad73eec38, type: 2}
+  _emotion: {fileID: 1484301230203224759}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _dashState: 0
+  _dashForce: 20
+  _maxDashTime: 1
+  _dashTime: 0
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0
