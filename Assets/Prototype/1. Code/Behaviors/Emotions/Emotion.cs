@@ -18,6 +18,7 @@ public class Emotion : MonoBehaviour
     private PlayerMovement _pm;
     private PlayerCombat _pCom;
     private EmotionController _ec;
+    private PlayerController _pController;
 
     [SerializeField] private EmotionState _emotionState;
     [SerializeField] private float _maxEmotionEnergy = 100f;
@@ -51,6 +52,7 @@ public class Emotion : MonoBehaviour
         _pm = GetComponent<PlayerMovement>();
         _pCom = GetComponent<PlayerCombat>();
         _ec = GetComponent<EmotionController>();
+        _pController = GetComponent<PlayerController>();
     }
 
     public virtual void Start()
@@ -174,10 +176,12 @@ public class Emotion : MonoBehaviour
             if (Input.GetButton("LB"))
             {
                 _openSkillTab = true;
+                _pController.CanJump = false;
             }
             else if (Input.GetButtonUp("LB"))
             {
                 _openSkillTab = false;
+                _pController.CanJump = true;
             }
 
             if (_openSkillTab)
