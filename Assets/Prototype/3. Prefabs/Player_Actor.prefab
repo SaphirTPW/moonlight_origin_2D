@@ -16,6 +16,17 @@ GameObject:
   - component: {fileID: 6599821910571612152}
   - component: {fileID: 6347780336557784861}
   - component: {fileID: 1511681540775153318}
+  - component: {fileID: 8837996798423167425}
+  - component: {fileID: 5362843391504871049}
+  - component: {fileID: 7251464022312781367}
+  - component: {fileID: 1194656677575337942}
+  - component: {fileID: 6356893102524356246}
+  - component: {fileID: 77095570392752736}
+  - component: {fileID: 6836797249725165388}
+  - component: {fileID: 2419476809153418278}
+  - component: {fileID: 1162830390850318163}
+  - component: {fileID: 6966040123615785730}
+  - component: {fileID: 4194736800330322183}
   m_Layer: 0
   m_Name: Player_Actor
   m_TagString: Player
@@ -38,6 +49,11 @@ Transform:
   m_Children:
   - {fileID: 5787895122326549106}
   - {fileID: 1069385141755389268}
+  - {fileID: 8522001112793348026}
+  - {fileID: 6837803070927067115}
+  - {fileID: 4917172403273255132}
+  - {fileID: 3937694113891967951}
+  - {fileID: 2607201340593147807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6903074477343190665
@@ -172,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attack: 0
+  _IsMoving: 0
   _canMove: 1
   _canJump: 1
   _canAttack: 1
@@ -189,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSpeed: 10
   _speedMod: 1
-  _playerMoveSmoothing: 0.05
+  _playerMoveSmoothing: 0.75
   _playerJumpForce: 8
   _playerFallMultiplier: 2.5
   _playerLowMultiplier: 2
@@ -217,10 +234,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _attackRange: 0.45
+  _knockBackForce: 2
+  _knockBackUp: 2
+  _recoilForce: 5
   _attackDamage: 10
   _playerComboCounter: 0
   _playerComboTime: 5
   _playerComboTimer: 0
+  _startAttackPoint: {fileID: 4917172403273255132}
+  _upAttackPoint: {fileID: 3937694113891967951}
+  _downAttackPoint: {fileID: 2607201340593147807}
 --- !u!114 &1511681540775153318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +256,395 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc5503c9931a874798b997b54f17b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMaxHealth: 0
-  _playerCurrentHealth: 0
+  _playerMaxHealth: 100
   _playerHealthText: {fileID: 0}
+--- !u!114 &8837996798423167425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57161639c92daf4587f4069dc4610ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emotions:
+  - {fileID: 4194736800330322183}
+  - {fileID: 5362843391504871049}
+  - {fileID: 77095570392752736}
+  - {fileID: 1162830390850318163}
+  - {fileID: 6966040123615785730}
+  _emoControllerState: 0
+  _currentActiveEmotion: 0
+  _startControllerCooldownTime: 5
+  _currControllerCooldown: 0
+  _canSwitch: 1
+  _coolDownIsOn: 0
+  _joyValueText: {fileID: 0}
+  _angerValueText: {fileID: 0}
+  _sadnessValueText: {fileID: 0}
+  _fearValueText: {fileID: 0}
+  _emotionIndacatorText: {fileID: 0}
+--- !u!114 &5362843391504871049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f60e399e886a4954494883c049c96178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emotionData: {fileID: 11400000, guid: 0751858e8e3be624dbeaf32faf6cdbee, type: 2}
+  _passive: {fileID: 6356893102524356246}
+  _skills:
+  - {fileID: 7251464022312781367}
+  - {fileID: 1194656677575337942}
+  _emotionState: 0
+  _maxEmotionEnergy: 100
+  _currentEmotionEnergy: 0
+  _buildUpRate: 0
+  _coolDownRate: 0
+  _emotionName: Joy
+  _openSkillTab: 0
+  _canUseSkill: 1
+--- !u!114 &7251464022312781367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f44cb28d24add4469ac2a8b26f3a42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 6c281b29cb958d448b83d3fb5140830f, type: 2}
+  _emotion: {fileID: 5362843391504871049}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _jumpForce: 10
+  _startBurstCount: 1
+  _burstJumpCount: 1
+--- !u!114 &1194656677575337942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9cafe2f7548ad45999bb24c6161bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 41363b664a95b6b4ca3c255ad73eec38, type: 2}
+  _emotion: {fileID: 5362843391504871049}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _dashForce: 20
+--- !u!114 &6356893102524356246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae39255b5f312f47a9d517f23f5bf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _passiveData: {fileID: 11400000, guid: cfbd497d79aa83c46a00a0b4da0dbaf4, type: 2}
+  _passiveState: 1
+  _sprintTime: 0
+  _maxSprintTime: 3
+--- !u!114 &77095570392752736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff90b5440a0e924ba5de73c0124a584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emotionData: {fileID: 11400000, guid: d9d7e6b1bcaf38340a27ab108fa42f59, type: 2}
+  _passive: {fileID: 0}
+  _skills:
+  - {fileID: 2419476809153418278}
+  - {fileID: 6836797249725165388}
+  _emotionState: 0
+  _maxEmotionEnergy: 100
+  _currentEmotionEnergy: 0
+  _buildUpRate: 0
+  _coolDownRate: 0
+  _emotionName: Anger
+  _openSkillTab: 0
+  _canUseSkill: 1
+--- !u!114 &6836797249725165388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4789178a4e1e7a14e9f332fe8c518ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 6008612024adb7d48b4c417b17dabadb, type: 2}
+  _emotion: {fileID: 77095570392752736}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _attackPoint: {fileID: 6837803070927067115}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackRange: 2
+  _knockBackForce: 8
+  _knockBackUp: 0.75
+  _recoilForce: 3
+  _damage: 30
+  _chargePunchTime: 0
+  _maxChargePunchTime: 3
+--- !u!114 &2419476809153418278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5455103fb490c43b39a61b39f50764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: fc35d5f8fe660084a99757949782703c, type: 2}
+  _emotion: {fileID: 77095570392752736}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _attackPoint: {fileID: 8522001112793348026}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackRange: 2
+  _knockBackForce: 8
+  _knockBackUp: 1.25
+  _recoilForce: 3
+  _dashForce: 5
+  _maxDashTime: 3
+  _damage: 20
+  _isActive: 0
+--- !u!114 &1162830390850318163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c01ca42949be244ab89abadbbe56e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emotionData: {fileID: 11400000, guid: a0e01965b8324304a8783dfc6fe569ca, type: 2}
+  _passive: {fileID: 0}
+  _skills: []
+  _emotionState: 0
+  _maxEmotionEnergy: 100
+  _currentEmotionEnergy: 0
+  _buildUpRate: 0
+  _coolDownRate: 0
+  _emotionName: Sadness
+  _openSkillTab: 0
+  _canUseSkill: 1
+--- !u!114 &6966040123615785730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa50f519f8b4ca24b9a01eea5160dbc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emotionData: {fileID: 11400000, guid: 8ca35d81f6069f54dbc6f01053dd98b4, type: 2}
+  _passive: {fileID: 0}
+  _skills: []
+  _emotionState: 0
+  _maxEmotionEnergy: 100
+  _currentEmotionEnergy: 0
+  _buildUpRate: 0
+  _coolDownRate: 0
+  _emotionName: Fear
+  _openSkillTab: 0
+  _canUseSkill: 1
+--- !u!114 &4194736800330322183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc5dd779a6d37340ab6749b56115397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emotionData: {fileID: 11400000, guid: fae9d04c9985ff14a9fcf60c1f239a86, type: 2}
+  _passive: {fileID: 0}
+  _skills: []
+  _emotionState: 0
+  _maxEmotionEnergy: 100
+  _currentEmotionEnergy: 0
+  _buildUpRate: 0
+  _coolDownRate: 0
+  _emotionName: 
+  _openSkillTab: 0
+  _canUseSkill: 1
+--- !u!1 &2141875813244074251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2607201340593147807}
+  m_Layer: 0
+  m_Name: DownAttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2607201340593147807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141875813244074251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2552198136806316451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2348324266759526552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6837803070927067115}
+  m_Layer: 0
+  m_Name: ChargePunchPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6837803070927067115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2348324266759526552}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.75, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2552198136806316451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3429505257311964814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8522001112793348026}
+  m_Layer: 0
+  m_Name: DashCrushPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8522001112793348026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3429505257311964814}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.55, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2552198136806316451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4128705163767325073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4917172403273255132}
+  m_Layer: 0
+  m_Name: StartAttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4917172403273255132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128705163767325073}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2552198136806316451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5008222730024093604
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +671,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2552198136806316451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5024495396043851390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3937694113891967951}
+  m_Layer: 0
+  m_Name: UpAttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3937694113891967951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024495396043851390}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

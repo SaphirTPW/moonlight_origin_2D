@@ -169,7 +169,11 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleSKill()
     {
-        if((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseSkill)
+        if((int)_emotionData.emotionType == 0)
+        {
+            return;
+        }
+        else if((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseSkill)
         {
             if (Input.GetButton("LB"))
             {

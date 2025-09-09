@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public bool HoldJump { get => _holdJump; set => _holdJump = value; }
     public bool Attack { get => _attack; set => _attack = value; }
     public bool IsMoving { get => _IsMoving; set => _IsMoving = value; }
+    public bool CanMove { get => _canMove; set => _canMove = value; }
+    public bool CanJump { get => _canJump; set => _canJump = value; }
+    public bool CanAttack { get => _canAttack; set => _canAttack = value; }
     #endregion
 
     #region Private Variables 
