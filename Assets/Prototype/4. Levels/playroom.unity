@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &75486821
 Transform:
   m_ObjectHideFlags: 0
@@ -2698,6 +2698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Actor
       objectReference: {fileID: 0}
+    - target: {fileID: 1069385141755389268, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _playerHealthText
       value: 
@@ -2746,6 +2750,10 @@ PrefabInstance:
       propertyPath: _passive
       value: 
       objectReference: {fileID: 1484301230203224807}
+    - target: {fileID: 6347780336557784861, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _attackRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8837996798423167425, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _joyValueText
       value: 

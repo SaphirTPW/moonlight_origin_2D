@@ -6,17 +6,20 @@ using UnityEngine;
 public class BuildUpAnger : Passive
 {
     #region Public Variables 
-    private float _buildUpDamage;
     #endregion
 
     #region Private Variables 
     #endregion
 
     #region Unity Methods 
+
+    private void Start()
+    {
+        
+    }
     public override void Update()
     {
         base.Update();
-
     }
     #endregion
 
@@ -32,12 +35,13 @@ public class BuildUpAnger : Passive
 
     public override void EnablePassive()
     {
-        //PCom.AttackDamage = PCom.AttackDamage + 5;
+        //Debug.Log("Value Updated");
+        PCom.AngerBuildUpOn = true;
     }
 
     public override void DisablePassive() 
     {
-        
+        PCom.AngerBuildUpOn = false;
     }
     #endregion
 

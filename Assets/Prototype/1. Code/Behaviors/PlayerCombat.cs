@@ -11,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     public float AttackMod { get => _attackMod; set => _attackMod = value; }
     public float PlayerComboCounter { get => _playerComboCounter; set => _playerComboCounter = value; }
     public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
+    public bool AngerBuildUpOn { get => _angerBuildUpOn; set => _angerBuildUpOn = value; }
     #endregion
 
     #region Private Variables 
@@ -25,6 +26,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float _recoilForce;
 
     [SerializeField] private float _attackDamage;
+    [SerializeField] private float _buildUpDamage;
     private float _attackMod = 1f;
     [SerializeField] private float _playerComboCounter;
     [SerializeField] private float _playerComboTime;
@@ -38,6 +40,7 @@ public class PlayerCombat : MonoBehaviour
     //[SerializeField] private Transform _backAttackPoint;
     
     private bool _isAttacking;
+    private bool _angerBuildUpOn = false;
 
     #endregion
 
@@ -68,10 +71,15 @@ public class PlayerCombat : MonoBehaviour
         if (_pController.Attack)
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
+            _buildUpDamage = pDamage * (1 + (_playerComboCounter / 100));
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod);
+                if (_angerBuildUpOn)
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod);
+                else
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod);
+
                 enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
                 PlayerAttackRecoil(enemy.transform, _recoilForce);
                 _isAttacking = true;
