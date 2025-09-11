@@ -113,6 +113,10 @@ public class EmotionController : MonoBehaviour
         for (int i = 0; i < _emotions.Length; i++)
         {
             _emotions[i].EmoState = Emotion.EmotionState.Sleep;
+            if (_emotions[i].Passive != null)
+            {
+                _emotions[i].Passive.PassState = Passive.PassiveState.Off;
+            }
         }
 
         pEmotion.EmoState = Emotion.EmotionState.Awake;

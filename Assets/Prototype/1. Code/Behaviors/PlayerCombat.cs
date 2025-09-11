@@ -9,6 +9,8 @@ public class PlayerCombat : MonoBehaviour
 {
     #region Public Variables 
     public float AttackMod { get => _attackMod; set => _attackMod = value; }
+    public float PlayerComboCounter { get => _playerComboCounter; set => _playerComboCounter = value; }
+    public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
     #endregion
 
     #region Private Variables 

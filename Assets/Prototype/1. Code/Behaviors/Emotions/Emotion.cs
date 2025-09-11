@@ -8,6 +8,7 @@ public class Emotion : MonoBehaviour
     #region Public Variables 
     public EmotionState EmoState { get => _emotionState; set => _emotionState = value; }
     public float CurrentEmotionEnergy { get => _currentEmotionEnergy; set => _currentEmotionEnergy = value; }
+    public Passive Passive { get => _passive; set => _passive = value; }
     #endregion
 
     #region Private Variables 
