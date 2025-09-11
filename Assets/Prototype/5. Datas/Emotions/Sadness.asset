@@ -15,7 +15,7 @@ MonoBehaviour:
   emotionName: Sadness
   emotionType: 3
   powerModifier: 0.35
-  defenseModifier: 0.25
+  defenseModifier: 1.75
   speedModifier: 0.5
   moveSmoothing: 0.2
   coPowerModifier: 0.45

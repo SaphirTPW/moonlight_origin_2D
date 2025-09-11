@@ -15,7 +15,7 @@ MonoBehaviour:
   emotionName: Fear
   emotionType: 4
   powerModifier: 0.5
-  defenseModifier: 0.35
+  defenseModifier: 1.75
   speedModifier: 1.25
   moveSmoothing: 0.65
   coPowerModifier: 0.35

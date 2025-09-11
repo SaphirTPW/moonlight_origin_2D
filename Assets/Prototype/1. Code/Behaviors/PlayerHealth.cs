@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     #region Private Variables 
     [SerializeField] private float _playerMaxHealth;
-    private float _playerCurrentHealth;
+    [SerializeField] private float _playerCurrentHealth;
     [SerializeField] private TMP_Text _playerHealthText;
     private float _defenseModifier = 1f;
     private bool _isDead = false;
@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
     }
     void Start()
     {
-        
+        GameManagerOnGameStateChange(GameManager.GameState.SetUp);
     }
 
     // Update is called once per frame

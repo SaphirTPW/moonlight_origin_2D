@@ -62,6 +62,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Public Methods 
+    public void PlayerKnockback(Transform pTransform, float pknockbackForce, float pknockbackUp)
+    {
+        Vector2 direction = (transform.position - pTransform.position).normalized;
+        _rb.linearVelocity = new Vector2(direction.x, pknockbackUp) * pknockbackForce;
+    }
     #endregion
 
     #region Private Methods 

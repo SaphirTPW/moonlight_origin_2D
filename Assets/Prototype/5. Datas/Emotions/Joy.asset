@@ -15,7 +15,7 @@ MonoBehaviour:
   emotionName: Joy
   emotionType: 1
   powerModifier: 1
-  defenseModifier: 0.5
+  defenseModifier: 1.5
   speedModifier: 1
   moveSmoothing: 0.3
   coPowerModifier: 1.05
