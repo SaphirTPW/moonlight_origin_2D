@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 311222874}
   - component: {fileID: 311222875}
   - component: {fileID: 311222876}
+  - component: {fileID: 311222877}
   m_Layer: 0
   m_Name: 'Isolation Shield '
   m_TagString: Untagged
@@ -515,6 +516,20 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &311222877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311222873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc187b001236bd043bad02b0b9d8f0d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageReduction: 2.75
+  _player: {fileID: 1484301230203224755}
 --- !u!1 &381989625
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,10 +858,6 @@ PrefabInstance:
     - target: {fileID: 6318945475871278666, guid: e69eca3bc48aa2847a1a06b8461cbf02, type: 3}
       propertyPath: m_Name
       value: Proto_Enemy_Actor_Turret
-      objectReference: {fileID: 0}
-    - target: {fileID: 7981271542487871996, guid: e69eca3bc48aa2847a1a06b8461cbf02, type: 3}
-      propertyPath: _fireRate
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2897,6 +2908,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _skills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: '_skills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1484301230203224826}
     - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _playerHealthText
       value: 
@@ -2984,6 +3003,9 @@ PrefabInstance:
       insertIndex: 14
       addedObject: {fileID: 1484301230203224788}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 18
+      addedObject: {fileID: 1484301230203224826}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484301230203224807}
   m_SourcePrefab: {fileID: 100100000, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
@@ -3020,6 +3042,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _passiveData: {fileID: 11400000, guid: 274d526fe70f0624187d7a74238e7eb1, type: 2}
   _passiveState: 0
+--- !u!114 &1484301230203224810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+  m_PrefabInstance: {fileID: 1484301230203224754}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c01ca42949be244ab89abadbbe56e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1484301230203224826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bab0d17f1c3f904fa12f286743a6de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 16302aa54e3efbd47a514820b4505d48, type: 2}
+  _emotion: {fileID: 1484301230203224810}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _maxSheildTime: 2
+  _isolationSheildObj: {fileID: 311222873}
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0

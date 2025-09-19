@@ -71,6 +71,7 @@ public class ChargePunch : Skill
             if (_chargePunchTime != _maxChargePunchTime)
             {
                 PC.CanMove = false;
+                PM.Rb.linearVelocity = Vector2.zero;
             }
 
             if (_chargePunchTime >= _maxChargePunchTime)

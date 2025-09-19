@@ -6,6 +6,11 @@ using UnityEngine;
 public class Dummy_Bullet : MonoBehaviour
 {
     #region Public Variables 
+    public Rigidbody2D BulletBody { get => _bulletBody; set => _bulletBody = value; }
+    public float BulletDamage { get => _bulletDamage; set => _bulletDamage = value; }
+    #endregion
+
+    #region Private Variables 
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private Vector2 _bulletDirection;
     [SerializeField] private float _autoDestroyTime;
@@ -13,10 +18,6 @@ public class Dummy_Bullet : MonoBehaviour
     [SerializeField] private float _knockBackUp = 3f;
     [SerializeField] private float _bulletDamage;
     private Rigidbody2D _bulletBody;
-
-    #endregion
-
-    #region Private Variables 
     #endregion
 
     #region Unity Methods 
