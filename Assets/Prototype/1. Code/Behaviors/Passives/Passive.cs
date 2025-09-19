@@ -10,6 +10,7 @@ public class Passive : MonoBehaviour
     public PlayerController PC { get => _pc; set => _pc = value; }
     public PlayerMovement Pm { get => _pm; set => _pm = value; }
     public PlayerCombat PCom { get => _pCom; set => _pCom = value; }
+    public PlayerHealth PH { get => _pH; set => _pH = value; }
     #endregion
 
     #region Private Variables 

@@ -8,14 +8,19 @@ public class PlayerHealth : MonoBehaviour
 {
     #region Public Variables 
     public float DefenseMod { get => _defenseModifier; set => _defenseModifier = value; }
+    public bool IsHealing { get => _isHealing; set => _isHealing = value; }
     #endregion
 
     #region Private Variables 
     [SerializeField] private float _playerMaxHealth;
+    private float _healingRate = 1f;
+    [SerializeField] private float _healingAmount;
+    [SerializeField] private float _startHealingRate = 1f;
     [SerializeField] private float _playerCurrentHealth;
     [SerializeField] private TMP_Text _playerHealthText;
     private float _defenseModifier = 1f;
     private bool _isDead = false;
+    private bool _isHealing = false;
     #endregion
 
     #region Unity Methods 
@@ -31,12 +36,14 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         GameManagerOnGameStateChange(GameManager.GameState.SetUp);
+        _healingRate = _startHealingRate;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdatePlayerHealth();
+        ProgressiveHealing(_healingAmount);
     }
     #endregion
 
@@ -49,6 +56,23 @@ public class PlayerHealth : MonoBehaviour
     public void PlayerGainHealth(float pHealthAmount)
     {
         _playerCurrentHealth += pHealthAmount;
+    }
+
+    public void ProgressiveHealing(float pHealthAmount)
+    {
+        if (_isHealing)
+        {
+            _healingRate -= Time.deltaTime;
+            if(_healingRate <= 0f)
+            {
+                PlayerGainHealth(pHealthAmount);
+                _healingRate = _startHealingRate;
+            }
+        }
+        else
+        {
+            return;
+        }
     }
     #endregion
 

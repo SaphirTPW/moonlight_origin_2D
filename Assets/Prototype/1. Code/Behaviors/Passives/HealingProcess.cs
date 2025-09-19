@@ -12,20 +12,35 @@ public class HealingProcess : Passive
     #endregion
 
     #region Unity Methods 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    public override void Update()
     {
-        
+        base.Update();
     }
     #endregion
 
     #region Public Methods 
+    public override void UpdatePassiveState(PassiveState pPassiveState)
+    {
+        base.UpdatePassiveState(pPassiveState);
+    }
+    public override void HandlePassiveOn()
+    {
+        base.HandlePassiveOn();
+    }
+
+    public override void EnablePassive()
+    {
+        PH.IsHealing = true;
+    }
+
+    public override void DisablePassive()
+    {
+        PH.IsHealing = false;
+    }
     #endregion
 
     #region Private Methods 

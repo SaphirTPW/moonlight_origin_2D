@@ -2944,6 +2944,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _passive
+      value: 
+      objectReference: {fileID: 1484301230203224828}
+    - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _skills.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2956,9 +2960,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1484301230203224827}
     - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _healingAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _playerHealthText
       value: 
       objectReference: {fileID: 1944850842}
+    - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _startHealingRate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _playerCurrentHealth
       value: 1
@@ -3051,6 +3063,9 @@ PrefabInstance:
       insertIndex: 19
       addedObject: {fileID: 1484301230203224827}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 20
+      addedObject: {fileID: 1484301230203224828}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484301230203224807}
   m_SourcePrefab: {fileID: 100100000, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
@@ -3139,6 +3154,20 @@ MonoBehaviour:
   _recoilForce: 20
   _isolationClone: {fileID: 7462307991156506088, guid: 4e54936e97f9f6e4c839eaa4957c36e6, type: 3}
   _clonePosition: {fileID: 1506914527}
+--- !u!114 &1484301230203224828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eab1255bfe147e42aae7d532df2bb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _passiveData: {fileID: 11400000, guid: e16bfc4bccd85f141bc5f993e7fbf643, type: 2}
+  _passiveState: 0
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0
