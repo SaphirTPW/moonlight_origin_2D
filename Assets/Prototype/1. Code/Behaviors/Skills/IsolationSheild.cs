@@ -61,7 +61,7 @@ public class IsolationSheild : Skill
             if(_sheildTime != _maxSheildTime)
             {
                 PC.CanMove = false;
-                PC.CanJump = false;
+                PC.CanJump = false;   
                 _isolationSheildObj.SetActive(true);
                 PM.Rb.linearVelocity = Vector2.zero;
             }

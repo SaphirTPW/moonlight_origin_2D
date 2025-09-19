@@ -859,6 +859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Proto_Enemy_Actor_Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 6318945475871278666, guid: e69eca3bc48aa2847a1a06b8461cbf02, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1791,6 +1795,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1506914526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1506914527}
+  m_Layer: 0
+  m_Name: ClonePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1506914527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506914526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1043338633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1530597127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,12 +2945,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _skills.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: '_skills.Array.data[0]'
       value: 
       objectReference: {fileID: 1484301230203224826}
+    - target: {fileID: 1162830390850318163, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: '_skills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1484301230203224827}
     - target: {fileID: 1511681540775153318, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _playerHealthText
       value: 
@@ -2998,6 +3037,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2552198136806316451, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 311222874}
+    - targetCorrespondingSourceObject: {fileID: 2552198136806316451, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1506914527}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: 14
@@ -3005,6 +3047,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: 18
       addedObject: {fileID: 1484301230203224826}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 19
+      addedObject: {fileID: 1484301230203224827}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484301230203224807}
@@ -3073,6 +3118,27 @@ MonoBehaviour:
   _skillCost: 0
   _maxSheildTime: 2
   _isolationSheildObj: {fileID: 311222873}
+--- !u!114 &1484301230203224827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffc250eea197084e85507de8dec169a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 2559c553367c5324ab9ce2c7ce40b0a9, type: 2}
+  _emotion: {fileID: 1484301230203224810}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _recoilForce: 20
+  _isolationClone: {fileID: 7462307991156506088, guid: 4e54936e97f9f6e4c839eaa4957c36e6, type: 3}
+  _clonePosition: {fileID: 1506914527}
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0

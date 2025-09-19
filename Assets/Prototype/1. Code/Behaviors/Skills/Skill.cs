@@ -71,12 +71,12 @@ public class Skill : MonoBehaviour
 
     public virtual void EnableSkill (float pSkillCost)
     {
- 
         if ((int)_skillData.skillEmoType == (int)_eC.CurrentActiveEmotion)
         {
             if (_currentSkillState == SkillState.Ready)
             {
                 _emotion.CurrentEmotionEnergy += pSkillCost;
+                _eC.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
             }
         }
     }
@@ -86,7 +86,9 @@ public class Skill : MonoBehaviour
         if(_currentSkillState == SkillState.CoolDown)
         {
             _coolDownTime -= Time.deltaTime;
-            if(_coolDownTime <= 0)
+            _eC.EmoControllerState = EmotionController.EmotionControllerState.Ready;
+            
+            if (_coolDownTime <= 0)
             {
                 _currentSkillState = SkillState.Ready;
                 _coolDownTime = _startCoolDownTime;
