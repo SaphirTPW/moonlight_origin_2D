@@ -19,7 +19,7 @@ public class SkillData : ScriptableObject
         Joy,
         Anger,
         Sadness,
-        Fea
+        Fear
     }
     #endregion
 

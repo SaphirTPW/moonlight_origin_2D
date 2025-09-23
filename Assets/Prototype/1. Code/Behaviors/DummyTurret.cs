@@ -7,6 +7,7 @@ public class DummyTurret : MonoBehaviour
 {
     #region Public Variables 
     [SerializeField] private GameObject _dummyBullet;
+    private DummyEnemy _dummy;
     [SerializeField] private float _fireRate;
     [SerializeField] private float _fireTime;
     #endregion
@@ -18,7 +19,7 @@ public class DummyTurret : MonoBehaviour
         // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _dummy = GetComponent<DummyEnemy>();
     }
 
     // Update is called once per frame
@@ -34,12 +35,19 @@ public class DummyTurret : MonoBehaviour
     #region Private Methods 
     private void Shoot()
     {
-        _fireTime += Time.deltaTime;
-
-        if(_fireTime >= _fireRate)
+        if (!_dummy.IsStunned)
         {
-            Instantiate(_dummyBullet, transform.position, Quaternion.identity);
-            _fireTime = 0;
+            _fireTime += Time.deltaTime;
+
+            if (_fireTime >= _fireRate)
+            {
+                Instantiate(_dummyBullet, transform.position, Quaternion.identity);
+                _fireTime = 0;
+            }
+        }
+        else
+        {
+            return;
         }
     }
     #endregion

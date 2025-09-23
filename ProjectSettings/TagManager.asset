@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - EnemyAttack
+  - Enemy
+  - ParaShot
   layers:
   - Default
   - TransparentFX
