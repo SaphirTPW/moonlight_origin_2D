@@ -729,6 +729,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3469763568394322885, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4925704985739896449, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: _enemyMaxHealth
       value: 200
@@ -3043,6 +3047,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _passive
+      value: 
+      objectReference: {fileID: 1484301230203224847}
+    - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _skills.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -3102,6 +3110,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: 23
       addedObject: {fileID: 1484301230203224829}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 24
+      addedObject: {fileID: 1484301230203224847}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484301230203224807}
@@ -3256,6 +3267,25 @@ MonoBehaviour:
   _skillCost: 0
   _dashForce: 4
   _maxDashTime: 8
+--- !u!114 &1484301230203224847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b599d5e5d8025e0409e6eb704a091997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _passiveData: {fileID: 11400000, guid: 8309dfef517d53d4ba443a4bd95c9ffb, type: 2}
+  _passiveState: 0
+  _paraShot: {fileID: 1484301230203224829}
+  _upgradedValue: 0
+  _defaultValue: 0
+  _focusTime: 0
+  _maxFocusTime: 5
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0

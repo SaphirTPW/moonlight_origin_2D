@@ -6,6 +6,7 @@ using UnityEngine;
 public class ParaShot : Skill
 {
     #region Public Variables 
+    public GameObject ParaShotObj { get => _paraShotObj; set => _paraShotObj = value; }
     #endregion
 
     #region Private Variables
