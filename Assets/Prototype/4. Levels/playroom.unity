@@ -727,7 +727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469763568394322885, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4925704985739896449, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: _enemyMaxHealth
@@ -871,7 +871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318945475871278666, guid: e69eca3bc48aa2847a1a06b8461cbf02, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6318945475871278666, guid: e69eca3bc48aa2847a1a06b8461cbf02, type: 3}
       propertyPath: m_TagString
@@ -3044,12 +3044,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _skills.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: '_skills.Array.data[0]'
       value: 
       objectReference: {fileID: 1484301230203224829}
+    - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: '_skills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1484301230203224846}
     - target: {fileID: 8837996798423167425, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _joyValueText
       value: 
@@ -3094,6 +3098,9 @@ PrefabInstance:
       addedObject: {fileID: 1484301230203224828}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: 22
+      addedObject: {fileID: 1484301230203224846}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 23
       addedObject: {fileID: 1484301230203224829}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
@@ -3229,6 +3236,26 @@ MonoBehaviour:
   _skillCost: 0
   _paraShotObj: {fileID: 6072153886423519298, guid: f16e603b66981894289d28874a0b5332, type: 3}
   _paraShotPoint: {fileID: 1798753781}
+--- !u!114 &1484301230203224846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484301230203224755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce4458e4f986e54f9a22a869109b6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: 5d94f4c96493bfd4e89217fe43032af2, type: 2}
+  _emotion: {fileID: 1484301230203224809}
+  _currentSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _skillCost: 0
+  _dashForce: 4
+  _maxDashTime: 8
 --- !u!1001 &2119645182528846014
 PrefabInstance:
   m_ObjectHideFlags: 0
