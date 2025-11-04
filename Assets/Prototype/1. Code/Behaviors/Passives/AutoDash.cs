@@ -11,6 +11,9 @@ public class AutoDash : Passive
     [SerializeField] private float _maxSprintTime;
     private float _sprintSpeed;
     private float _defaultSpeed;
+
+    private float _newAnimSpeed;
+    private float _defaultAnimSpeed;
     #endregion
 
     #region Private Variables 
@@ -22,6 +25,9 @@ public class AutoDash : Passive
     {
         _sprintSpeed = Pm.PlayerSpeed * 2;
         _defaultSpeed = Pm.PlayerSpeed;
+
+        _defaultAnimSpeed = 1f;
+        _newAnimSpeed = 2f;
     }
 
     // Update is called once per frame
@@ -53,11 +59,13 @@ public class AutoDash : Passive
     public override void EnablePassive()
     {
         Pm.PlayerSpeed = _sprintSpeed;
+        PC.PlayerAnim.speed = _newAnimSpeed;
     }
 
     public override void DisablePassive()
     {
         Pm.PlayerSpeed = _defaultSpeed;
+        PC.PlayerAnim.speed = _defaultAnimSpeed;
     }
 
     public override void CheckCondition()

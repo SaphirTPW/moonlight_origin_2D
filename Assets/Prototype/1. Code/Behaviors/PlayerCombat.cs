@@ -33,11 +33,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float _playerComboTimer;
 
     private Vector2 _attackDirectionInput;
-    //[SerializeField] private Transform _forwardAttackPoint;
     [SerializeField] private Transform _startAttackPoint;
     [SerializeField] private Transform _upAttackPoint;
     [SerializeField] private Transform _downAttackPoint;
-    //[SerializeField] private Transform _backAttackPoint;
+
+    [SerializeField] private GameObject _impactFX;
     
     private bool _isAttacking;
     private bool _angerBuildUpOn = false;
@@ -81,6 +81,7 @@ public class PlayerCombat : MonoBehaviour
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod);
 
                 enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
+                Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
                 PlayerAttackRecoil(enemy.transform, _recoilForce);
                 _isAttacking = true;
                 _playerComboCounter++;

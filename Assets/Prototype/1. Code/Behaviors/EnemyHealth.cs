@@ -9,16 +9,18 @@ public class EnemyHealth : MonoBehaviour
     #endregion
 
     #region Private Variables 
+    private DamageFlash _damageFlash;
     [SerializeField] private float _enemyMaxHealth;
     [SerializeField] private float _enemyCurrentHealth;
     private bool _isDead = false;
     #endregion
 
     #region Unity Methods 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SetEnemyHealth();
+        _damageFlash = GetComponent<DamageFlash>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float pDamage)
     {
         _enemyCurrentHealth -= pDamage;
+        _damageFlash.CallDamageFlash();
     }
     #endregion
 

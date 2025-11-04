@@ -90,18 +90,35 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < _colliders.Length; i++)
         {
             if (_colliders[i].gameObject != gameObject)
+            {
                 _playerGrounded = true;
+            }
         }
     }
 
     private void PlayerJump()
     {
         if (_rb.linearVelocityY < 0)
+        {
             _rb.gravityScale = _playerFallMultiplier;
+            _pc.PlayerAnim.SetFloat("VSpeed", _rb.linearVelocityY);
+        }
         else if (_rb.linearVelocityY > 0 && !_pc.HoldJump)
+        {
             _rb.gravityScale = _playerLowMultiplier;
+            _pc.PlayerAnim.SetFloat("VSpeed", _rb.linearVelocityY);
+            _pc.PlayerAnim.SetBool("IsJumping", true);
+        }
+        else if(_rb.linearVelocityY > 0 && _pc.HoldJump)
+        {
+            _pc.PlayerAnim.SetFloat("VSpeed", _rb.linearVelocityY);
+            _pc.PlayerAnim.SetBool("IsJumping", true);
+        }
         else
+        {
             _rb.gravityScale = _playerDefaultGravityScale;
+            _pc.PlayerAnim.SetBool("IsJumping", false);
+        }
 
         if(_playerGrounded && _pc.Jump)
         {

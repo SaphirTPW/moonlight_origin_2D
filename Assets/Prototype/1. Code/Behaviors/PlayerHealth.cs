@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ProgressiveHealing(float pHealthAmount)
     {
-        if (_isHealing)
+        if (_isHealing && _playerCurrentHealth < _playerMaxHealth)
         {
             _healingRate -= Time.deltaTime;
             if(_healingRate <= 0f)

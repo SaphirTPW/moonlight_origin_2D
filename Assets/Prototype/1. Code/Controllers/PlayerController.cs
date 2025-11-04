@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public bool CanJump { get => _canJump; set => _canJump = value; }
     public bool CanAttack { get => _canAttack; set => _canAttack = value; }
+    public Animator PlayerAnim { get => _playerAnim; set => _playerAnim = value; }
     #endregion
 
     #region Private Variables 
@@ -26,13 +28,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canJump;
     [SerializeField] private bool _canAttack;
+    private Animator _playerAnim;
     #endregion
 
     #region Unity Methods 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -59,6 +62,8 @@ public class PlayerController : MonoBehaviour
                 _IsMoving = true;
             else
                 _IsMoving = false;
+
+            _playerAnim.SetFloat("HSpeed", Mathf.Abs(_inputDirection.x));
         }
     }
 
@@ -67,12 +72,19 @@ public class PlayerController : MonoBehaviour
         if (_canJump)
         {
             if (Input.GetButtonDown("Jump"))
+            {
                 _jump = true;
+            }
 
             if (Input.GetButton("Jump"))
+            {
                 _holdJump = true;
+
+            }
             else
+            {
                 _holdJump = false;
+            }
         }
     }
 
@@ -83,6 +95,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Attack"))
             {
                 _attack = true;
+                _playerAnim.SetTrigger("Attack");
             }
         }
     }
