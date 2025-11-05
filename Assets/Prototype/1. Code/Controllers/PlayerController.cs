@@ -16,12 +16,18 @@ public class PlayerController : MonoBehaviour
     public bool CanJump { get => _canJump; set => _canJump = value; }
     public bool CanAttack { get => _canAttack; set => _canAttack = value; }
     public Animator PlayerAnim { get => _playerAnim; set => _playerAnim = value; }
+    public float JumpBufferCounter { get => _jumpBufferCounter; set => _jumpBufferCounter = value; }
+    public float JumpBufferTime { get => _jumpBufferTime; set => _jumpBufferTime = value; }
     #endregion
 
     #region Private Variables 
     private Vector2 _inputDirection;
+    
     private bool _jump = false;
     private bool _holdJump = false;
+    [SerializeField] private float _jumpBufferTime = 0.2f;
+    [SerializeField] private float _jumpBufferCounter;
+
     [SerializeField] private bool _attack = false;
     [SerializeField] private bool _IsMoving = false;
     
@@ -29,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _canJump;
     [SerializeField] private bool _canAttack;
     private Animator _playerAnim;
+    private PlayerMovement _playerMove;
     #endregion
 
     #region Unity Methods 
@@ -36,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _playerAnim = GetComponent<Animator>();
+        _playerMove = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -44,6 +52,7 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleJumpInput();
         HandleAttackInput();
+        //HandleJumpBuffer();
     }
     #endregion
 
@@ -74,6 +83,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 _jump = true;
+                _jumpBufferCounter = _jumpBufferTime;
+            }
+            else
+            {
+                _jumpBufferCounter -= Time.deltaTime;
             }
 
             if (Input.GetButton("Jump"))
@@ -85,6 +99,18 @@ public class PlayerController : MonoBehaviour
             {
                 _holdJump = false;
             }
+        }
+    }
+
+    public void HandleJumpBuffer()
+    {
+        if (_jump)
+        {
+            _jumpBufferCounter = _jumpBufferTime;
+        }
+        else
+        {
+            _jumpBufferTime -= Time.deltaTime;
         }
     }
 

@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _playerGroundCheck;
     [SerializeField] private float _groundCheckRad;
     [SerializeField] private LayerMask _groundIdentifier;
+    
+    [SerializeField] private float _coyoteTime = 0.2f;
+    [SerializeField] private float _coyoteTimeCounter;
 
     //Change Sprite Orientation
     private bool _facingRight = true;
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         PlayerGroundChecker();
+        CoyoteTime();
     }
 
     private void FixedUpdate()
@@ -108,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
             _rb.gravityScale = _playerLowMultiplier;
             _pc.PlayerAnim.SetFloat("VSpeed", _rb.linearVelocityY);
             _pc.PlayerAnim.SetBool("IsJumping", true);
+            _coyoteTimeCounter = 0;
         }
         else if(_rb.linearVelocityY > 0 && _pc.HoldJump)
         {
@@ -120,11 +125,25 @@ public class PlayerMovement : MonoBehaviour
             _pc.PlayerAnim.SetBool("IsJumping", false);
         }
 
-        if(_playerGrounded && _pc.Jump)
+        if(_coyoteTimeCounter > 0f && _pc.JumpBufferCounter > 0f)
         {
+            _pc.JumpBufferCounter = 0;
             _playerGrounded = false;
             _pc.Jump = false;
             _rb.AddForce(new Vector2(0f, _playerJumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void CoyoteTime()
+    {
+        if (_playerGrounded)
+        {
+            _coyoteTimeCounter = _coyoteTime;
+        }
+        else
+        {
+            _coyoteTimeCounter -= Time.deltaTime;
+            _rb.gravityScale = _playerDefaultGravityScale;
         }
     }
 

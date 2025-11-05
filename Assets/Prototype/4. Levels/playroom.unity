@@ -921,7 +921,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5999999, z: -10}
+  m_LocalPosition: {x: 0, y: 3.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1524,7 +1524,7 @@ Transform:
   m_GameObject: {fileID: 1139965718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5999999, z: -10}
+  m_LocalPosition: {x: 0, y: 3.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2836,7 +2836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2552198136806316451, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2552198136806316451, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2878,9 +2878,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4112396726751543133, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _jumpBufferTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206294358426110087, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4917172403273255132, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787895122326549106, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.025
       objectReference: {fileID: 0}
     - target: {fileID: 6347780336557784861, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _impactFX
@@ -2901,6 +2913,18 @@ PrefabInstance:
     - target: {fileID: 6347780336557784861, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _knockBackForce
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599821910571612152, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _coyoteTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599821910571612152, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _groundCheckRad
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599821910571612152, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _jumpBufferTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8837996798423167425, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _joyValueText
