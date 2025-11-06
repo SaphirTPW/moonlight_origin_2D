@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 InputDirection { get => _inputDirection; set => _inputDirection = value; }
     public bool Jump { get => _jump; set => _jump = value; }
     public bool HoldJump { get => _holdJump; set => _holdJump = value; }
-    public bool Attack { get => _attack; set => _attack = value; }
+    public bool Attack { get => _isAttacking; set => _isAttacking = value; }
     public bool IsMoving { get => _IsMoving; set => _IsMoving = value; }
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public bool CanJump { get => _canJump; set => _canJump = value; }
@@ -22,18 +22,24 @@ public class PlayerController : MonoBehaviour
 
     #region Private Variables 
     private Vector2 _inputDirection;
+    private float _inputDirThreshold = 0.2f;
+    private float _inputDirPrevValue = 0;
+    private float _currentInputDirValue;
     
     private bool _jump = false;
     private bool _holdJump = false;
     [SerializeField] private float _jumpBufferTime = 0.2f;
     [SerializeField] private float _jumpBufferCounter;
 
-    [SerializeField] private bool _attack = false;
+    [SerializeField] private bool _isAttacking = false;
     [SerializeField] private bool _IsMoving = false;
     
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canJump;
     [SerializeField] private bool _canAttack;
+
+    [SerializeField] private ParticleSystem _dustFX;
+    [SerializeField] private ParticleSystem _landingFX;
     private Animator _playerAnim;
     private PlayerMovement _playerMove;
     #endregion
@@ -52,11 +58,19 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleJumpInput();
         HandleAttackInput();
-        //HandleJumpBuffer();
     }
     #endregion
 
     #region Public Methods 
+    public void CreateDust()
+    {
+        _dustFX.Play();
+    }
+
+    public void CreateLandingDust()
+    {
+        _landingFX.Play();
+    }
     #endregion
 
     #region Private Methods 
@@ -66,11 +80,23 @@ public class PlayerController : MonoBehaviour
         {
             _inputDirection.x = Input.GetAxis("Horizontal");
             _inputDirection.y = Input.GetAxis("Vertical");
+            _currentInputDirValue = _inputDirection.x;
 
             if (_inputDirection.x > 0 || _inputDirection.x < 0)
+            {
                 _IsMoving = true;
+            }
             else
+            {
                 _IsMoving = false;
+            }
+
+            if (Mathf.Abs(_currentInputDirValue) > _inputDirThreshold && Mathf.Abs(_inputDirPrevValue) <= _inputDirThreshold)
+            {
+                CreateDust();
+            }
+
+            _inputDirPrevValue = _currentInputDirValue;
 
             _playerAnim.SetFloat("HSpeed", Mathf.Abs(_inputDirection.x));
         }
@@ -84,6 +110,7 @@ public class PlayerController : MonoBehaviour
             {
                 _jump = true;
                 _jumpBufferCounter = _jumpBufferTime;
+                CreateDust();
             }
             else
             {
@@ -102,25 +129,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void HandleJumpBuffer()
-    {
-        if (_jump)
-        {
-            _jumpBufferCounter = _jumpBufferTime;
-        }
-        else
-        {
-            _jumpBufferTime -= Time.deltaTime;
-        }
-    }
-
     private void HandleAttackInput()
     {
         if (_canAttack)
         {
             if (Input.GetButtonDown("Attack"))
             {
-                _attack = true;
+                _isAttacking = true;
                 _playerAnim.SetTrigger("Attack");
             }
         }

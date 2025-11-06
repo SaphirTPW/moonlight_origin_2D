@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _playerLowMultiplier = 2f;
     [SerializeField] private float _playerDefaultGravityScale;
     [SerializeField] private bool _playerGrounded;
+    private bool _wasGrounded = false;
     [SerializeField] private Transform _playerGroundCheck;
     [SerializeField] private float _groundCheckRad;
     [SerializeField] private LayerMask _groundIdentifier;
@@ -80,9 +81,15 @@ public class PlayerMovement : MonoBehaviour
         _rb.linearVelocity = Vector3.SmoothDamp(_rb.linearVelocity, targetVelocity, ref _velocity, _playerMoveSmoothing);
 
         if (pDirection > 0 && !_facingRight)
+        {
             PlayerFlipSprite();
+            _pc.CreateDust();
+        }
         else if (pDirection < 0 && _facingRight)
+        {
             PlayerFlipSprite();
+            _pc.CreateDust();
+        }
     }
 
     private void PlayerGroundChecker()
@@ -98,6 +105,13 @@ public class PlayerMovement : MonoBehaviour
                 _playerGrounded = true;
             }
         }
+
+        if(_playerGrounded && !_wasGrounded)
+        {
+            _pc.CreateLandingDust();
+        }
+
+        _wasGrounded = _playerGrounded;
     }
 
     private void PlayerJump()
