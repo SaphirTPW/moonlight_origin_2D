@@ -165,7 +165,7 @@ public class Emotion : MonoBehaviour
         {
             _currentEmotionEnergy = 0;
             _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
-            _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral);
+            _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
             _canUseSkill = true;
         }
     }

@@ -14,11 +14,17 @@ public class EmotionController : MonoBehaviour
     public bool CoolDownIsOn { get => _coolDownIsOn; set => _coolDownIsOn = value; }
     public Emotion[] Emotions { get => _emotions; set => _emotions = value; }
     public TMP_Text EmotionIndacatorText { get => _emotionIndacatorText; set => _emotionIndacatorText = value; }
+
+    public Color joyColor;
+    public Color angerColor;
+    public Color sadnessColor;
+    public Color fearColor;
+    public Color neutralColor;
     #endregion
 
     #region Private Variables
-    [SerializeField] private PlayerController _pc;
-    [SerializeField] private PlayerMovement _pm;
+    private PlayerController _pc;
+    private PlayerMovement _pm;
     [SerializeField] private Emotion[] _emotions;
     [SerializeField] private EmotionControllerState _emoControllerState;
     [SerializeField] private ActiveEmotionState _currentActiveEmotion;
@@ -34,6 +40,7 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private ParticleSystem _gatherFX;
     [SerializeField] private ParticleSystem _burstFX;
     [SerializeField] private ParticleSystem _defusionFX;
+    [SerializeField] private ParticleSystem _emoShiftFX;
 
     #endregion
 
@@ -43,6 +50,7 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private TMP_Text _sadnessValueText;
     [SerializeField] private TMP_Text _fearValueText;
     [SerializeField] private TMP_Text _emotionIndacatorText;
+
     #endregion
 
     #region Unity Methods 
@@ -61,7 +69,7 @@ public class EmotionController : MonoBehaviour
 
     void Start()
     {
-        EnableEmotion(_emotions[0], ActiveEmotionState.Neutral);
+        EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
         DelayNeutralCall();
     }
 
@@ -96,34 +104,34 @@ public class EmotionController : MonoBehaviour
 
             if (_dPadV < 0)
             {
-                EnableEmotion(_emotions[1], ActiveEmotionState.Joy);
+                EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
             }
             else if (_dPadV > 0)
             {
-                EnableEmotion(_emotions[3], ActiveEmotionState.Sadness);
+                EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
             }
             else if (_dPadH < 0)
             {
-                EnableEmotion(_emotions[2], ActiveEmotionState.Anger);
+                EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
             }
             else if (_dPadH > 0)
             {
-                EnableEmotion(_emotions[4], ActiveEmotionState.Fear);
+                EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
             }
             else if (Input.GetButtonDown("Neutral"))
             {
-                EnableEmotion(_emotions[0], ActiveEmotionState.Neutral);
+                EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
                 _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
             }
                 
         }
     }
 
-    public void EnableEmotion(Emotion pEmotion, ActiveEmotionState pActiveEmoState)
+    public void EnableEmotion(Emotion pEmotion, ActiveEmotionState pActiveEmoState, Color pColor, ParticleSystem pFX)
     {
         for (int i = 0; i < _emotions.Length; i++)
         {
@@ -138,11 +146,14 @@ public class EmotionController : MonoBehaviour
 
         if(!_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
-            AnimaFusion(pEmotion);
+            AnimaFusion(pEmotion, pColor);
         }
         else if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
             pEmotion.EmoState = Emotion.EmotionState.Awake;
+            pFX.startColor = pColor;
+            pFX.Play();
+
         }
         else if(_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
         {
@@ -212,8 +223,10 @@ public class EmotionController : MonoBehaviour
         _fearValueText.text = Mathf.Round(_emotions[4].CurrentEmotionEnergy).ToString();
     }
 
-    private void AnimaFusion(Emotion pEmotion)
+    private void AnimaFusion(Emotion pEmotion, Color pColor)
     {
+        _gatherFX.startColor = pColor;
+        _burstFX.startColor = pColor;
         _gatherFX.Play();
         StartCoroutine(AnimaFusionCo(_gatherFX, _burstFX, pEmotion));
     }
@@ -239,7 +252,7 @@ public class EmotionController : MonoBehaviour
     private IEnumerator SetNeutralState()
     {
         yield return new WaitForSeconds(0.1f);
-        EnableEmotion(_emotions[0], ActiveEmotionState.Neutral);
+        EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
     }
 
     private IEnumerator AnimaFusionCo(ParticleSystem pStartFX, ParticleSystem pEndFX, Emotion pEmotion)
