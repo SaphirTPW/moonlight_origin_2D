@@ -16,7 +16,9 @@ public class EmotionController : MonoBehaviour
     public TMP_Text EmotionIndacatorText { get => _emotionIndacatorText; set => _emotionIndacatorText = value; }
     #endregion
 
-    #region Private Variables 
+    #region Private Variables
+    [SerializeField] private PlayerController _pc;
+    [SerializeField] private PlayerMovement _pm;
     [SerializeField] private Emotion[] _emotions;
     [SerializeField] private EmotionControllerState _emoControllerState;
     [SerializeField] private ActiveEmotionState _currentActiveEmotion;
@@ -24,9 +26,15 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private float _currControllerCooldown;
     public bool _canSwitch = false;
     [SerializeField] private bool _coolDownIsOn = false;
+    [SerializeField] private bool _hasFused = false;
     private float _dPadH;
     private float _dPadV;
     private Coroutine neutralDelayCall = null;
+
+    [SerializeField] private ParticleSystem _gatherFX;
+    [SerializeField] private ParticleSystem _burstFX;
+    [SerializeField] private ParticleSystem _defusionFX;
+
     #endregion
 
     #region Debug Variables
@@ -41,6 +49,8 @@ public class EmotionController : MonoBehaviour
     private void Awake()
     {
         SetEmotionController();
+        _pc = GetComponent<PlayerController>();
+        _pm = GetComponent<PlayerMovement>();
     }
 
     private void OnDestroy()
@@ -62,6 +72,11 @@ public class EmotionController : MonoBehaviour
         SetDebugTextValue();
         ControllerCooldown();
         StartControllerCoolDown();
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
     #endregion
 
@@ -119,8 +134,20 @@ public class EmotionController : MonoBehaviour
             }
         }
 
-        pEmotion.EmoState = Emotion.EmotionState.Awake;
         _currentActiveEmotion = pActiveEmoState;
+
+        if(!_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
+        {
+            AnimaFusion(pEmotion);
+        }
+        else if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
+        {
+            pEmotion.EmoState = Emotion.EmotionState.Awake;
+        }
+        else if(_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
+        {
+            AnimaDefusion(pEmotion);
+        }
     }
 
     public void ControllerCooldown()
@@ -185,6 +212,18 @@ public class EmotionController : MonoBehaviour
         _fearValueText.text = Mathf.Round(_emotions[4].CurrentEmotionEnergy).ToString();
     }
 
+    private void AnimaFusion(Emotion pEmotion)
+    {
+        _gatherFX.Play();
+        StartCoroutine(AnimaFusionCo(_gatherFX, _burstFX, pEmotion));
+    }
+
+    private void AnimaDefusion(Emotion pEmotion)
+    {
+        _defusionFX.Play();
+        StartCoroutine(AnimaDefusionCo(_defusionFX, pEmotion));
+    }
+
     private void DelayNeutralCall()
     {
         if(neutralDelayCall != null)
@@ -201,6 +240,32 @@ public class EmotionController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         EnableEmotion(_emotions[0], ActiveEmotionState.Neutral);
+    }
+
+    private IEnumerator AnimaFusionCo(ParticleSystem pStartFX, ParticleSystem pEndFX, Emotion pEmotion)
+    {
+        _pc.CanMove = false;
+        _pc.CanJump = false;
+        _pm.Rb.linearVelocity = Vector2.zero;
+        yield return new WaitUntil(() => !pStartFX.IsAlive());
+        pEndFX.Play();
+        yield return new WaitUntil(() => !pEndFX.IsAlive());
+        pEmotion.EmoState = Emotion.EmotionState.Awake;
+        _pc.CanMove = true;
+        _pc.CanJump = true;
+        _hasFused = true;
+    }
+
+    private IEnumerator AnimaDefusionCo(ParticleSystem pDefusionFX, Emotion pEmotion)
+    {
+        _pc.CanMove = false;
+        _pc.CanJump = false;
+        _pm.Rb.linearVelocity = Vector2.zero;
+        yield return new WaitUntil(() => !pDefusionFX.IsAlive());
+        _pc.CanMove = true;
+        _pc.CanJump = true;
+        pEmotion.EmoState = Emotion.EmotionState.Awake;
+        _hasFused = false;
     }
     #endregion
 }

@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerMoveSmoothing { get => _playerMoveSmoothing; set => _playerMoveSmoothing = value; }
     public bool PlayerGrounded { get => _playerGrounded; set => _playerGrounded = value; }
     public float PlayerFallMultiplier { get => _playerFallMultiplier; set => _playerFallMultiplier = value; }
+    public float DefPlayerSpeed { get => _defPlayerSpeed; set => _defPlayerSpeed = value; }
     #endregion
 
     #region Private Variables 
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer _spr;
 
     //Movement Variables 
+    private float _defPlayerSpeed;
     [SerializeField] private float _playerSpeed;
     [SerializeField] private float _speedMod;
     [SerializeField][Range(0, 0.75f)] private float _playerMoveSmoothing;
@@ -50,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         _pc = GetComponent<PlayerController>();
         _rb = GetComponent<Rigidbody2D>();
         _spr = GetComponent<SpriteRenderer>();
+        //_defPlayerSpeed = _playerSpeed;
     }
 
     // Update is called once per frame
