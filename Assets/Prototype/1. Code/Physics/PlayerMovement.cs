@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         _pc = GetComponent<PlayerController>();
         _rb = GetComponent<Rigidbody2D>();
         _spr = GetComponent<SpriteRenderer>();
-        //_defPlayerSpeed = _playerSpeed;
     }
 
     // Update is called once per frame
@@ -86,12 +85,22 @@ public class PlayerMovement : MonoBehaviour
         if (pDirection > 0 && !_facingRight)
         {
             PlayerFlipSprite();
-            _pc.CreateDust();
+            if (_playerGrounded)
+            {
+                _pc.CreateDust();
+            }
+            else
+                return;
         }
         else if (pDirection < 0 && _facingRight)
         {
             PlayerFlipSprite();
-            _pc.CreateDust();
+            if (_playerGrounded)
+            {
+                _pc.CreateDust();
+            }
+            else
+                return;
         }
     }
 

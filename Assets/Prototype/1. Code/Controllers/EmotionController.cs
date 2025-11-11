@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class EmotionController : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class EmotionController : MonoBehaviour
     private float _dPadH;
     private float _dPadV;
     private Coroutine neutralDelayCall = null;
+    private CinemachineImpulseSource _impulseSource;
 
     [SerializeField] private ParticleSystem _gatherFX;
     [SerializeField] private ParticleSystem _burstFX;
@@ -59,6 +61,7 @@ public class EmotionController : MonoBehaviour
         SetEmotionController();
         _pc = GetComponent<PlayerController>();
         _pm = GetComponent<PlayerMovement>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void OnDestroy()
@@ -262,6 +265,7 @@ public class EmotionController : MonoBehaviour
         _pm.Rb.simulated = false;
         yield return new WaitUntil(() => !pStartFX.IsAlive());
         pEndFX.Play();
+        CameraShakeManager.instance.CameraShake(_impulseSource);
         yield return new WaitUntil(() => !pEndFX.IsAlive());
         pEmotion.EmoState = Emotion.EmotionState.Awake;
         _pc.CanMove = true;

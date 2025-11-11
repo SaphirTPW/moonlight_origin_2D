@@ -19,6 +19,7 @@ public class ChargePunch : Skill
 
     [SerializeField] private float _chargePunchTime;
     [SerializeField] private float _maxChargePunchTime;
+    [SerializeField] private ParticleSystem _gatherFX;
     private bool _isActive;
     #endregion
 
@@ -72,10 +73,12 @@ public class ChargePunch : Skill
             {
                 PC.CanMove = false;
                 PM.Rb.linearVelocity = Vector2.zero;
+                _gatherFX.Play();
             }
 
             if (_chargePunchTime >= _maxChargePunchTime)
             {
+                _gatherFX.Stop();
                 ChargePunchAttack(_damage);
                 PC.CanMove = true;
                 _chargePunchTime = 0;

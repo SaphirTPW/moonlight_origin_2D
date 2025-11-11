@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float _enemyMaxHealth;
     [SerializeField] private float _enemyCurrentHealth;
     private bool _isDead = false;
+
+    private CinemachineImpulseSource _impulseSource;
     #endregion
 
     #region Unity Methods 
@@ -21,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
     {
         SetEnemyHealth();
         _damageFlash = GetComponent<DamageFlash>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _enemyCurrentHealth -= pDamage;
         _damageFlash.CallDamageFlash();
+        CameraShakeManager.instance.CameraShake(_impulseSource);
     }
     #endregion
 
