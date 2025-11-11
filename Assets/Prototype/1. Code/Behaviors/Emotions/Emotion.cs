@@ -27,6 +27,8 @@ public class Emotion : MonoBehaviour
     [SerializeField] private float _buildUpRate;
     [SerializeField] private float _coolDownRate;
     [SerializeField] private string _emotionName;
+    [SerializeField] private ParticleSystem _emotionEffect;
+    [SerializeField] private Color _emotionColor;
     private float _crashOutCooldownRate;
 
     private float _defenseModifier;
@@ -60,6 +62,7 @@ public class Emotion : MonoBehaviour
     {
         SetEmotionStat();
         SetCoEmotionStat();
+        _emotionEffect.startColor = _emotionColor;
     }
 
     // Update is called once per frame
@@ -103,6 +106,8 @@ public class Emotion : MonoBehaviour
         {
             case EmotionState.Awake:
                 HandleAwakeEmotion();
+                _emotionEffect.startColor = _emotionColor;
+                _emotionEffect.Play();
                 break;
             case EmotionState.Sleep:
                 HandleSleepEmotion();
@@ -144,6 +149,7 @@ public class Emotion : MonoBehaviour
     {
         _isAwake = false;
         _currentEmotionEnergy -= Time.deltaTime * _coolDownRate;
+
         if (_currentEmotionEnergy <= 0)
         {
             _currentEmotionEnergy = 0;

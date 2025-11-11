@@ -259,13 +259,14 @@ public class EmotionController : MonoBehaviour
     {
         _pc.CanMove = false;
         _pc.CanJump = false;
-        _pm.Rb.linearVelocity = Vector2.zero;
+        _pm.Rb.simulated = false;
         yield return new WaitUntil(() => !pStartFX.IsAlive());
         pEndFX.Play();
         yield return new WaitUntil(() => !pEndFX.IsAlive());
         pEmotion.EmoState = Emotion.EmotionState.Awake;
         _pc.CanMove = true;
         _pc.CanJump = true;
+        _pm.Rb.simulated = true;
         _hasFused = true;
     }
 

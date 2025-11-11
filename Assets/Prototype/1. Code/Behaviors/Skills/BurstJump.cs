@@ -9,6 +9,7 @@ public class BurstJump : Skill
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _startBurstCount;
     [SerializeField] private float _burstJumpCount = 1f;
+    [SerializeField] private ParticleSystem _burstFX;
     #endregion
 
     #region Private Variables 
@@ -54,6 +55,7 @@ public class BurstJump : Skill
         {
             PM.Rb.linearVelocity = new Vector3(PM.Rb.linearVelocity.x, 0, 0);
             PM.Rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
+            _burstFX.Play();
             _burstJumpCount -= 1f;
         }
 

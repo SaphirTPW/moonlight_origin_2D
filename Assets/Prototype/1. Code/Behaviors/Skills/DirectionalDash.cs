@@ -12,6 +12,7 @@ public class DirectionalDash : Skill
     [SerializeField] private float _dashForce;
     private Vector2 _savedVelocity;
     private Vector2 _inputDirection;
+    [SerializeField] private ParticleSystem _dashFX;
     #endregion
 
     #region Unity Methods 
