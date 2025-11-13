@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static EmotionController;
 
 public class Emotion : MonoBehaviour
 {
@@ -45,6 +47,12 @@ public class Emotion : MonoBehaviour
     [SerializeField] private bool _openSkillTab = false;
     [SerializeField] private bool _canUseSkill = true;
 
+    [SerializeField] private GameObject _skillIndicator;
+    [SerializeField] private GameObject _skillListIndicator;
+
+    [SerializeField] private TMP_Text[] _skillNames;
+    [SerializeField] private TMP_Text[] _skillCooldowns;
+
     #endregion
 
     #region Unity Methods 
@@ -63,6 +71,7 @@ public class Emotion : MonoBehaviour
         SetEmotionStat();
         SetCoEmotionStat();
         _emotionEffect.startColor = _emotionColor;
+        _skillListIndicator.SetActive(false);
     }
 
     // Update is called once per frame
@@ -158,6 +167,14 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleCrashOut()
     {
+        if (_openSkillTab)
+        {
+            //Debug.Log("Menu is Open ?");
+            _openSkillTab = false;
+            HideSkill();
+            _pc.CanJump = true;
+        }
+
         _ec.EmotionIndacatorText.text = $"{_ec.CurrentActiveEmotion.ToString()} CRASH OUT";
         _pH.DefenseMod = _coDefenseModifier;
         _pm.SpeedMod = _coSpeedModifier;
@@ -169,6 +186,7 @@ public class Emotion : MonoBehaviour
 
         if (_currentEmotionEnergy <= 0)
         {
+            _ec.EmotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
             _currentEmotionEnergy = 0;
             _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
             _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
@@ -187,15 +205,25 @@ public class Emotion : MonoBehaviour
             if (Input.GetButton("LB"))
             {
                 _openSkillTab = true;
+                ShowSKill();
             }
             else if (Input.GetButtonUp("LB"))
             {
                 _openSkillTab = false;
+                HideSkill();
             }
 
             if (_openSkillTab)
             {
                 _pc.CanJump = false;
+                for (int i = 0; i < _skillNames.Length; i++)
+                {
+                    for (int j = 0; j < _skillCooldowns.Length; j++)
+                    {
+                        _skillNames[i].text = _skills[i].SkillName;
+                        _skillCooldowns[j].text = Mathf.Round(_skills[j].CoolDownTime).ToString();
+                    }
+                }
                 if (Input.GetButtonDown("Jump"))
                 {
                     _skills[0].EnableSkill(_skills[0].SkillCost);
@@ -208,6 +236,18 @@ public class Emotion : MonoBehaviour
             else if(!_openSkillTab)
                 _pc.CanJump = true;
         }
+    }
+
+    public virtual void ShowSKill()
+    {
+        _skillListIndicator.SetActive(true);
+        _skillIndicator.SetActive(false);
+    }
+
+    public virtual void HideSkill()
+    {
+        _skillListIndicator.SetActive(false);
+        _skillIndicator.SetActive(true);
     }
     public enum EmotionState
     {

@@ -13,6 +13,8 @@ public class Skill : MonoBehaviour
     public PlayerController PC { get => _pC; set => _pC = value; }
     public SkillState CurrentSkillState { get => _currentSkillState; set => _currentSkillState = value; }
     public float SkillCost { get => _skillCost; set => _skillCost = value; }
+    public float CoolDownTime { get => _coolDownTime; set => _coolDownTime = value; }
+    public string SkillName { get => _skillName; set => _skillName = value; }
     #endregion
 
     #region Private Variables 
@@ -28,6 +30,7 @@ public class Skill : MonoBehaviour
 
     [SerializeField] private float _startCoolDownTime;
     [SerializeField] private float _coolDownTime;
+    private string _skillName;
 
     [SerializeField] private float _skillCost;
 
@@ -67,6 +70,7 @@ public class Skill : MonoBehaviour
         _skillCost = _skillData.skillCost;
         _startCoolDownTime = _skillData.coolDownTime;
         _coolDownTime = _startCoolDownTime;
+        _skillName = _skillData.skillName;
     }
 
     public virtual void EnableSkill (float pSkillCost)

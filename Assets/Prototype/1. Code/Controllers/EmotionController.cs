@@ -73,6 +73,7 @@ public class EmotionController : MonoBehaviour
     void Start()
     {
         EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
+        _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
         DelayNeutralCall();
     }
 
