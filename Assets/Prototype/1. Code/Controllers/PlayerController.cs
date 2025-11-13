@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
             {
                 _isAttacking = true;
                 _playerAnim.SetTrigger("Attack");
+                //_playerAnim.Play("player_attack", 0, 0f);
             }
         }
     }

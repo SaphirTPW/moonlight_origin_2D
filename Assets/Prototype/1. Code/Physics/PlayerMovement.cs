@@ -138,12 +138,14 @@ public class PlayerMovement : MonoBehaviour
             _rb.gravityScale = _playerLowMultiplier;
             _pc.PlayerAnim.SetFloat("VSpeed", _rb.linearVelocityY);
             _pc.PlayerAnim.SetBool("IsJumping", true);
+            //_pc.PlayerAnim.SetTrigger("Attack");
             _coyoteTimeCounter = 0;
         }
         else if(_rb.linearVelocityY > 0 && _pc.HoldJump)
         {
             _pc.PlayerAnim.SetFloat("VSpeed", _rb.linearVelocityY);
             _pc.PlayerAnim.SetBool("IsJumping", true);
+            //_pc.PlayerAnim.SetTrigger("Attack");
         }
         else
         {
