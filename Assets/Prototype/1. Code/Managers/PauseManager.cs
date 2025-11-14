@@ -52,6 +52,11 @@ public class PauseManager : MonoBehaviour
         OnGamePaused?.Invoke(pPauseState);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void HandlePause()
     {
         isPaused = true;

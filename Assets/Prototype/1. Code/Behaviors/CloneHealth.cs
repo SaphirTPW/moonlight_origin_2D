@@ -11,6 +11,7 @@ public class CloneHealth : MonoBehaviour
     #region Private Variables 
     [SerializeField] private float _cloneMaxHealth;
     [SerializeField] private float _cloneHealth;
+    [SerializeField] private float _cloneAutoDestroyTime;
     #endregion
 
     #region Unity Methods 
@@ -24,6 +25,7 @@ public class CloneHealth : MonoBehaviour
     void Update()
     {
         UpdateCloneHealth();
+        CloneAutoDestroy();
     }
     #endregion
 
@@ -47,6 +49,11 @@ public class CloneHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void CloneAutoDestroy()
+    {
+        Destroy(gameObject, _cloneAutoDestroyTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

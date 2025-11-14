@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ChargePunch : Skill
@@ -20,7 +21,7 @@ public class ChargePunch : Skill
     [SerializeField] private float _chargePunchTime;
     [SerializeField] private float _maxChargePunchTime;
     [SerializeField] private ParticleSystem _gatherFX;
-    private bool _isActive;
+    [SerializeField] private bool _isActive;
     #endregion
 
     #region Unity Methods 
@@ -44,8 +45,11 @@ public class ChargePunch : Skill
     #region Public Methods 
     public override void EnableSkill(float pSkillCost)
     {
-        base.EnableSkill(pSkillCost);
-        _isActive = true;
+        if (!_isActive)
+        {
+            base.EnableSkill(pSkillCost);
+            _isActive = true;
+        }
     }
 
     public override void SkillOnCoolDown()
@@ -80,6 +84,7 @@ public class ChargePunch : Skill
             {
                 _gatherFX.Stop();
                 ChargePunchAttack(_damage);
+                PC.PlayerAnim.SetTrigger("Attack");
                 PC.CanMove = true;
                 _chargePunchTime = 0;
                 CurrentSkillState = SkillState.CoolDown;
@@ -99,6 +104,8 @@ public class ChargePunch : Skill
                 PlayerAttackRecoil(enemy.transform, _recoilForce);
                 _isActive = false;
             }
+
+            _isActive = false;
         }
     }
 
