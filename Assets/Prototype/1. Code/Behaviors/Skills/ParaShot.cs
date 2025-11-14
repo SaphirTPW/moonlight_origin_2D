@@ -12,6 +12,7 @@ public class ParaShot : Skill
     #region Private Variables
     [SerializeField] private GameObject _paraShotObj;
     [SerializeField] private Transform _paraShotPoint;
+    private float _dir;
     #endregion
 
     #region Unity Methods 
@@ -50,10 +51,16 @@ public class ParaShot : Skill
     {
         if (CurrentSkillState == SkillState.Ready)
         {
-            Instantiate(_paraShotObj, _paraShotPoint.position, _paraShotPoint.rotation);
+            var _paraBullet = _paraShotObj.GetComponent<ParaShotBullet>();
+            float dir = Mathf.Sign(transform.localScale.x);
+            _paraBullet.SetDirection(new Vector2(dir, 0));
+
+            var bullet = Instantiate(_paraShotObj, _paraShotPoint.position, Quaternion.identity);
+            bullet.transform.localScale = Vector3.one;
             CurrentSkillState = SkillState.CoolDown;
         }
     }
+
     #endregion
 
     #region Coroutines

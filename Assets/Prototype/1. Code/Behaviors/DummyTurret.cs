@@ -10,6 +10,7 @@ public class DummyTurret : MonoBehaviour
     private DummyEnemy _dummy;
     [SerializeField] private float _fireRate;
     [SerializeField] private float _fireTime;
+    [SerializeField] private Vector2 _bulletDirection;
     #endregion
 
     #region Private Variables 
@@ -41,7 +42,9 @@ public class DummyTurret : MonoBehaviour
 
             if (_fireTime >= _fireRate)
             {
-                Instantiate(_dummyBullet, transform.position, Quaternion.identity);
+                var dummyBullet = _dummyBullet.GetComponent<Dummy_Bullet>();
+                dummyBullet.SetDirection(_bulletDirection);
+                var bullet = Instantiate(_dummyBullet, transform.position, Quaternion.identity);
                 _fireTime = 0;
             }
         }

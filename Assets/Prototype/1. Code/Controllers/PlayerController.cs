@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem _dustFX;
     [SerializeField] private ParticleSystem _landingFX;
     private Animator _playerAnim;
-    private PlayerMovement _playerMove;
+    private PlayerMovement _pm;
     #endregion
 
     #region Unity Methods 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _playerAnim = GetComponent<Animator>();
-        _playerMove = GetComponent<PlayerMovement>();
+        _pm = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour
     #region Public Methods 
     public void CreateDust()
     {
-        _dustFX.Play();
+        if(_pm.PlayerGrounded)
+            _dustFX.Play();
     }
 
     public void CreateLandingDust()

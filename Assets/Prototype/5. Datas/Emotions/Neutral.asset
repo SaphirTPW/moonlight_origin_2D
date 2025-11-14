@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionName: Neutral
   emotionType: 0
-  powerModifier: 1
-  defenseModifier: 1
-  speedModifier: 1
+  powerModifier: 0.75
+  defenseModifier: 0.75
+  speedModifier: 0.75
   moveSmoothing: 0.3
   coPowerModifier: 0
   coDefenseModifier: 0

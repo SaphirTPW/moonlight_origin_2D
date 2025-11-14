@@ -7,6 +7,7 @@ public class ParaShotBullet : MonoBehaviour
 {
     #region Public Variables 
     public float StunValue { get => _stunValue; set => _stunValue = value; }
+    public Vector2 ParaShotDirection { get => _paraShotDirection; set => _paraShotDirection = value; }
     #endregion
 
     #region Private Variables 
@@ -18,17 +19,23 @@ public class ParaShotBullet : MonoBehaviour
     #endregion
 
     #region Unity Methods 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _paraBody = GetComponent<Rigidbody2D>();
+        ParaShotMove();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ParaShotMove();
         AutoDestroy();
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
     #endregion
 
@@ -38,7 +45,12 @@ public class ParaShotBullet : MonoBehaviour
     #region Private Methods 
     private void ParaShotMove()
     {
-        _paraBody.linearVelocity = new Vector2(_paraShotDirection.x, _paraShotDirection.y) * _paraShotSpeed;
+        _paraBody.linearVelocity = _paraShotDirection * _paraShotSpeed;
+    }
+
+    public void SetDirection(Vector2 pDir)
+    {
+        _paraShotDirection = pDir.normalized;
     }
 
     private void AutoDestroy()
@@ -58,6 +70,10 @@ public class ParaShotBullet : MonoBehaviour
             //collision.GetComponent<DummyEnemy>().Stun(_stunValue);
             collision.GetComponent<DummyEnemy>().IsStunned = true;
             collision.GetComponent<DummyEnemy>().StunTime = _stunValue;
+            Destroy(gameObject);
+        }
+        else if(collision.gameObject.tag == "Untagged")
+        {
             Destroy(gameObject);
         }
     }

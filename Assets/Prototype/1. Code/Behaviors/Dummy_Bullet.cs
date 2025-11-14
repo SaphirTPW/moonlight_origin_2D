@@ -25,12 +25,12 @@ public class Dummy_Bullet : MonoBehaviour
     void Start()
     {
         _bulletBody = GetComponent<Rigidbody2D>();
+        BulletMove();
     }
 
     // Update is called once per frame
     void Update()
     {
-        BulletMove();
         AutoDestroy();
     }
     #endregion
@@ -41,7 +41,12 @@ public class Dummy_Bullet : MonoBehaviour
     #region Private Methods 
     private void BulletMove()
     {
-        _bulletBody.linearVelocity = new Vector2(_bulletDirection.x, _bulletDirection.y) * _bulletSpeed;
+        _bulletBody.linearVelocity = _bulletDirection * _bulletSpeed;
+    }
+
+    public void SetDirection(Vector2 pDir)
+    {
+        _bulletDirection = pDir;
     }
 
     private void AutoDestroy()
@@ -58,6 +63,10 @@ public class Dummy_Bullet : MonoBehaviour
         {
             collision.GetComponent<PlayerHealth>().PlayerTakeDamage(_bulletDamage);
             collision.GetComponent<PlayerMovement>().PlayerKnockback(transform, _knockBackForce, _knockBackUp);
+            Destroy(gameObject);
+        }
+        else if(collision.gameObject.tag == "Untagged")
+        {
             Destroy(gameObject);
         }
     }

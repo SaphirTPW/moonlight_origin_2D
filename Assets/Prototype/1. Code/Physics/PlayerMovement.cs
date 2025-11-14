@@ -85,22 +85,12 @@ public class PlayerMovement : MonoBehaviour
         if (pDirection > 0 && !_facingRight)
         {
             PlayerFlipSprite();
-            if (_playerGrounded)
-            {
-                _pc.CreateDust();
-            }
-            else
-                return;
+            _pc.CreateDust();
         }
         else if (pDirection < 0 && _facingRight)
         {
             PlayerFlipSprite();
-            if (_playerGrounded)
-            {
-                _pc.CreateDust();
-            }
-            else
-                return;
+            _pc.CreateDust();
         }
     }
 
