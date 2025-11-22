@@ -17,6 +17,7 @@ public class Emotion : MonoBehaviour
     [SerializeField] private EmotionData _emotionData;
     [SerializeField] private Passive _passive;
     [SerializeField] private Skill[] _skills;
+    [SerializeField] private UniqueSkill _uskill;
     private PlayerHealth _pH;
     private PlayerMovement _pm;
     private PlayerCombat _pCom;
@@ -46,6 +47,7 @@ public class Emotion : MonoBehaviour
     private bool _isAwake;
     [SerializeField] private bool _openSkillTab = false;
     [SerializeField] private bool _canUseSkill = true;
+    [SerializeField] private bool _canUseUSkill = true;
 
     [SerializeField] private GameObject _skillIndicator;
     [SerializeField] private GameObject _skillListIndicator;
@@ -68,6 +70,7 @@ public class Emotion : MonoBehaviour
 
     public virtual void Start()
     {
+        //CheckUSkill();
         SetEmotionStat();
         SetCoEmotionStat();
         _emotionEffect.startColor = _emotionColor;
@@ -79,6 +82,7 @@ public class Emotion : MonoBehaviour
     {
         UpdateEmotionState(_emotionState);
         HandleSKill();
+        HandleUSkill();
     }
     #endregion
 
@@ -200,6 +204,21 @@ public class Emotion : MonoBehaviour
         }
     }
 
+    public virtual void HandleUSkill()
+    {
+        if ((int)_emotionData.emotionType == 0)
+        {
+            return;
+        }
+        else if ((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseUSkill)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                _uskill.EnableUSkill();
+            }
+        }
+    }
+
     public virtual void HandleSKill()
     {
         if((int)_emotionData.emotionType == 0)
@@ -222,6 +241,8 @@ public class Emotion : MonoBehaviour
             if (_openSkillTab)
             {
                 _pc.CanJump = false;
+                _canUseUSkill = false;
+
                 for (int i = 0; i < _skillNames.Length; i++)
                 {
                     for (int j = 0; j < _skillCooldowns.Length; j++)
@@ -239,8 +260,19 @@ public class Emotion : MonoBehaviour
                     _skills[1].EnableSkill(_skills[1].SkillCost);
                 }
             }
-            else if(!_openSkillTab)
+            else if (!_openSkillTab)
+            {
                 _pc.CanJump = true;
+                _canUseUSkill = true;
+            }
+        }
+    }
+
+    private void CheckUSkill()
+    {
+        if (_uskill == null)
+        {
+            return;
         }
     }
 

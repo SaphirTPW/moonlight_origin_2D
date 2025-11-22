@@ -62,7 +62,7 @@ public class Skill : MonoBehaviour
     public enum SkillState
     {
         Ready,
-        CoolDown,
+        CoolDown
     }
 
     public virtual void SetSkillInfo()

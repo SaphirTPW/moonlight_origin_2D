@@ -12703,6 +12703,37 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
+--- !u!114 &1043338680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5362843391504871049, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+  m_PrefabInstance: {fileID: 1484301230203224754}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250794123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f60e399e886a4954494883c049c96178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1043338689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250794123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 937d6c4303155564f9a722d7a27a3557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slide
+  _uSkillData: {fileID: 11400000, guid: 0306364a5ca76d1409c25c53950a220b, type: 2}
+  _emotion: {fileID: 1043338680}
+  _currentUSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _dashForce: 3
+  _maxDashTime: 1
+  _dashTime: 0
 --- !u!1 &1058434220
 GameObject:
   m_ObjectHideFlags: 0
@@ -21175,6 +21206,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1399467393}
     - target: {fileID: 5362843391504871049, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _uskill
+      value: 
+      objectReference: {fileID: 1043338689}
+    - target: {fileID: 5362843391504871049, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _emotionEffect
       value: 
       objectReference: {fileID: 1287573425}
@@ -21403,6 +21438,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1287573423}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 13
+      addedObject: {fileID: 1043338689}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1043338661}
