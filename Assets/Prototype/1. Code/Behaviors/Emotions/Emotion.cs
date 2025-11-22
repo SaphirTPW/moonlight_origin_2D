@@ -210,6 +210,10 @@ public class Emotion : MonoBehaviour
         {
             return;
         }
+        else if(_uskill == null)
+        {
+            return;
+        }
         else if ((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseUSkill)
         {
             if (Input.GetButtonDown("Cancel"))

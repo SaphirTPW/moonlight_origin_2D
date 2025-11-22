@@ -12,11 +12,13 @@ public class PlayerCombat : MonoBehaviour
     public float PlayerComboCounter { get => _playerComboCounter; set => _playerComboCounter = value; }
     public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
     public bool AngerBuildUpOn { get => _angerBuildUpOn; set => _angerBuildUpOn = value; }
+    public float DamageMultiplier { get => _damageMultiplier; set => _damageMultiplier = value; }
     #endregion
 
     #region Private Variables 
     private PlayerController _pController;
     private PlayerMovement _pMovement;
+    private WarmingUp _warmUp;
 
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private LayerMask _enemyLayer;
@@ -27,6 +29,7 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _buildUpDamage;
+    [SerializeField] private float _damageMultiplier = 1f;
     private float _attackMod = 1f;
     [SerializeField] private float _playerComboCounter;
     [SerializeField] private float _playerComboTime;
@@ -50,6 +53,7 @@ public class PlayerCombat : MonoBehaviour
     {
         _pController = GetComponent<PlayerController>();
         _pMovement = GetComponent<PlayerMovement>();
+        _warmUp = GetComponent<WarmingUp>();
         SetComboTimer();
     }
 
@@ -76,14 +80,16 @@ public class PlayerCombat : MonoBehaviour
             foreach (Collider2D enemy in hitEnemies)
             {
                 if (_angerBuildUpOn)
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod);
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
                 else
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod);
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
 
                 enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
                 Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
                 PlayerAttackRecoil(enemy.transform, _recoilForce);
                 _isAttacking = true;
+                _warmUp.IsWarmnedUp = false;
+                _damageMultiplier = 1f;
                 _playerComboCounter++;
                 SetComboTimer();
             }

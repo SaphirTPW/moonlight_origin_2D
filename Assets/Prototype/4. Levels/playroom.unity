@@ -5051,6 +5051,11 @@ Transform:
   - {fileID: 506159024}
   m_Father: {fileID: 173832285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &86837439 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1069385141755389268, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+  m_PrefabInstance: {fileID: 1484301230203224754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &153304777
 GameObject:
   m_ObjectHideFlags: 0
@@ -12703,6 +12708,28 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
+--- !u!114 &1043338668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+  m_PrefabInstance: {fileID: 1484301230203224754}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250794123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa50f519f8b4ca24b9a01eea5160dbc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1043338676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 77095570392752736, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+  m_PrefabInstance: {fileID: 1484301230203224754}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250794123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff90b5440a0e924ba5de73c0124a584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1043338680 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5362843391504871049, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
@@ -12734,6 +12761,43 @@ MonoBehaviour:
   _dashForce: 3
   _maxDashTime: 1
   _dashTime: 0
+--- !u!114 &1043338690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250794123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ddf9eabd2ef0c4d8ed2c3c8a215268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WarmingUp
+  _uSkillData: {fileID: 11400000, guid: b23a82ef9279e6140a20081de7fd7a71, type: 2}
+  _emotion: {fileID: 1043338676}
+  _currentUSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _isWarmnedUp: 0
+--- !u!114 &1043338691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250794123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2548009c82f8c34abeb9b5294e7870a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WarningShot
+  _uSkillData: {fileID: 11400000, guid: 311d75b366e835c41b2c36101f8d63ac, type: 2}
+  _emotion: {fileID: 1043338668}
+  _currentUSkillState: 0
+  _startCoolDownTime: 0
+  _coolDownTime: 0
+  _warningShotObj: {fileID: 2962737894304557634, guid: dff8541e2e577104a9cc40f8053e0a49, type: 3}
+  _warningShotPoint: {fileID: 86837439}
 --- !u!1 &1058434220
 GameObject:
   m_ObjectHideFlags: 0
@@ -21026,6 +21090,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 156672542}
     m_Modifications:
     - target: {fileID: 77095570392752736, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _uskill
+      value: 
+      objectReference: {fileID: 1043338690}
+    - target: {fileID: 77095570392752736, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _emotionEffect
       value: 
       objectReference: {fileID: 1287573425}
@@ -21282,6 +21350,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 476364933}
     - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      propertyPath: _uskill
+      value: 
+      objectReference: {fileID: 1043338691}
+    - target: {fileID: 6966040123615785730, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: _emotionEffect
       value: 
       objectReference: {fileID: 1287573425}
@@ -21441,6 +21513,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: 13
       addedObject: {fileID: 1043338689}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 15
+      addedObject: {fileID: 1043338690}
+    - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+      insertIndex: 25
+      addedObject: {fileID: 1043338691}
     - targetCorrespondingSourceObject: {fileID: 326219660339728513, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1043338661}
