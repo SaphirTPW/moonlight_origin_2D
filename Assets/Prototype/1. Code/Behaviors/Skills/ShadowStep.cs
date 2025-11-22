@@ -11,8 +11,9 @@ public class ShadowStep : Skill
     #region Private Variables
     [SerializeField] private float _dashForce;
     [SerializeField] private float _maxDashTime;
-    private float _dashTime;
+    [SerializeField] private float _dashTime;
     private Vector2 _savedVelocity;
+    public bool _isActive;
     #endregion
 
     #region Unity Methods 
@@ -26,6 +27,7 @@ public class ShadowStep : Skill
     public override void Update()
     {
         base.Update();
+        HandleReturnToNormal();
     }
     #endregion
 
@@ -53,17 +55,34 @@ public class ShadowStep : Skill
     #region Private Methods 
     private void HandleShadowStep()
     {
-        _dashTime += Time.deltaTime * 3f;
-        _savedVelocity = PM.Rb.linearVelocity;
         PC.CanJump = false;
         PM.Rb.linearVelocity = new Vector2(PM.Rb.linearVelocity.x * -_dashForce, PM.Rb.linearVelocity.y);
-        CurrentSkillState = SkillState.CoolDown;
+        PM.Rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        PM.PlayerCollider.enabled = false;
+        _isActive = true;
+    }
+
+    private void HandleReturnToNormal()
+    {
+        if (_isActive)
+        {
+            _dashTime += Time.deltaTime * 3f;
+            _savedVelocity = PM.Rb.linearVelocity;
+        }
 
         if (_dashTime >= _maxDashTime)
         {
+            Debug.Log("Dash Done");
+            _isActive = false;
+            PC.CanJump = true;
+            PM.Rb.constraints = RigidbodyConstraints2D.None;
+            PM.Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            PM.PlayerCollider.enabled = true;
+            CurrentSkillState = SkillState.CoolDown;
             PM.Rb.linearVelocity = _savedVelocity;
-            PC.CanJump = false;
+            _dashTime = 0;
         }
+
     }
     #endregion
 

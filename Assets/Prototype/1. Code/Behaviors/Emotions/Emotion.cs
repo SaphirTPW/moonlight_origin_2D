@@ -146,8 +146,13 @@ public class Emotion : MonoBehaviour
                 _currentEmotionEnergy = _maxEmotionEnergy;
                 if (_emotionName != "Neutral")
                 {
-                    _emotionState = EmotionState.CrashOut;
-                    _canUseSkill = false;
+                    //_emotionState = EmotionState.CrashOut;
+                    //_canUseSkill = false;
+                    _currentEmotionEnergy = 0;
+                    _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
+                    _ec.EmotionIndacatorText.text = "Cooldown";
+                    _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
+                    _canUseSkill = true;
                 }
             }
         }
@@ -189,6 +194,7 @@ public class Emotion : MonoBehaviour
             _ec.EmotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
             _currentEmotionEnergy = 0;
             _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
+            _ec.EmotionIndacatorText.text = "Cooldown";
             _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
             _canUseSkill = true;
         }

@@ -12,12 +12,14 @@ public class PlayerMovement : MonoBehaviour
     public bool PlayerGrounded { get => _playerGrounded; set => _playerGrounded = value; }
     public float PlayerFallMultiplier { get => _playerFallMultiplier; set => _playerFallMultiplier = value; }
     public float DefPlayerSpeed { get => _defPlayerSpeed; set => _defPlayerSpeed = value; }
+    public Collider2D PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
     #endregion
 
     #region Private Variables 
     private PlayerController _pc;
     private Rigidbody2D _rb;
     private SpriteRenderer _spr;
+    private Collider2D _playerCollider;
 
     //Movement Variables 
     private float _defPlayerSpeed;
@@ -40,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _coyoteTime = 0.2f;
     [SerializeField] private float _coyoteTimeCounter;
 
+    [SerializeField] private float _groundDamping = 0f;
+    [SerializeField] private float _airDamping = 0.75f;
+
     //Change Sprite Orientation
     private bool _facingRight = true;
 
@@ -52,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         _pc = GetComponent<PlayerController>();
         _rb = GetComponent<Rigidbody2D>();
         _spr = GetComponent<SpriteRenderer>();
+        _playerCollider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -105,7 +111,13 @@ public class PlayerMovement : MonoBehaviour
             if (_colliders[i].gameObject != gameObject)
             {
                 _playerGrounded = true;
+                _rb.linearDamping = _groundDamping;
             }
+        }
+
+        if (!_playerGrounded)
+        {
+            _rb.linearDamping = _airDamping;
         }
 
         if(_playerGrounded && !_wasGrounded)

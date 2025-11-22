@@ -19,7 +19,7 @@ public class AutoDash : Passive
     #endregion
 
     #region Unity Methods 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _sprintSpeed = Pm.PlayerSpeed * 2;
@@ -69,7 +69,7 @@ public class AutoDash : Passive
 
     public override void CheckCondition()
     {
-        if (PC.IsMoving)
+        if (PC.IsMoving && Pm.PlayerGrounded)
         {
             _sprintTime += Time.deltaTime;
             if(_sprintTime >= _maxSprintTime)

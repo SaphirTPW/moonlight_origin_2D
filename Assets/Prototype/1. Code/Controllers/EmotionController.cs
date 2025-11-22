@@ -186,6 +186,7 @@ public class EmotionController : MonoBehaviour
     {
         _currControllerCooldown = _startControllerCooldownTime;
         _emoControllerState = EmotionControllerState.Ready;
+        _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
         _coolDownIsOn = false;
     }
 

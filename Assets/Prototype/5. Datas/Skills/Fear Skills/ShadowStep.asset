@@ -16,5 +16,5 @@ MonoBehaviour:
   skillDesc: "Dash d\xE9fensif permettant au joueur de se repositionner ou de prendre
     de l\u2019\xE9cart par rapport aux ennemis."
   skillEmoType: 4
-  coolDownTime: 15
+  coolDownTime: 3
   skillCost: 25

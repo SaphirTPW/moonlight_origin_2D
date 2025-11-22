@@ -53,7 +53,8 @@ public class BurstJump : Skill
 
         if (!PM.PlayerGrounded && _burstJumpCount != 0)
         {
-            PM.Rb.linearVelocity = new Vector3(PM.Rb.linearVelocity.x, 0, 0);
+            //PM.Rb.linearVelocity = new Vector3(PM.Rb.linearVelocity.x, 0, 0);
+            PM.Rb.linearVelocity = Vector2.zero;
             PM.Rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
             _burstFX.Play();
             _burstJumpCount -= 1f;
