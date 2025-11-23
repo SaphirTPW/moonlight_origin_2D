@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IsolationSheild : Skill
+public class IsolationSheild : UniqueSkill
 {
     #region Public Variables 
     #endregion
@@ -26,7 +26,7 @@ public class IsolationSheild : Skill
     public override void Update()
     {
         base.Update();
-        if (CurrentSkillState == SkillState.Ready)
+        if (CurrentUSkillState == USkillState.Ready)
         {
             HandleActiveShield();
         }
@@ -34,15 +34,15 @@ public class IsolationSheild : Skill
     #endregion
 
     #region Public Methods 
-    public override void EnableSkill(float pSkillCost)
+    public override void EnableUSkill()
     {
-        base.EnableSkill(pSkillCost);
+        base.EnableUSkill();
         _sheildisActive = true;
     }
 
-    public override void SkillOnCoolDown()
+    public override void USkillOnCoolDown()
     {
-        base.SkillOnCoolDown();
+        base.USkillOnCoolDown();
     }
 
     public override void SetSkillInfo()
@@ -73,7 +73,7 @@ public class IsolationSheild : Skill
                 _sheildTime = 0;
                 _isolationSheildObj.SetActive(false);
                 _sheildisActive = false;
-                CurrentSkillState = SkillState.CoolDown;
+                CurrentUSkillState = USkillState.CoolDown;
             }
         }
     }

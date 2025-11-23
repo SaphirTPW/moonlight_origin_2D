@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     #region Public Variables 
     public float DefenseMod { get => _defenseModifier; set => _defenseModifier = value; }
     public bool IsHealing { get => _isHealing; set => _isHealing = value; }
+    public float PlayerCurrentHealth { get => _playerCurrentHealth; set => _playerCurrentHealth = value; }
+    public float PlayerMaxHealth { get => _playerMaxHealth; set => _playerMaxHealth = value; }
     #endregion
 
     #region Private Variables 
