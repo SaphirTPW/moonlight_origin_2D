@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float _enemyMaxHealth;
     [SerializeField] private float _enemyCurrentHealth;
     private bool _isDead = false;
+    [SerializeField] private GameObject _damageTextPrefab;
 
     private CinemachineImpulseSource _impulseSource;
     #endregion
@@ -39,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _enemyCurrentHealth -= pDamage;
         _damageFlash.CallDamageFlash();
+        ShowDamage(pDamage.ToString("F1"));
         CameraShakeManager.instance.CameraShake(_impulseSource);
     }
     #endregion
@@ -57,6 +59,12 @@ public class EnemyHealth : MonoBehaviour
 
         if(_isDead)
             Destroy(gameObject);
+    }
+
+    private void ShowDamage(string text)
+    {
+        GameObject prefab = Instantiate(_damageTextPrefab, transform.position, Quaternion.identity);
+        prefab.GetComponentInChildren<TextMesh>().text = text;
     }
     #endregion
 
