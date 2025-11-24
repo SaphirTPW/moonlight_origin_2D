@@ -34,7 +34,6 @@ public class HealingBurst : Skill
         {
             base.EnableSkill(pSkillCost);
             _isActive = true;
-            PH.IsHealing = false;
         }
     }
 
@@ -60,6 +59,7 @@ public class HealingBurst : Skill
             {
                 PC.CanMove = false;
                 PM.Rb.linearVelocity = Vector2.zero;
+                PH.IsHealing = false;
                 _gatherFX.Play();
             }
 
@@ -78,17 +78,18 @@ public class HealingBurst : Skill
 
     private void HandleHealBurst(float pAmount)
     {
-        pAmount = PH.PlayerMaxHealth * 0.5f;
+        pAmount = PH.PlayerMaxHealth * 0.4f;
         
         if (_isActive)
         {
             
             Debug.Log(pAmount);
             PH.PlayerCurrentHealth += pAmount;
-            //if (PH.PlayerMaxHealth >= PH.PlayerMaxHealth)
-            //    PH.PlayerCurrentHealth = PH.PlayerMaxHealth;
             _isActive = false;
         }
+
+        if (PH.PlayerCurrentHealth >= PH.PlayerMaxHealth)
+            PH.PlayerCurrentHealth = PH.PlayerMaxHealth;
     }
 
     #endregion

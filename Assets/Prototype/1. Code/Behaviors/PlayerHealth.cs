@@ -11,18 +11,22 @@ public class PlayerHealth : MonoBehaviour
     public bool IsHealing { get => _isHealing; set => _isHealing = value; }
     public float PlayerCurrentHealth { get => _playerCurrentHealth; set => _playerCurrentHealth = value; }
     public float PlayerMaxHealth { get => _playerMaxHealth; set => _playerMaxHealth = value; }
+    public bool IsReceivingDamage { get => _isReceivingDamage; set => _isReceivingDamage = value; }
     #endregion
 
     #region Private Variables 
+    public static PlayerHealth Instance;
     [SerializeField] private float _playerMaxHealth;
     private float _healingRate = 1f;
     [SerializeField] private float _healingAmount;
+    [SerializeField] private float _damageAmount;
     [SerializeField] private float _startHealingRate = 1f;
     [SerializeField] private float _playerCurrentHealth;
     [SerializeField] private TMP_Text _playerHealthText;
     private float _defenseModifier = 1f;
     private bool _isDead = false;
     private bool _isHealing = false;
+    [SerializeField] private bool _isReceivingDamage = false;
     #endregion
 
     #region Unity Methods 
@@ -35,6 +39,11 @@ public class PlayerHealth : MonoBehaviour
     {
         GameManager.OnGameStateChanged -= GameManagerOnGameStateChange;
     }
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         GameManagerOnGameStateChange(GameManager.GameState.SetUp);
@@ -46,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
     {
         UpdatePlayerHealth();
         ProgressiveHealing(_healingAmount);
+        ProgressiveDamage(_damageAmount);
     }
     #endregion
 
@@ -68,6 +78,23 @@ public class PlayerHealth : MonoBehaviour
             if(_healingRate <= 0f)
             {
                 PlayerGainHealth(pHealthAmount);
+                _healingRate = _startHealingRate;
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void ProgressiveDamage(float pDamageAmount)
+    {
+        if (_isReceivingDamage)
+        {
+            _healingRate -= Time.deltaTime;
+            if (_healingRate <= 0f)
+            {
+                PlayerTakeDamage(pDamageAmount);
                 _healingRate = _startHealingRate;
             }
         }
@@ -106,7 +133,12 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (_isDead)
-            GameManager.Instance.UpdateGameState(GameManager.GameState.Dead);
+        {
+            //GameManager.Instance.UpdateGameState(GameManager.GameState.Dead);
+            GameManager.Instance.PlayerVoidOut();
+            SetPlayerHealth();
+            _isDead = false;
+        }
     }
     #endregion
 
