@@ -27,6 +27,7 @@ public class EmotionController : MonoBehaviour
     private PlayerController _pc;
     private PlayerMovement _pm;
     [SerializeField] private Emotion[] _emotions;
+    [SerializeField] private bool[] _emotionIsActive;
     [SerializeField] private EmotionControllerState _emoControllerState;
     [SerializeField] private ActiveEmotionState _currentActiveEmotion;
     [SerializeField] private float _startControllerCooldownTime;
@@ -106,22 +107,22 @@ public class EmotionController : MonoBehaviour
             _dPadH = Input.GetAxisRaw("DPAD-H");
             _dPadV = Input.GetAxisRaw("DPAD-V");
 
-            if (_dPadV < 0)
+            if (_dPadV < 0 && _currentActiveEmotion != ActiveEmotionState.Joy)
             {
                 EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
             }
-            else if (_dPadV > 0)
+            else if (_dPadV > 0 && _currentActiveEmotion != ActiveEmotionState.Sadness)
             {
                 EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
             }
-            else if (_dPadH < 0)
+            else if (_dPadH < 0 && _currentActiveEmotion != ActiveEmotionState.Anger)
             {
                 EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
             }
-            else if (_dPadH > 0)
+            else if (_dPadH > 0 && _currentActiveEmotion != ActiveEmotionState.Fear)
             {
                 EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
@@ -140,6 +141,8 @@ public class EmotionController : MonoBehaviour
         for (int i = 0; i < _emotions.Length; i++)
         {
             _emotions[i].EmoState = Emotion.EmotionState.Sleep;
+            _emotionIsActive[i] = false;
+
             if (_emotions[i].Passive != null)
             {
                 _emotions[i].Passive.PassState = Passive.PassiveState.Off;
@@ -152,14 +155,15 @@ public class EmotionController : MonoBehaviour
         {
             AnimaFusion(pEmotion, pColor);
         }
-        else if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
+
+        if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
             pEmotion.EmoState = Emotion.EmotionState.Awake;
             pFX.startColor = pColor;
             pFX.Play();
-
         }
-        else if(_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
+
+        if (_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
         {
             AnimaDefusion(pEmotion);
         }
