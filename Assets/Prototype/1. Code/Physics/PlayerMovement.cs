@@ -13,10 +13,12 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerFallMultiplier { get => _playerFallMultiplier; set => _playerFallMultiplier = value; }
     public float DefPlayerSpeed { get => _defPlayerSpeed; set => _defPlayerSpeed = value; }
     public Collider2D PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
+    public float GroundDamping { get => _groundDamping; set => _groundDamping = value; }
     #endregion
 
     #region Private Variables 
     private PlayerController _pc;
+    private PlayerCombat _pCom;
     private Rigidbody2D _rb;
     private SpriteRenderer _spr;
     private Collider2D _playerCollider;
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _pc = GetComponent<PlayerController>();
+        _pCom = GetComponent<PlayerCombat>();
         _rb = GetComponent<Rigidbody2D>();
         _spr = GetComponent<SpriteRenderer>();
         _playerCollider = GetComponent<Collider2D>();
@@ -112,12 +115,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 _playerGrounded = true;
                 _rb.linearDamping = _groundDamping;
+                _pCom.RecoilForce = 30;
             }
         }
 
         if (!_playerGrounded)
         {
             _rb.linearDamping = _airDamping;
+            _pCom.RecoilForce = 10;
         }
 
         if(_playerGrounded && !_wasGrounded)

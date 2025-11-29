@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpBufferCounter;
 
     [SerializeField] private bool _isAttacking = false;
+    [SerializeField] private float _startAttackTime;
+    [SerializeField] private float _attackTime;
     [SerializeField] private bool _IsMoving = false;
     
     [SerializeField] private bool _canMove;
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleJumpInput();
         HandleAttackInput();
+        UpdateAttackState();
     }
     #endregion
 
@@ -138,8 +141,23 @@ public class PlayerController : MonoBehaviour
             {
                 _isAttacking = true;
                 _playerAnim.SetTrigger("Attack");
-                _pm.Rb.linearDamping = 1f;
-                //_playerAnim.Play("player_attack", 0, 0f);
+                _canAttack = false;
+                _pm.Rb.linearDamping = 1000f;
+            }
+        }
+    }
+
+    private void UpdateAttackState()
+    {
+        if (!_canAttack)
+        {
+            _attackTime += Time.deltaTime;
+
+            if(_attackTime >= _startAttackTime)
+            {
+                _canAttack = true;
+                _isAttacking = false;
+                _attackTime = 0;
             }
         }
     }

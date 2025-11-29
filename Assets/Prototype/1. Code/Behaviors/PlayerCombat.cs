@@ -13,6 +13,7 @@ public class PlayerCombat : MonoBehaviour
     public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
     public bool AngerBuildUpOn { get => _angerBuildUpOn; set => _angerBuildUpOn = value; }
     public float DamageMultiplier { get => _damageMultiplier; set => _damageMultiplier = value; }
+    public float RecoilForce { get => _recoilForce; set => _recoilForce = value; }
     #endregion
 
     #region Private Variables 
@@ -27,6 +28,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float _knockBackUp = 10f;
     [SerializeField] private float _recoilForce;
 
+    [SerializeField] private float _startAttackTime;
+    public float _attackTime;
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _buildUpDamage;
     [SerializeField] private float _damageMultiplier = 1f;
@@ -42,7 +45,7 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private GameObject _impactFX;
     
-    private bool _isAttacking;
+    [SerializeField] private bool _isAttacking;
     private bool _angerBuildUpOn = false;
 
     #endregion
@@ -63,6 +66,7 @@ public class PlayerCombat : MonoBehaviour
         PlayerAttack(_attackDamage);
         EnableComboTimer();
         SetAttackDirection();
+        //UpdateAttackState();
     }
     #endregion
 
@@ -80,9 +84,15 @@ public class PlayerCombat : MonoBehaviour
             foreach (Collider2D enemy in hitEnemies)
             {
                 if (_angerBuildUpOn)
+                {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
+                    _pController.Attack = false;
+                }
                 else
+                {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
+                    _pController.Attack = false;
+                }
 
                 enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
                 Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
@@ -93,8 +103,8 @@ public class PlayerCombat : MonoBehaviour
                 _playerComboCounter++;
                 SetComboTimer();
             }
-            _pController.Attack = false;
         }
+        //_pController.Attack = false;
     }
 
     private void PlayerAttackRecoil(Transform pTransform, float pRecoilForce)
@@ -102,6 +112,21 @@ public class PlayerCombat : MonoBehaviour
         Vector2 direction = (transform.position - pTransform.position).normalized;
         _pMovement.Rb.linearVelocity = direction * pRecoilForce;
     }
+
+    //private void UpdateAttackState()
+    //{
+    //    if (this._isAttacking || _pController.Attack)
+    //    {
+    //        _attackTime += Time.deltaTime;
+
+    //        if(_attackTime >= _startAttackTime)
+    //        {
+    //            _pController.CanAttack = true;
+    //            this._isAttacking = false;
+    //            _attackTime = 0;
+    //        }
+    //    }
+    //}
 
     private void ResetComboCounter()
     {
