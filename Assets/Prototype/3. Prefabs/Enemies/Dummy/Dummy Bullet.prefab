@@ -133,11 +133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 20
-  _bulletDirection: {x: -1, y: 0}
+  _bulletDirection: {x: 1, y: 0}
   _autoDestroyTime: 5
   _knockBackForce: 6
   _knockBackUp: 2
-  _bulletDamage: 30
+  _bulletDamage: 15
 --- !u!58 &2003474563794093275
 CircleCollider2D:
   m_ObjectHideFlags: 0

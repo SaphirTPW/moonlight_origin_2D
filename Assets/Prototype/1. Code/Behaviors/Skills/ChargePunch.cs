@@ -55,6 +55,11 @@ public class ChargePunch : Skill
     public override void SkillOnCoolDown()
     {
         base.SkillOnCoolDown();
+        //if (WarmUp.IsWarmnedUp)
+        //{
+        //    WarmUp.IsWarmnedUp = false;
+        //    PCom.DamageMultiplier = 1f;
+        //}
     }
 
     public override void SetSkillInfo()
@@ -83,7 +88,9 @@ public class ChargePunch : Skill
             if (_chargePunchTime >= _maxChargePunchTime)
             {
                 _gatherFX.Stop();
-                ChargePunchAttack(_damage);
+                ChargePunchAttack(_damage * PCom.DamageMultiplier);
+                WarmUp.IsWarmnedUp = false;
+                PCom.DamageMultiplier = 1f;
                 PC.PlayerAnim.SetTrigger("Attack");
                 PC.CanMove = true;
                 _chargePunchTime = 0;

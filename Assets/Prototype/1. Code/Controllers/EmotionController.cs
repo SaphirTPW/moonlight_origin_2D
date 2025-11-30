@@ -99,8 +99,8 @@ public class EmotionController : MonoBehaviour
     {
         if (_emoControllerState == EmotionControllerState.Ready)
             _canSwitch = true;
-        else if (_emoControllerState == EmotionControllerState.NotReady)
-            _canSwitch = false;
+        //else if (_emoControllerState == EmotionControllerState.NotReady)
+        //    _canSwitch = false;
 
         if (_canSwitch)
         {
@@ -190,7 +190,8 @@ public class EmotionController : MonoBehaviour
     {
         _currControllerCooldown = _startControllerCooldownTime;
         _emoControllerState = EmotionControllerState.Ready;
-        _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+        //_emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+        _emotionIndacatorText.text = "Neutral";
         _coolDownIsOn = false;
     }
 

@@ -15,16 +15,19 @@ public class Skill : MonoBehaviour
     public float SkillCost { get => _skillCost; set => _skillCost = value; }
     public float CoolDownTime { get => _coolDownTime; set => _coolDownTime = value; }
     public string SkillName { get => _skillName; set => _skillName = value; }
+    public WarmingUp WarmUp { get => _warmUp; set => _warmUp = value; }
     #endregion
 
     #region Private Variables 
     [SerializeField] private SkillData _skillData;
     [SerializeField] private Emotion _emotion;
+
     private PlayerHealth _pH;
     private PlayerMovement _pM;
     private PlayerCombat _pCom;
     private EmotionController _eC;
     private PlayerController _pC;
+    private WarmingUp _warmUp;
 
     [SerializeField] private SkillState _currentSkillState;
 
@@ -44,6 +47,7 @@ public class Skill : MonoBehaviour
         _pCom = GetComponent<PlayerCombat>();
         _eC = GetComponent<EmotionController>();
         _pC = GetComponent<PlayerController>();
+        _warmUp = GetComponent<WarmingUp>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()

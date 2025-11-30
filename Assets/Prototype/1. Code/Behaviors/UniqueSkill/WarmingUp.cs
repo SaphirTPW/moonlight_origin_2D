@@ -7,6 +7,7 @@ public class WarmingUp : UniqueSkill
 
     private float _newDamageMultiplier = 0.25f;
     [SerializeField] private bool _isWarmnedUp = false;
+    [SerializeField] private ParticleSystem _warmUpFX;
 
     public override void Start()
     {
@@ -40,6 +41,7 @@ public class WarmingUp : UniqueSkill
         {
             _isWarmnedUp = true;
             PCom.DamageMultiplier = PCom.DamageMultiplier + _newDamageMultiplier;
+            _warmUpFX.Play();
             EC.EmoControllerState = EmotionController.EmotionControllerState.Ready;
         }
     }

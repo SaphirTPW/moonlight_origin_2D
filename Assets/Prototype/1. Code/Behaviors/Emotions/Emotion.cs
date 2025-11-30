@@ -18,6 +18,7 @@ public class Emotion : MonoBehaviour
     [SerializeField] private Passive _passive;
     [SerializeField] private Skill[] _skills;
     [SerializeField] private UniqueSkill _uskill;
+
     private PlayerHealth _pH;
     private PlayerMovement _pm;
     private PlayerCombat _pCom;
@@ -155,6 +156,8 @@ public class Emotion : MonoBehaviour
                     _currentEmotionEnergy = 0;
                     _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
                     _ec.EmotionIndacatorText.text = "Fatigue";
+                    _ec.CanSwitch = false;
+                    HideSkill();
                     _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
                     _canUseSkill = true;
                 }

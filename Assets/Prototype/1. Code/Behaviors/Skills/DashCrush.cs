@@ -34,7 +34,7 @@ public class DashCrush : Skill
     public override void Update()
     {
         base.Update();
-        DashCrushAttack(_damage);
+        DashCrushAttack(_damage * PCom.DamageMultiplier);
     }
     #endregion
 
@@ -51,6 +51,11 @@ public class DashCrush : Skill
     public override void SkillOnCoolDown()
     {
         base.SkillOnCoolDown();
+        //if (WarmUp.IsWarmnedUp)
+        //{
+        //    WarmUp.IsWarmnedUp = false;
+        //    PCom.DamageMultiplier = 1f;
+        //}
     }
 
     public override void SetSkillInfo()
@@ -83,6 +88,8 @@ public class DashCrush : Skill
             foreach (Collider2D enemy in hitEnemies)
             {
                 enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
+                WarmUp.IsWarmnedUp = false;
+                PCom.DamageMultiplier = 1f;
                 enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
                 PlayerAttackRecoil(enemy.transform, _recoilForce);
                 _isActive = false;
