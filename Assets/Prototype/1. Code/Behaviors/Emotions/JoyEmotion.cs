@@ -42,6 +42,11 @@ public class JoyEmotion : Emotion
         base.HandleAwakeEmotion();
     }
 
+    public override void HandleFatigueState()
+    {
+        base.HandleFatigueState();
+    }
+
     public override void HandleSleepEmotion()
     {
        base.HandleSleepEmotion();

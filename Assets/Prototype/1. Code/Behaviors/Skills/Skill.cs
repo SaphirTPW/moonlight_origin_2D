@@ -37,6 +37,8 @@ public class Skill : MonoBehaviour
 
     [SerializeField] private float _skillCost;
 
+    private bool _IsShortInEnergy = false;
+
     #endregion
 
     #region Unity Methods 
@@ -59,6 +61,14 @@ public class Skill : MonoBehaviour
     public virtual void Update()
     {
         SkillOnCoolDown();
+        if(_currentSkillState == SkillState.Ready && (_emotion.MaxEmotionEnergy - _emotion.CurrentEmotionEnergy) < _skillCost)
+        {
+            _IsShortInEnergy = true;
+        }
+        else if(_currentSkillState == SkillState.Ready && (_emotion.MaxEmotionEnergy - _emotion.CurrentEmotionEnergy) > _skillCost)
+        {
+            _IsShortInEnergy = false;
+        }
     }
     #endregion
 
@@ -81,10 +91,15 @@ public class Skill : MonoBehaviour
     {
         if ((int)_skillData.skillEmoType == (int)_eC.CurrentActiveEmotion)
         {
-            if (_currentSkillState == SkillState.Ready)
+            if (_currentSkillState == SkillState.Ready && (_emotion.MaxEmotionEnergy - _emotion.CurrentEmotionEnergy) > pSkillCost)
             {
                 _emotion.CurrentEmotionEnergy += pSkillCost;
                 _eC.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
+            }
+            else if (_currentSkillState == SkillState.Ready && (_emotion.MaxEmotionEnergy - _emotion.CurrentEmotionEnergy) < pSkillCost)
+            {
+                _emotion.HandleFatigueState();
+                //_eC.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
             }
         }
     }
@@ -94,8 +109,15 @@ public class Skill : MonoBehaviour
         if(_currentSkillState == SkillState.CoolDown)
         {
             _coolDownTime -= Time.deltaTime;
-            _eC.EmoControllerState = EmotionController.EmotionControllerState.Ready;
-            
+            if (!_IsShortInEnergy)
+            {
+                _eC.EmoControllerState = EmotionController.EmotionControllerState.Ready;
+            }
+            //else
+            //{
+            //    return;
+            //}
+
             if (_coolDownTime <= 0)
             {
                 _currentSkillState = SkillState.Ready;

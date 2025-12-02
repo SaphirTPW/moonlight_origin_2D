@@ -11,6 +11,7 @@ public class Emotion : MonoBehaviour
     public EmotionState EmoState { get => _emotionState; set => _emotionState = value; }
     public float CurrentEmotionEnergy { get => _currentEmotionEnergy; set => _currentEmotionEnergy = value; }
     public Passive Passive { get => _passive; set => _passive = value; }
+    public float MaxEmotionEnergy { get => _maxEmotionEnergy; set => _maxEmotionEnergy = value; }
     #endregion
 
     #region Private Variables 
@@ -153,18 +154,24 @@ public class Emotion : MonoBehaviour
                 {
                     //_emotionState = EmotionState.CrashOut;
                     //_canUseSkill = false;
-                    _currentEmotionEnergy = 0;
-                    _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
-                    _ec.EmotionIndacatorText.text = "Fatigue";
-                    _ec.CanSwitch = false;
-                    HideSkill();
-                    _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
-                    _canUseSkill = true;
+                    HandleFatigueState();
                 }
             }
         }
 
     }
+
+    public virtual void HandleFatigueState()
+    {
+        Debug.Log("Hello");
+        _currentEmotionEnergy = 0;
+        _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
+        _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
+        _ec.EmotionIndacatorText.text = "Fatigue";
+        _ec.CanSwitch = false;
+        HideSkill();
+        _canUseSkill = true;
+    } 
 
     public virtual void HandleSleepEmotion()
     {
