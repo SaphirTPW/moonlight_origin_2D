@@ -150,7 +150,7 @@ public class Emotion : MonoBehaviour
             if (_currentEmotionEnergy >= _maxEmotionEnergy)
             {
                 _currentEmotionEnergy = _maxEmotionEnergy;
-                if (_emotionName != "Neutral")
+                if (_emotionName != "Neutral" || _emotionName != "Fatigue")
                 {
                     //_emotionState = EmotionState.CrashOut;
                     //_canUseSkill = false;
@@ -166,7 +166,7 @@ public class Emotion : MonoBehaviour
         Debug.Log("Hello");
         _currentEmotionEnergy = 0;
         _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
-        _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
+        _ec.EnableEmotion(_ec.Emotions[5], EmotionController.ActiveEmotionState.Fatigue, _ec.fatigueColor, null);
         _ec.EmotionIndacatorText.text = "Fatigue";
         _ec.CanSwitch = false;
         HideSkill();

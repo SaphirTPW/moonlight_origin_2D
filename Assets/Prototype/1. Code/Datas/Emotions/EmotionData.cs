@@ -30,7 +30,8 @@ public class EmotionData : ScriptableObject
         Joy,
         Anger,
         Sadness,
-        Fear
+        Fear,
+        Fatigue
     }
     #endregion
 

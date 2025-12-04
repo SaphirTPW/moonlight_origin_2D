@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b0cac518d597e45b28460f4f9e7056, type: 3}
-  m_Name: Joy
-  m_EditorClassIdentifier: 
-  emotionName: Joy
-  emotionType: 1
-  powerModifier: 1
-  defenseModifier: 1.5
-  speedModifier: 1
-  moveSmoothing: 0.1
-  coPowerModifier: 1.05
-  coDefenseModifier: 0.15
-  coSpeedModifier: 1.8
-  coMoveSmoothing: 0.4
-  buildUpRate: 10
-  coolDownRate: 4
-  crashCoolDownRate: 3
+  m_Name: Fatigue
+  m_EditorClassIdentifier: Assembly-CSharp::EmotionData
+  emotionName: 
+  emotionType: 0
+  powerModifier: 0.25
+  defenseModifier: 0.25
+  speedModifier: 0.25
+  moveSmoothing: 0.075
+  coPowerModifier: 0
+  coDefenseModifier: 0
+  coSpeedModifier: 0
+  coMoveSmoothing: 0
+  buildUpRate: 0
+  coolDownRate: 0
+  crashCoolDownRate: 0

@@ -21,6 +21,7 @@ public class EmotionController : MonoBehaviour
     public Color sadnessColor;
     public Color fearColor;
     public Color neutralColor;
+    public Color fatigueColor;
     #endregion
 
     #region Private Variables
@@ -159,8 +160,12 @@ public class EmotionController : MonoBehaviour
         if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
             pEmotion.EmoState = Emotion.EmotionState.Awake;
-            pFX.startColor = pColor;
-            pFX.Play();
+
+            if(pFX != null)
+            {
+                pFX.startColor = pColor;
+                pFX.Play();
+            }
         }
 
         if (_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
@@ -191,6 +196,7 @@ public class EmotionController : MonoBehaviour
         _currControllerCooldown = _startControllerCooldownTime;
         _emoControllerState = EmotionControllerState.Ready;
         //_emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+        EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
         _emotionIndacatorText.text = "Neutral";
         _coolDownIsOn = false;
     }
@@ -217,6 +223,7 @@ public class EmotionController : MonoBehaviour
         Anger,
         Sadness,
         Fear,
+        Fatigue,
         Ecstasy,
         Rage,
         Grief,
