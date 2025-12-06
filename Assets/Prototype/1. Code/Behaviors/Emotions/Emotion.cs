@@ -75,7 +75,9 @@ public class Emotion : MonoBehaviour
         //CheckUSkill();
         SetEmotionStat();
         SetCoEmotionStat();
-        _emotionEffect.startColor = _emotionColor;
+        var main = _emotionEffect.main;
+        main.startColor = _emotionColor;
+        _emotionEffect.gameObject.SetActive(false);
         _skillListIndicator.SetActive(false);
     }
 
@@ -121,8 +123,8 @@ public class Emotion : MonoBehaviour
         {
             case EmotionState.Awake:
                 HandleAwakeEmotion();
-                _emotionEffect.startColor = _emotionColor;
-                _emotionEffect.Play();
+                var main = _emotionEffect.main;
+                main.startColor = _emotionColor;
                 break;
             case EmotionState.Sleep:
                 HandleSleepEmotion();
@@ -143,6 +145,8 @@ public class Emotion : MonoBehaviour
         _pCom.AttackMod = _attackModifier;
         _pm.PlayerMoveSmoothing = _moveSmoothing;
         _isAwake = true;
+        //_emotionEffect.Play();
+        _emotionEffect.gameObject.SetActive(true);
 
         if (_isAwake)
         {
@@ -152,8 +156,6 @@ public class Emotion : MonoBehaviour
                 _currentEmotionEnergy = _maxEmotionEnergy;
                 if (_emotionName != "Neutral" || _emotionName != "Fatigue")
                 {
-                    //_emotionState = EmotionState.CrashOut;
-                    //_canUseSkill = false;
                     HandleFatigueState();
                 }
             }
