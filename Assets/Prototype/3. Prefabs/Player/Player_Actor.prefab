@@ -5149,6 +5149,7 @@ MonoBehaviour:
   sadnessColor: {r: 0.17150229, g: 0.4332147, b: 0.8867924, a: 1}
   fearColor: {r: 0.65520227, g: 0.14346743, b: 0.9811321, a: 1}
   neutralColor: {r: 0, g: 0, b: 0, a: 0}
+  fatigueColor: {r: 0, g: 0, b: 0, a: 0}
   _emotions:
   - {fileID: 4194736800330322183}
   - {fileID: 5362843391504871049}
@@ -5156,7 +5157,7 @@ MonoBehaviour:
   - {fileID: 1162830390850318163}
   - {fileID: 6966040123615785730}
   - {fileID: 4841483539617668844}
-  _emotionIsActive: 0000000000
+  _emotionIsActive: 000000000000
   _emoControllerState: 0
   _currentActiveEmotion: 0
   _startControllerCooldownTime: 8
@@ -5383,10 +5384,10 @@ MonoBehaviour:
   _attackRange: 2
   _knockBackForce: 20
   _knockBackUp: 0.75
-  _recoilForce: 3
+  _recoilForce: 10
   _damage: 30
   _chargePunchTime: 0
-  _maxChargePunchTime: 3
+  _maxChargePunchTime: 2
   _gatherFX: {fileID: 2305163475175308372}
   _isActive: 0
 --- !u!114 &2419476809153418278
@@ -5414,7 +5415,7 @@ MonoBehaviour:
   _attackRange: 2
   _knockBackForce: 10
   _knockBackUp: 1
-  _recoilForce: 3
+  _recoilForce: 10
   _dashForce: 5
   _maxDashTime: 3
   _damage: 20
@@ -10742,7 +10743,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -30380,7 +30381,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -35193,7 +35194,7 @@ Transform:
   m_GameObject: {fileID: 3429505257311964814}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.408, y: 0, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35249,7 +35250,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -55115,7 +55116,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

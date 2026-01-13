@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerHealth : MonoBehaviour
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float _startHealingRate = 1f;
     [SerializeField] private float _playerCurrentHealth;
     [SerializeField] private TMP_Text _playerHealthText;
+    [SerializeField] private Image _playerHealthBar;
     private float _defenseModifier = 1f;
     private bool _isDead = false;
     private bool _isHealing = false;
@@ -125,6 +127,7 @@ public class PlayerHealth : MonoBehaviour
     private void UpdatePlayerHealth()
     {
         _playerHealthText.text = Mathf.Round(_playerCurrentHealth).ToString();
+        _playerHealthBar.fillAmount = _playerCurrentHealth / 100;
 
         if(_playerCurrentHealth <= 0)
         {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static EmotionController;
 
 public class Emotion : MonoBehaviour
@@ -34,6 +35,7 @@ public class Emotion : MonoBehaviour
     [SerializeField] private string _emotionName;
     [SerializeField] private ParticleSystem _emotionEffect;
     [SerializeField] private Color _emotionColor;
+    [SerializeField] private Image _emotionMeter;
     private float _crashOutCooldownRate;
 
     private float _defenseModifier;
@@ -77,6 +79,7 @@ public class Emotion : MonoBehaviour
         SetCoEmotionStat();
         var main = _emotionEffect.main;
         main.startColor = _emotionColor;
+        _emotionMeter.color = _emotionColor;
         _emotionEffect.gameObject.SetActive(false);
         _skillListIndicator.SetActive(false);
     }
@@ -84,6 +87,7 @@ public class Emotion : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        _emotionMeter.fillAmount = _currentEmotionEnergy / 100;
         UpdateEmotionState(_emotionState);
         HandleSKill();
         HandleUSkill();
@@ -114,6 +118,11 @@ public class Emotion : MonoBehaviour
         _coSpeedModifier = _emotionData.coSpeedModifier;
         _coMoveSmoothing = _emotionData.coMoveSmoothing;
     }
+
+    //public virtual void SetEmotionMeter()
+    //{
+        
+    //}
 
     public virtual void UpdateEmotionState(EmotionState pEmotionState)
     {
@@ -151,6 +160,7 @@ public class Emotion : MonoBehaviour
         if (_isAwake)
         {
             _currentEmotionEnergy += Time.deltaTime * _buildUpRate;
+
             if (_currentEmotionEnergy >= _maxEmotionEnergy)
             {
                 _currentEmotionEnergy = _maxEmotionEnergy;
@@ -281,14 +291,6 @@ public class Emotion : MonoBehaviour
                 _pc.CanJump = true;
                 _canUseUSkill = true;
             }
-        }
-    }
-
-    private void CheckUSkill()
-    {
-        if (_uskill == null)
-        {
-            return;
         }
     }
 

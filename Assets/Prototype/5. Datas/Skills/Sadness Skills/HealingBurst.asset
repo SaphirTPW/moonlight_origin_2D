@@ -15,5 +15,5 @@ MonoBehaviour:
   skillName: HealingBurst
   skillDesc: ---
   skillEmoType: 3
-  coolDownTime: 20
+  coolDownTime: 10
   skillCost: 50

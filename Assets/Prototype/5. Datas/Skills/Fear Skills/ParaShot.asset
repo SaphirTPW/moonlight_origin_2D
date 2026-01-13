@@ -15,5 +15,5 @@ MonoBehaviour:
   skillName: Para Shot
   skillDesc: "Projectile qui paralyse l\u2019ennemi pendant un certain temps."
   skillEmoType: 4
-  coolDownTime: 7
+  coolDownTime: 4
   skillCost: 20
