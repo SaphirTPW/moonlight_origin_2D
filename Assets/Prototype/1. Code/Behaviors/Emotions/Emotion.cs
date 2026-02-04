@@ -35,7 +35,8 @@ public class Emotion : MonoBehaviour
     [SerializeField] private string _emotionName;
     [SerializeField] private ParticleSystem _emotionEffect;
     [SerializeField] private Color _emotionColor;
-    [SerializeField] private Image _emotionMeter;
+    [SerializeField] private Image _emotionMeterPad;
+    [SerializeField] private Image _emotionMeterKey;
     private float _crashOutCooldownRate;
 
     private float _defenseModifier;
@@ -56,8 +57,13 @@ public class Emotion : MonoBehaviour
     [SerializeField] private GameObject _skillIndicator;
     [SerializeField] private GameObject _skillListIndicator;
 
-    [SerializeField] private TMP_Text[] _skillNames;
-    [SerializeField] private TMP_Text[] _skillCooldowns;
+    [SerializeField] private TMP_Text[] _skillNamesPAD;
+    [SerializeField] private TMP_Text[] _skillCooldownsPAD;
+
+    [SerializeField] private TMP_Text[] _skillNamesKEY;
+    [SerializeField] private TMP_Text[] _skillCooldownsKEY;
+
+
 
     #endregion
 
@@ -77,9 +83,11 @@ public class Emotion : MonoBehaviour
         //CheckUSkill();
         SetEmotionStat();
         SetCoEmotionStat();
+        //SetSkillName();
         var main = _emotionEffect.main;
         main.startColor = _emotionColor;
-        _emotionMeter.color = _emotionColor;
+        _emotionMeterPad.color = _emotionColor;
+        _emotionMeterKey.color = _emotionColor;
         _emotionEffect.gameObject.SetActive(false);
         _skillListIndicator.SetActive(false);
     }
@@ -87,10 +95,13 @@ public class Emotion : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        _emotionMeter.fillAmount = _currentEmotionEnergy / 100;
+        _emotionMeterPad.fillAmount = _currentEmotionEnergy / 100;
+        _emotionMeterKey.fillAmount = _currentEmotionEnergy / 100;
+
         UpdateEmotionState(_emotionState);
         HandleSKill();
         HandleUSkill();
+        UpdateSkillUI();
     }
     #endregion
 
@@ -118,6 +129,14 @@ public class Emotion : MonoBehaviour
         _coSpeedModifier = _emotionData.coSpeedModifier;
         _coMoveSmoothing = _emotionData.coMoveSmoothing;
     }
+
+    //private void SetSkillName()
+    //{
+    //    for (int i = 0; i < _skillNames.Length; i++)
+    //    {
+    //        _skillNames[i] = _skillListIndicator.transform.GetChild(0).GetChild(1).gameObject.GetComponent<TMP_Text>();
+    //    }
+    //}
 
     //public virtual void SetEmotionMeter()
     //{
@@ -175,7 +194,6 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleFatigueState()
     {
-        Debug.Log("Hello");
         _currentEmotionEnergy = 0;
         _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
         _ec.EnableEmotion(_ec.Emotions[5], EmotionController.ActiveEmotionState.Fatigue, _ec.fatigueColor, null);
@@ -238,7 +256,7 @@ public class Emotion : MonoBehaviour
         }
         else if ((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseUSkill)
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.G))
             {
                 _uskill.EnableUSkill();
             }
@@ -253,37 +271,52 @@ public class Emotion : MonoBehaviour
         }
         else if((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseSkill)
         {
-            if (Input.GetButton("LB"))
+            if (_pc.OpenSkillTab)
             {
-                _openSkillTab = true;
                 ShowSKill();
             }
-            else if (Input.GetButtonUp("LB"))
+            else if (!_pc.OpenSkillTab)
             {
-                _openSkillTab = false;
                 HideSkill();
             }
 
-            if (_openSkillTab)
+            if (_pc.OpenSkillTab)
             {
                 _pc.CanJump = false;
                 _canUseUSkill = false;
 
-                for (int i = 0; i < _skillNames.Length; i++)
+                if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
                 {
-                    for (int j = 0; j < _skillCooldowns.Length; j++)
+                    for (int i = 0; i < _skillNamesPAD.Length; i++)
                     {
-                        _skillNames[i].text = _skills[i].SkillName;
-                        _skillCooldowns[j].text = Mathf.Round(_skills[j].CoolDownTime).ToString();
+                        for (int j = 0; j < _skillCooldownsPAD.Length; j++)
+                        {
+                            _skillNamesPAD[i].text = _skills[i].SkillName;
+                            _skillCooldownsPAD[j].text = Mathf.Round(_skills[j].CoolDownTime).ToString();
+                        }
                     }
                 }
-                if (Input.GetButtonDown("Jump"))
+                else if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Keyboard)
+                {
+                    for (int i = 0; i < _skillNamesKEY.Length; i++)
+                    {
+                        for (int j = 0; j < _skillCooldownsKEY.Length; j++)
+                        {
+                            _skillNamesKEY[i].text = _skills[i].SkillName;
+                            _skillCooldownsKEY[j].text = Mathf.Round(_skills[j].CoolDownTime).ToString();
+                        }
+                    }
+                }
+
+                if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Q))
                 {
                     _skills[0].EnableSkill(_skills[0].SkillCost);
+                    Debug.Log("Input Called 1");
                 }
-                else if (Input.GetButtonDown("Cancel"))
+                else if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.E))
                 {
                     _skills[1].EnableSkill(_skills[1].SkillCost);
+                    Debug.Log("Input Called 2");
                 }
             }
             else if (!_openSkillTab)
@@ -304,6 +337,21 @@ public class Emotion : MonoBehaviour
     {
         _skillListIndicator.SetActive(false);
         _skillIndicator.SetActive(true);
+    }
+
+    private void UpdateSkillUI()
+    {
+        if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Keyboard)
+        {
+            _skillIndicator = UIManager.Instance.KeySkillUI;
+            _skillListIndicator = UIManager.Instance.KeySkillListUI;
+        }
+        else if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
+        {
+            _skillIndicator = UIManager.Instance.PadSkillUI;
+            _skillListIndicator = UIManager.Instance.PadSkillListUI;
+        }
+
     }
     public enum EmotionState
     {

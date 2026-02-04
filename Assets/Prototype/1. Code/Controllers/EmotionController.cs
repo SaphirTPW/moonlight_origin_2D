@@ -108,27 +108,27 @@ public class EmotionController : MonoBehaviour
             _dPadH = Input.GetAxisRaw("DPAD-H");
             _dPadV = Input.GetAxisRaw("DPAD-V");
 
-            if (_dPadV < 0 && _currentActiveEmotion != ActiveEmotionState.Joy)
+            if (_dPadV < 0 && _currentActiveEmotion != ActiveEmotionState.Joy || Input.GetKeyDown(KeyCode.W) && _currentActiveEmotion != ActiveEmotionState.Joy)
             {
                 EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
             }
-            else if (_dPadV > 0 && _currentActiveEmotion != ActiveEmotionState.Sadness)
+            else if (_dPadV > 0 && _currentActiveEmotion != ActiveEmotionState.Sadness || Input.GetKeyDown(KeyCode.S) && _currentActiveEmotion != ActiveEmotionState.Sadness)
             {
                 EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
             }
-            else if (_dPadH < 0 && _currentActiveEmotion != ActiveEmotionState.Anger)
+            else if (_dPadH < 0 && _currentActiveEmotion != ActiveEmotionState.Anger || Input.GetKeyDown(KeyCode.D) && _currentActiveEmotion != ActiveEmotionState.Anger)
             {
                 EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
             }
-            else if (_dPadH > 0 && _currentActiveEmotion != ActiveEmotionState.Fear)
+            else if (_dPadH > 0 && _currentActiveEmotion != ActiveEmotionState.Fear || Input.GetKeyDown(KeyCode.A) && _currentActiveEmotion != ActiveEmotionState.Fear)
             {
                 EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
                 _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
             }
-            else if (Input.GetButtonDown("Neutral"))
+            else if (Input.GetButtonDown("Neutral") || Input.GetKeyDown(KeyCode.R))
             {
                 EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
                 _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();

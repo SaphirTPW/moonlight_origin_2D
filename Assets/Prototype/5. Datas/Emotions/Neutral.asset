@@ -16,7 +16,7 @@ MonoBehaviour:
   emotionType: 0
   powerModifier: 0.75
   defenseModifier: 0.75
-  speedModifier: 0.75
+  speedModifier: 1
   moveSmoothing: 0.075
   coPowerModifier: 0
   coDefenseModifier: 0

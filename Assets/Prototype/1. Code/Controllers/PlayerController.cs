@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Animator PlayerAnim { get => _playerAnim; set => _playerAnim = value; }
     public float JumpBufferCounter { get => _jumpBufferCounter; set => _jumpBufferCounter = value; }
     public float JumpBufferTime { get => _jumpBufferTime; set => _jumpBufferTime = value; }
+    public bool OpenSkillTab { get => _openSkillTab; set => _openSkillTab = value; }
     #endregion
 
     #region Private Variables 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canJump;
     [SerializeField] private bool _canAttack;
+    [SerializeField] private bool _openSkillTab;
 
     [SerializeField] private ParticleSystem _dustFX;
     [SerializeField] private ParticleSystem _landingFX;
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleJumpInput();
         HandleAttackInput();
+        HandleSkillTab();
         UpdateAttackState();
     }
     #endregion
@@ -82,9 +85,22 @@ public class PlayerController : MonoBehaviour
     {
         if (_canMove) 
         {
-            _inputDirection.x = Input.GetAxis("Horizontal");
-            _inputDirection.y = Input.GetAxis("Vertical");
-            _currentInputDirValue = _inputDirection.x;
+            if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
+            {
+                _inputDirection.x = Input.GetAxis("Horizontal");
+                _inputDirection.y = Input.GetAxis("Vertical");
+
+                //Debug.Log($"InputDirectionX {_inputDirection.x} ; InputDirectionY {_inputDirection.y}");
+            }
+            else if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Keyboard)
+            {
+                _inputDirection.x = Input.GetAxis("KEYHorizontal");
+                _inputDirection.y = Input.GetAxis("KEYVertical");
+
+                //Debug.Log($"InputDirectionX {_inputDirection.x} ; InputDirectionY {_inputDirection.y}");
+            }
+
+                _currentInputDirValue = _inputDirection.x;
 
             if (_inputDirection.x > 0 || _inputDirection.x < 0)
             {
@@ -110,7 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_canJump)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") || Input.GetButtonDown("KEYJump"))
             {
                 _jump = true;
                 _jumpBufferCounter = _jumpBufferTime;
@@ -121,7 +137,7 @@ public class PlayerController : MonoBehaviour
                 _jumpBufferCounter -= Time.deltaTime;
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") || Input.GetButton("KEYJump"))
             {
                 _holdJump = true;
 
@@ -137,13 +153,30 @@ public class PlayerController : MonoBehaviour
     {
         if (_canAttack)
         {
-            if (Input.GetButtonDown("Attack"))
+            if (Input.GetButtonDown("Attack") || Input.GetKeyDown(KeyCode.F))
             {
                 _isAttacking = true;
                 _playerAnim.SetTrigger("Attack");
                 _canAttack = false;
                 _pm.Rb.linearDamping = 1000f;
             }
+
+            if (Input.GetButtonDown("Attack"))
+                InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Gamepad;
+            else if (Input.GetKeyDown(KeyCode.F))
+                InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Keyboard;
+        }
+    }
+
+    private void HandleSkillTab()
+    {
+        if (Input.GetButton("LB") || Input.GetKey(KeyCode.LeftShift))
+        {
+            _openSkillTab = true;
+        }
+        else if (Input.GetButtonUp("LB") || Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _openSkillTab = false;
         }
     }
 
