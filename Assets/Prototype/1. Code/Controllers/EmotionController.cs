@@ -11,7 +11,7 @@ public class EmotionController : MonoBehaviour
     #region Public Variables 
     public EmotionControllerState EmoControllerState { get => _emoControllerState; set => _emoControllerState = value; }
     public ActiveEmotionState CurrentActiveEmotion { get => _currentActiveEmotion; set => _currentActiveEmotion = value; }
-    public bool CanSwitch { get => _canSwitch; set => _canSwitch = value; }
+    public bool CanSwitch { get => canSwitch; set => canSwitch = value; }
     public bool CoolDownIsOn { get => _coolDownIsOn; set => _coolDownIsOn = value; }
     public Emotion[] Emotions { get => _emotions; set => _emotions = value; }
     public TMP_Text EmotionIndacatorText { get => _emotionIndacatorText; set => _emotionIndacatorText = value; }
@@ -33,7 +33,7 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private ActiveEmotionState _currentActiveEmotion;
     [SerializeField] private float _startControllerCooldownTime;
     [SerializeField] private float _currControllerCooldown;
-    public bool _canSwitch = false;
+    public bool canSwitch = false;
     [SerializeField] private bool _coolDownIsOn = false;
     [SerializeField] private bool _hasFused = false;
     private float _dPadH;
@@ -99,11 +99,11 @@ public class EmotionController : MonoBehaviour
     public void EmotionSwitch()
     {
         if (_emoControllerState == EmotionControllerState.Ready)
-            _canSwitch = true;
+            canSwitch = true;
         //else if (_emoControllerState == EmotionControllerState.NotReady)
         //    _canSwitch = false;
 
-        if (_canSwitch)
+        if (canSwitch)
         {
             _dPadH = Input.GetAxisRaw("DPAD-H");
             _dPadV = Input.GetAxisRaw("DPAD-V");
@@ -143,6 +143,8 @@ public class EmotionController : MonoBehaviour
         {
             _emotions[i].EmoState = Emotion.EmotionState.Sleep;
             _emotionIsActive[i] = false;
+            _emotions[i].IsCrashOutAvailable = false;
+            InputDeviceManager.Instance.DisablePrompt();
 
             if (_emotions[i].Passive != null)
             {
@@ -204,7 +206,7 @@ public class EmotionController : MonoBehaviour
     public void SetEmotionController()
     {
         _emoControllerState = EmotionControllerState.Ready;
-        _canSwitch = true;
+        canSwitch = true;
         _coolDownIsOn = false;
         _currControllerCooldown = _startControllerCooldownTime;
     }

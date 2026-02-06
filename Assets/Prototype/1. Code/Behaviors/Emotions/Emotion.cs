@@ -13,6 +13,7 @@ public class Emotion : MonoBehaviour
     public float CurrentEmotionEnergy { get => _currentEmotionEnergy; set => _currentEmotionEnergy = value; }
     public Passive Passive { get => _passive; set => _passive = value; }
     public float MaxEmotionEnergy { get => _maxEmotionEnergy; set => _maxEmotionEnergy = value; }
+    public bool IsCrashOutAvailable { get => _isCrashOutAvailable; set => _isCrashOutAvailable = value; }
     #endregion
 
     #region Private Variables 
@@ -53,6 +54,7 @@ public class Emotion : MonoBehaviour
     [SerializeField] private bool _openSkillTab = false;
     [SerializeField] private bool _canUseSkill = true;
     [SerializeField] private bool _canUseUSkill = true;
+    [SerializeField] private bool _isCrashOutAvailable;
 
     [SerializeField] private GameObject _skillIndicator;
     [SerializeField] private GameObject _skillListIndicator;
@@ -63,11 +65,23 @@ public class Emotion : MonoBehaviour
     [SerializeField] private TMP_Text[] _skillNamesKEY;
     [SerializeField] private TMP_Text[] _skillCooldownsKEY;
 
+    public static event Action<EmotionState> OnEmotionStateChanged;
+    public static event Action<bool> OnCrashOutAvailability;
 
 
     #endregion
 
     #region Unity Methods 
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
 
     private void Awake()
     {
@@ -102,10 +116,12 @@ public class Emotion : MonoBehaviour
         HandleSKill();
         HandleUSkill();
         UpdateSkillUI();
+        EnableCrashOut();
     }
     #endregion
 
     #region Public Methods 
+
 
     public virtual void SetEmotionStat()
     {
@@ -160,13 +176,18 @@ public class Emotion : MonoBehaviour
             case EmotionState.CrashOut:
                 HandleCrashOut();
                 break;
+            case EmotionState.Fatigue:
+                HandleFatigueState();
+                break;
             default:
                 break;
         }
+        OnEmotionStateChanged?.Invoke(pEmotionState);
     }
 
     public virtual void HandleAwakeEmotion()
     {
+        
         _emotionState = EmotionState.Awake;
         _pH.DefenseMod = _defenseModifier;
         _pm.SpeedMod = _speedModifier;
@@ -175,6 +196,7 @@ public class Emotion : MonoBehaviour
         _isAwake = true;
         //_emotionEffect.Play();
         _emotionEffect.gameObject.SetActive(true);
+
 
         if (_isAwake)
         {
@@ -185,15 +207,19 @@ public class Emotion : MonoBehaviour
                 _currentEmotionEnergy = _maxEmotionEnergy;
                 if (_emotionName != "Neutral" || _emotionName != "Fatigue")
                 {
-                    HandleFatigueState();
+                    _emotionState = EmotionState.Fatigue; 
                 }
             }
         }
+
+        CheckCrashOut();
 
     }
 
     public virtual void HandleFatigueState()
     {
+        _isCrashOutAvailable = false;
+        InputDeviceManager.Instance.DisablePrompt();
         _currentEmotionEnergy = 0;
         _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
         _ec.EnableEmotion(_ec.Emotions[5], EmotionController.ActiveEmotionState.Fatigue, _ec.fatigueColor, null);
@@ -212,6 +238,28 @@ public class Emotion : MonoBehaviour
         {
             _currentEmotionEnergy = 0;
         }
+    }
+
+    public void EnableCrashOut()
+    {
+        if(_isCrashOutAvailable && Input.GetButtonDown("Crash Out"))
+        {
+            _emotionState = EmotionState.CrashOut;
+            _isCrashOutAvailable = false;
+            InputDeviceManager.Instance.DisablePrompt();
+            _pH.PlayerCurrentHealth += _pH.PlayerMaxHealth * 0.25f;
+        }
+    }
+
+    public void CheckCrashOut()
+    {
+        bool newState = _currentEmotionEnergy >= 75 && _pH.PlayerCurrentHealth <= 25;
+
+        if (newState == _isCrashOutAvailable)
+            return;
+
+        _isCrashOutAvailable = newState;
+        OnCrashOutAvailability?.Invoke(newState);
     }
 
     public virtual void HandleCrashOut()
@@ -311,12 +359,12 @@ public class Emotion : MonoBehaviour
                 if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Q))
                 {
                     _skills[0].EnableSkill(_skills[0].SkillCost);
-                    Debug.Log("Input Called 1");
+                    //Debug.Log("Input Called 1");
                 }
                 else if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.E))
                 {
                     _skills[1].EnableSkill(_skills[1].SkillCost);
-                    Debug.Log("Input Called 2");
+                    //Debug.Log("Input Called 2");
                 }
             }
             else if (!_openSkillTab)
@@ -357,7 +405,8 @@ public class Emotion : MonoBehaviour
     {
         Awake,
         Sleep,
-        CrashOut
+        CrashOut,
+        Fatigue
     }
     #endregion
 

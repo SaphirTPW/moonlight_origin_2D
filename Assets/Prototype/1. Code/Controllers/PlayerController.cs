@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private ParticleSystem _dustFX;
     [SerializeField] private ParticleSystem _landingFX;
+
     private Animator _playerAnim;
     private PlayerMovement _pm;
     #endregion
