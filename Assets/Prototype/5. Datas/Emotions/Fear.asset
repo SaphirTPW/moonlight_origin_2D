@@ -22,6 +22,6 @@ MonoBehaviour:
   coDefenseModifier: 0.2
   coSpeedModifier: 2
   coMoveSmoothing: 0.6
-  buildUpRate: 1
+  buildUpRate: 2
   coolDownRate: 4
   crashCoolDownRate: 3

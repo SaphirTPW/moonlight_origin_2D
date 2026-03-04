@@ -15341,7 +15341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1006372189
 Transform:
   m_ObjectHideFlags: 0
@@ -36757,14 +36757,6 @@ PrefabInstance:
       propertyPath: '_skillCooldownsPAD.Array.data[1]'
       value: 
       objectReference: {fileID: 1196928488}
-    - target: {fileID: 6599821910571612152, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
-      propertyPath: _speedMod
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6599821910571612152, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
-      propertyPath: _playerMoveSmoothing
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 6903074477343190665, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
       propertyPath: m_DrawMode
       value: 0

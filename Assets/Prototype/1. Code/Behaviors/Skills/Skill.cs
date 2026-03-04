@@ -109,6 +109,7 @@ public class Skill : MonoBehaviour
         if(_currentSkillState == SkillState.CoolDown)
         {
             _coolDownTime -= Time.deltaTime;
+
             if (!_IsShortInEnergy)
             {
                 _eC.EmoControllerState = EmotionController.EmotionControllerState.Ready;

@@ -74,8 +74,8 @@ public class EmotionController : MonoBehaviour
 
     void Start()
     {
-        EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
-        _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+        //EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
+        //_emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
         DelayNeutralCall();
     }
 
@@ -100,8 +100,8 @@ public class EmotionController : MonoBehaviour
     {
         if (_emoControllerState == EmotionControllerState.Ready)
             canSwitch = true;
-        //else if (_emoControllerState == EmotionControllerState.NotReady)
-        //    _canSwitch = false;
+        else if (_emoControllerState == EmotionControllerState.NotReady)
+            canSwitch = false;
 
         if (canSwitch)
         {
@@ -141,7 +141,8 @@ public class EmotionController : MonoBehaviour
     {
         for (int i = 0; i < _emotions.Length; i++)
         {
-            _emotions[i].EmoState = Emotion.EmotionState.Sleep;
+            //_emotions[i].EmoState = Emotion.EmotionState.Sleep;
+            _emotions[i].UpdateEmotionState(Emotion.EmotionState.Sleep);
             _emotionIsActive[i] = false;
             _emotions[i].IsCrashOutAvailable = false;
             InputDeviceManager.Instance.DisablePrompt();
@@ -161,7 +162,7 @@ public class EmotionController : MonoBehaviour
 
         if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
-            pEmotion.EmoState = Emotion.EmotionState.Awake;
+            pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
 
             if(pFX != null)
             {
@@ -173,6 +174,12 @@ public class EmotionController : MonoBehaviour
         if (_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
         {
             AnimaDefusion(pEmotion);
+        }
+
+        if (!_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
+        {
+            Debug.Log("isNeutral");
+            pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
         }
     }
 
@@ -197,7 +204,6 @@ public class EmotionController : MonoBehaviour
     {
         _currControllerCooldown = _startControllerCooldownTime;
         _emoControllerState = EmotionControllerState.Ready;
-        //_emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
         EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
         _emotionIndacatorText.text = "Neutral";
         _coolDownIsOn = false;
@@ -271,6 +277,7 @@ public class EmotionController : MonoBehaviour
     private IEnumerator SetNeutralState()
     {
         yield return new WaitForSeconds(0.1f);
+        //Debug.Log("Neutral");
         EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
     }
 
@@ -283,7 +290,7 @@ public class EmotionController : MonoBehaviour
         pEndFX.Play();
         CameraShakeManager.instance.CameraShake(_impulseSource);
         yield return new WaitUntil(() => !pEndFX.IsAlive());
-        pEmotion.EmoState = Emotion.EmotionState.Awake;
+        pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
         _pc.CanMove = true;
         _pc.CanJump = true;
         _pm.Rb.simulated = true;
@@ -298,7 +305,7 @@ public class EmotionController : MonoBehaviour
         yield return new WaitUntil(() => !pDefusionFX.IsAlive());
         _pc.CanMove = true;
         _pc.CanJump = true;
-        pEmotion.EmoState = Emotion.EmotionState.Awake;
+        pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
         _hasFused = false;
     }
     #endregion

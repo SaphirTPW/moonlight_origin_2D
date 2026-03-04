@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Passive : MonoBehaviour
@@ -22,9 +23,23 @@ public class Passive : MonoBehaviour
     private PlayerController _pc;
 
     [SerializeField] private PassiveState _passiveState;
+    [SerializeField] private PassiveMode _passiveMode;
+
+    public static event Action<PassiveState> OnPassiveStateChanged;
     #endregion
 
     #region Unity Methods 
+
+    protected virtual void OnEnable()
+    {
+        Emotion.OnEmotionStateChanged += HandlePassiveOn;
+    }
+
+    protected virtual void OnDisable()
+    {
+        Emotion.OnEmotionStateChanged -= HandlePassiveOn;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -34,20 +49,16 @@ public class Passive : MonoBehaviour
         _ec = GetComponent<EmotionController>();
         _pc = GetComponent<PlayerController>();
     }
-
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        HandlePassiveOn();
-        HandlePassiveOff();
-        UpdatePassiveState(_passiveState);
-    }
     #endregion
 
     #region Public Methods 
 
-    public virtual void UpdatePassiveState(PassiveState pPassiveState)
+    public void UpdatePassiveState(PassiveState pPassiveState)
     {
+        if (_passiveState == pPassiveState)
+        {
+            return;
+        }
         _passiveState = pPassiveState;
 
         switch (pPassiveState)
@@ -61,29 +72,57 @@ public class Passive : MonoBehaviour
             default:
                 break;
         }
+        OnPassiveStateChanged?.Invoke(pPassiveState);
     }
+
     public enum PassiveState
     {
         On,
         Off
     }
 
-    
-    public virtual void HandlePassiveOn()
+    public enum PassiveMode
     {
-        if ((int)_passiveData.passiveEmoType == (int)_ec.CurrentActiveEmotion)
+        Normal,
+        CrashOut
+    }
+
+    public void HandlePassiveOn(Emotion.EmotionState pEmotionState)
+    {
+        if ((int)_passiveData.passiveEmoType != (int)_ec.CurrentActiveEmotion)
         {
-            if (_passiveData.passiveType == PassiveData.PassiveType.Auto)
-            {
-                _passiveState = PassiveState.On;
-            }
-            else if (_passiveData.passiveType == PassiveData.PassiveType.Conditional)
-            {
-                CheckCondition();
-            }
-        }
-        else
+            UpdatePassiveState(PassiveState.Off);
             return;
+        }
+
+        bool shouldBeActive = false;
+
+        if (pEmotionState == Emotion.EmotionState.Awake && _passiveMode == PassiveMode.Normal)
+        {
+            shouldBeActive = true;
+        }
+        else if (pEmotionState == Emotion.EmotionState.CrashOut && _passiveMode == PassiveMode.CrashOut)
+        {
+            shouldBeActive = true;
+        }
+
+        if (!shouldBeActive)
+        {
+            UpdatePassiveState(PassiveState.Off);
+            return;
+        }
+
+        // Activation
+        if (_passiveData.passiveType == PassiveData.PassiveType.Auto)
+        {
+            UpdatePassiveState(PassiveState.On);
+        }
+        else if (_passiveData.passiveType == PassiveData.PassiveType.Conditional)
+        {
+            CheckCondition();
+        }
+
+        Debug.Log($"{name} - EmotionState reçu : p{pEmotionState}");
     }
 
     public virtual void HandlePassiveOff()

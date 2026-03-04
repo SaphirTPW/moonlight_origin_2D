@@ -94,10 +94,8 @@ public class Emotion : MonoBehaviour
 
     public virtual void Start()
     {
-        //CheckUSkill();
         SetEmotionStat();
         SetCoEmotionStat();
-        //SetSkillName();
         var main = _emotionEffect.main;
         main.startColor = _emotionColor;
         _emotionMeterPad.color = _emotionColor;
@@ -112,11 +110,13 @@ public class Emotion : MonoBehaviour
         _emotionMeterPad.fillAmount = _currentEmotionEnergy / 100;
         _emotionMeterKey.fillAmount = _currentEmotionEnergy / 100;
 
-        UpdateEmotionState(_emotionState);
+        //UpdateEmotionState(_emotionState);
         HandleSKill();
         HandleUSkill();
         UpdateSkillUI();
         EnableCrashOut();
+        IncreaseEmotionEnergy();
+        DecreaseEmotionEnergy();
     }
     #endregion
 
@@ -146,21 +146,11 @@ public class Emotion : MonoBehaviour
         _coMoveSmoothing = _emotionData.coMoveSmoothing;
     }
 
-    //private void SetSkillName()
-    //{
-    //    for (int i = 0; i < _skillNames.Length; i++)
-    //    {
-    //        _skillNames[i] = _skillListIndicator.transform.GetChild(0).GetChild(1).gameObject.GetComponent<TMP_Text>();
-    //    }
-    //}
-
-    //public virtual void SetEmotionMeter()
-    //{
-        
-    //}
-
     public virtual void UpdateEmotionState(EmotionState pEmotionState)
     {
+        if (_emotionState == pEmotionState)
+            return;
+
         _emotionState = pEmotionState;
 
         switch (pEmotionState)
@@ -187,33 +177,14 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleAwakeEmotion()
     {
-        
+
         _emotionState = EmotionState.Awake;
         _pH.DefenseMod = _defenseModifier;
         _pm.SpeedMod = _speedModifier;
         _pCom.AttackMod = _attackModifier;
         _pm.PlayerMoveSmoothing = _moveSmoothing;
-        _isAwake = true;
-        //_emotionEffect.Play();
+        _emotionEffect.Play();
         _emotionEffect.gameObject.SetActive(true);
-
-
-        if (_isAwake)
-        {
-            _currentEmotionEnergy += Time.deltaTime * _buildUpRate;
-
-            if (_currentEmotionEnergy >= _maxEmotionEnergy)
-            {
-                _currentEmotionEnergy = _maxEmotionEnergy;
-                if (_emotionName != "Neutral" || _emotionName != "Fatigue")
-                {
-                    _emotionState = EmotionState.Fatigue; 
-                }
-            }
-        }
-
-        CheckCrashOut();
-
     }
 
     public virtual void HandleFatigueState()
@@ -232,20 +203,15 @@ public class Emotion : MonoBehaviour
     public virtual void HandleSleepEmotion()
     {
         _isAwake = false;
-        _currentEmotionEnergy -= Time.deltaTime * _coolDownRate;
-
-        if (_currentEmotionEnergy <= 0)
-        {
-            _currentEmotionEnergy = 0;
-        }
     }
 
     public void EnableCrashOut()
     {
         if(_isCrashOutAvailable && Input.GetButtonDown("Crash Out"))
         {
-            _emotionState = EmotionState.CrashOut;
+            UpdateEmotionState(EmotionState.CrashOut);
             _isCrashOutAvailable = false;
+            _canUseSkill = false;
             InputDeviceManager.Instance.DisablePrompt();
             _pH.PlayerCurrentHealth += _pH.PlayerMaxHealth * 0.25f;
         }
@@ -260,6 +226,45 @@ public class Emotion : MonoBehaviour
 
         _isCrashOutAvailable = newState;
         OnCrashOutAvailability?.Invoke(newState);
+    }
+
+    public void IncreaseEmotionEnergy()
+    {
+        if (_emotionState == EmotionState.Awake)
+        {
+            _currentEmotionEnergy += Time.deltaTime * _buildUpRate;
+
+            if (_currentEmotionEnergy >= _maxEmotionEnergy)
+            {
+                _currentEmotionEnergy = _maxEmotionEnergy;
+                if (_emotionName != "Neutral" || _emotionName != "Fatigue")
+                {
+                    UpdateEmotionState(EmotionState.Fatigue);
+                }
+            }
+        }
+
+        CheckCrashOut();
+    }
+
+    public void DecreaseEmotionEnergy()
+    {
+        if (_emotionState == EmotionState.Sleep || _emotionState == EmotionState.CrashOut)
+        {
+            _currentEmotionEnergy -= Time.deltaTime * _coolDownRate;
+
+            if (_currentEmotionEnergy <= 0)
+            {
+                if(_emotionState == EmotionState.Sleep)
+                {
+                    _currentEmotionEnergy = 0;
+                }
+                else if(_emotionState == EmotionState.CrashOut)
+                {
+                    UpdateEmotionState(EmotionState.Fatigue);
+                }
+            }
+        }
     }
 
     public virtual void HandleCrashOut()

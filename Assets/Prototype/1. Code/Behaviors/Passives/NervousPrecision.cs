@@ -9,43 +9,48 @@ public class NervousPrecision : Passive
     #endregion
 
     #region Private Variables 
+    private FearEmotion _fearEmotion;
     [SerializeField] private ParaShot _paraShot;
     [SerializeField] private float _upgradedValue;
     [SerializeField] private float _defaultValue;
     [SerializeField] private float _focusTime;
     [SerializeField] private float _maxFocusTime;
+
+    [SerializeField] private bool _canNervShot = false;
     #endregion
 
     #region Unity Methods 
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        Emotion.OnEmotionStateChanged += TurnOffNervShot;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        Emotion.OnEmotionStateChanged -= TurnOffNervShot;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _fearEmotion = GetComponent<FearEmotion>();
         _upgradedValue = _paraShot.ParaShotObj.GetComponent<ParaShotBullet>().StunValue + 5;
         _defaultValue = _paraShot.ParaShotObj.GetComponent<ParaShotBullet>().StunValue;
     }
 
-    public override void Update()
+    private void Update()
     {
-        base.Update();
+        LoadNervShot();
     }
     #endregion
 
     #region Public Methods 
-    public override void UpdatePassiveState(PassiveState pPassiveState)
-    {
-        base.UpdatePassiveState(pPassiveState);
-    }
-    public override void HandlePassiveOn()
-    {
-        base.HandlePassiveOn();
-    }
 
     public override void HandlePassiveOff()
     {
-        if (PC.IsMoving && PassState == PassiveState.On)
-        {
-            PassState = PassiveState.Off;
-        }
+        UpdatePassiveState(PassiveState.Off);
     }
 
     public override void EnablePassive()
@@ -60,19 +65,37 @@ public class NervousPrecision : Passive
 
     public override void CheckCondition()
     {
-        if (!PC.IsMoving)
+        if(_fearEmotion.EmoState == Emotion.EmotionState.Awake)
         {
-            _focusTime += Time.deltaTime;
-            if (_focusTime >= _maxFocusTime)
+            _canNervShot = true;
+        }
+    }
+
+    public void LoadNervShot()
+    {
+        if (_canNervShot)
+        {
+            if (!PC.IsMoving)
             {
-                PassState = PassiveState.On;
-                _focusTime = _maxFocusTime;
+                _focusTime += Time.deltaTime;
+                if (_focusTime >= _maxFocusTime)
+                {
+                    PassState = PassiveState.On;
+                    _focusTime = _maxFocusTime;
+                }
+            }
+            else if (PC.IsMoving)
+            {
+                _focusTime = 0;
+                HandlePassiveOff();
             }
         }
-        else if (PC.IsMoving)
-        {
-            _focusTime = 0;
-        }
+    }
+
+    private void TurnOffNervShot(Emotion.EmotionState pState)
+    {
+        if(_fearEmotion.EmoState != Emotion.EmotionState.Awake)
+            _canNervShot = false;
     }
     #endregion
 

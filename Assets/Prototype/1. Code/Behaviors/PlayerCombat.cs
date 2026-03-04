@@ -46,7 +46,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private GameObject _impactFX;
     
     [SerializeField] private bool _isAttacking;
-    private bool _angerBuildUpOn = false;
+    [SerializeField] private bool _angerBuildUpOn = false;
 
     #endregion
 

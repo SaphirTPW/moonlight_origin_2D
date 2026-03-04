@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     #region Public Variables 
     public float SpeedMod { get => _speedMod; set => _speedMod = value; }
-    public float PlayerSpeed { get => _playerSpeed; set => _playerSpeed = value; }
+    public float PlayerSpeed { get => _playerSpeed; set { _playerSpeed = value; Debug.Log("PlayerSpeed set to: " + value); } }
     public Rigidbody2D Rb { get => _rb; set => _rb = value; }
     public float PlayerMoveSmoothing { get => _playerMoveSmoothing; set => _playerMoveSmoothing = value; }
     public bool PlayerGrounded { get => _playerGrounded; set => _playerGrounded = value; }

@@ -1,21 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class AutoDash : Passive
+public class EsctasyRush : Passive
 {
     #region Public Variables 
     private JoyEmotion _joyEmotion;
     [SerializeField] private float _sprintTime;
     [SerializeField] private float _maxSprintTime;
-    [SerializeField] private float _sprintSpeed;
-    [SerializeField] private float _defaultSpeed;
+    private float _sprintSpeed;
+    private float _defaultSpeed;
 
     private float _newAnimSpeed;
     private float _defaultAnimSpeed;
 
-    [SerializeField] private bool _canAutoDash = false;
+    [SerializeField] private bool _canEsctaDash = false;
     #endregion
 
     #region Private Variables 
@@ -26,15 +24,14 @@ public class AutoDash : Passive
     protected override void OnEnable()
     {
         base.OnEnable();
-        Emotion.OnEmotionStateChanged += TurnOffAutoDash;
+        Emotion.OnEmotionStateChanged += TurnOffEsctaDash;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        Emotion.OnEmotionStateChanged -= TurnOffAutoDash;
+        Emotion.OnEmotionStateChanged -= TurnOffEsctaDash;
     }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,7 +45,7 @@ public class AutoDash : Passive
 
     private void Update()
     {
-        LoadAutoDash();
+        LoadEsctaDash();
     }
     #endregion
 
@@ -56,15 +53,13 @@ public class AutoDash : Passive
 
     public override void HandlePassiveOff()
     {
-        if (!PC.IsMoving)
-        {
-            UpdatePassiveState(PassiveState.Off);
-        }
+        UpdatePassiveState(PassiveState.Off);
     }
 
     public override void EnablePassive()
     {
-        Pm.PlayerSpeed = _sprintSpeed;
+
+        Pm.PlayerSpeed = _sprintSpeed * 2;
         PC.PlayerAnim.speed = _newAnimSpeed;
     }
 
@@ -76,15 +71,15 @@ public class AutoDash : Passive
 
     public override void CheckCondition()
     {
-        if(_joyEmotion.EmoState == Emotion.EmotionState.Awake)
+        if(_joyEmotion.EmoState == Emotion.EmotionState.CrashOut)
         {
-            _canAutoDash = true;
+            _canEsctaDash = true;
         }
     }
 
-    public void LoadAutoDash()
+    public void LoadEsctaDash()
     {
-        if (_canAutoDash)
+        if (_canEsctaDash)
         {
             if (PC.IsMoving && Pm.PlayerGrounded)
             {
@@ -102,17 +97,11 @@ public class AutoDash : Passive
         }
     }
 
-    public void TurnOffAutoDash(Emotion.EmotionState state)
+    public void TurnOffEsctaDash(Emotion.EmotionState state)
     {
-        if (_joyEmotion.EmoState != Emotion.EmotionState.Awake)
-            _canAutoDash = false;
+        if (_joyEmotion.EmoState != Emotion.EmotionState.CrashOut)
+            _canEsctaDash = false;
     }
 
-    #endregion
-
-    #region Private Methods 
-    #endregion
-
-    #region Coroutines
     #endregion
 }

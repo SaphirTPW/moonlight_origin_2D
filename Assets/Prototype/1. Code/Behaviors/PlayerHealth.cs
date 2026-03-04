@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Image _playerHealthBar;
     private float _defenseModifier = 1f;
     private bool _isDead = false;
-    private bool _isHealing = false;
+    [SerializeField] private bool _isHealing = false;
     [SerializeField] private bool _isReceivingDamage = false;
     #endregion
 

@@ -16,21 +16,9 @@ public class HealingProcess : Passive
     {
 
     }
-    public override void Update()
-    {
-        base.Update();
-    }
     #endregion
 
     #region Public Methods 
-    public override void UpdatePassiveState(PassiveState pPassiveState)
-    {
-        base.UpdatePassiveState(pPassiveState);
-    }
-    public override void HandlePassiveOn()
-    {
-        base.HandlePassiveOn();
-    }
 
     public override void EnablePassive()
     {
