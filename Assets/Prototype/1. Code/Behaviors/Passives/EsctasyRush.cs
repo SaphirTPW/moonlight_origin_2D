@@ -9,11 +9,18 @@ public class EsctasyRush : Passive
     [SerializeField] private float _maxSprintTime;
     private float _sprintSpeed;
     private float _defaultSpeed;
-
     private float _newAnimSpeed;
     private float _defaultAnimSpeed;
 
+    [SerializeField] private Transform _attackPoint;
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _attackRange;
+    [SerializeField] private float _knockBackForce = 50f;
+    [SerializeField] private float _knockBackUp = 10f;
+    [SerializeField] private float _damage;
+
     [SerializeField] private bool _canEsctaDash = false;
+    private bool _barrierActive = false;
     #endregion
 
     #region Private Variables 
@@ -36,7 +43,7 @@ public class EsctasyRush : Passive
     void Start()
     {
         _joyEmotion = GetComponent<JoyEmotion>();
-        _sprintSpeed = Pm.PlayerSpeed * 2;
+        _sprintSpeed = Pm.PlayerSpeed * 2.5f;
         _defaultSpeed = Pm.PlayerSpeed;
 
         _defaultAnimSpeed = 1f;
@@ -59,7 +66,7 @@ public class EsctasyRush : Passive
     public override void EnablePassive()
     {
 
-        Pm.PlayerSpeed = _sprintSpeed * 2;
+        Pm.PlayerSpeed = _sprintSpeed;
         PC.PlayerAnim.speed = _newAnimSpeed;
     }
 
@@ -87,12 +94,29 @@ public class EsctasyRush : Passive
                 if (_sprintTime >= _maxSprintTime)
                 {
                     UpdatePassiveState(PassiveState.On);
+                    _barrierActive = true;
+                    EsctaDashBarrier(_damage);
                 }
             }
             else if (!PC.IsMoving)
             {
                 _sprintTime = 0;
                 HandlePassiveOff();
+                _barrierActive = false;
+            }
+        }
+    }
+
+    public void EsctaDashBarrier(float pDamage)
+    {
+        if (_barrierActive)
+        {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
+                enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce * 2, _knockBackUp);
             }
         }
     }

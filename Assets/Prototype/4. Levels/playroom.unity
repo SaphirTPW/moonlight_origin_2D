@@ -8709,7 +8709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469763568394322885, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4925704985739896449, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: _enemyMaxHealth
@@ -9689,7 +9689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469763568394322885, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5987269080384018072, guid: e3c1569f900bbd34aafba5a5dbc7c70f, type: 3}
       propertyPath: m_Mass
@@ -13806,6 +13806,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818520076}
   m_CullTransparentMesh: 1
+--- !u!4 &827609891 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8522001112793348026, guid: 3e70cf2c3f5cc8f449703049c318739f, type: 3}
+  m_PrefabInstance: {fileID: 1484301230203224754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &858823281
 GameObject:
   m_ObjectHideFlags: 0
@@ -15594,6 +15599,15 @@ MonoBehaviour:
   _passiveMode: 1
   _sprintTime: 0
   _maxSprintTime: 2
+  _attackPoint: {fileID: 827609891}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackRange: 2
+  _knockBackForce: 10
+  _knockBackUp: 1
+  _damage: 5
+  _canEsctaDash: 0
 --- !u!1 &1059237383
 GameObject:
   m_ObjectHideFlags: 0
