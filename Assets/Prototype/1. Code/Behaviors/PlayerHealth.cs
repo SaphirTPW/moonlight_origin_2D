@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public float PlayerCurrentHealth { get => _playerCurrentHealth; set => _playerCurrentHealth = value; }
     public float PlayerMaxHealth { get => _playerMaxHealth; set => _playerMaxHealth = value; }
     public bool IsReceivingDamage { get => _isReceivingDamage; set => _isReceivingDamage = value; }
+    public bool IsGriefFaceOn { get => _isGriefFaceOn; set => _isGriefFaceOn = value; }
     #endregion
 
     #region Private Variables 
@@ -26,9 +28,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private TMP_Text _playerHealthText;
     [SerializeField] private Image _playerHealthBar;
     private float _defenseModifier = 1f;
+    private float _griefDefendMod = 0.5f;
     private bool _isDead = false;
     [SerializeField] private bool _isHealing = false;
     [SerializeField] private bool _isReceivingDamage = false;
+    [SerializeField] private bool _isGriefFaceOn = false;
+
+    public delegate bool OnPlayerHitDelegate(float damage);
+    public static event OnPlayerHitDelegate OnPlayerHit;
     #endregion
 
     #region Unity Methods 
@@ -64,7 +71,30 @@ public class PlayerHealth : MonoBehaviour
     #region Public Methods 
     public void PlayerTakeDamage(float pDamage)
     {
-        _playerCurrentHealth -= pDamage * _defenseModifier;
+        bool cancelHit = false;
+
+        if(OnPlayerHit != null)
+        {
+            foreach (OnPlayerHitDelegate subscriber in OnPlayerHit.GetInvocationList())
+            {
+                if (subscriber.Invoke(pDamage))
+                {
+                    cancelHit = true;
+                    break;
+                }
+            }
+        }
+
+        if (cancelHit)
+            return;
+
+
+        if (!IsGriefFaceOn)
+        {
+            _playerCurrentHealth -= pDamage * _defenseModifier;
+        }
+        else
+            _playerCurrentHealth -= pDamage * _griefDefendMod;
     }
 
     public void PlayerGainHealth(float pHealthAmount)

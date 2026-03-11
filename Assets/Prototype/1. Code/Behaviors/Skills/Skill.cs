@@ -76,7 +76,7 @@ public class Skill : MonoBehaviour
     public enum SkillState
     {
         Ready,
-        CoolDown
+        CoolDown,
     }
 
     public virtual void SetSkillInfo()
@@ -91,15 +91,15 @@ public class Skill : MonoBehaviour
     {
         if ((int)_skillData.skillEmoType == (int)_eC.CurrentActiveEmotion)
         {
+            _eC.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
+
             if (_currentSkillState == SkillState.Ready && (_emotion.MaxEmotionEnergy - _emotion.CurrentEmotionEnergy) > pSkillCost)
             {
                 _emotion.CurrentEmotionEnergy += pSkillCost;
-                _eC.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
             }
             else if (_currentSkillState == SkillState.Ready && (_emotion.MaxEmotionEnergy - _emotion.CurrentEmotionEnergy) < pSkillCost)
             {
                 _emotion.HandleFatigueState();
-                //_eC.EmoControllerState = EmotionController.EmotionControllerState.NotReady;
             }
         }
     }
@@ -110,14 +110,10 @@ public class Skill : MonoBehaviour
         {
             _coolDownTime -= Time.deltaTime;
 
-            if (!_IsShortInEnergy)
-            {
+            if (_eC.EmoControllerState == EmotionController.EmotionControllerState.Cooldown)
+                _eC.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
+            else
                 _eC.EmoControllerState = EmotionController.EmotionControllerState.Ready;
-            }
-            //else
-            //{
-            //    return;
-            //}
 
             if (_coolDownTime <= 0)
             {

@@ -19,7 +19,7 @@ MonoBehaviour:
   speedModifier: 1.25
   moveSmoothing: 0.2
   coPowerModifier: 0.35
-  coDefenseModifier: 0.2
+  coDefenseModifier: 2
   coSpeedModifier: 2
   coMoveSmoothing: 0.6
   buildUpRate: 2

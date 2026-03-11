@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float DefPlayerSpeed { get => _defPlayerSpeed; set => _defPlayerSpeed = value; }
     public Collider2D PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
     public float GroundDamping { get => _groundDamping; set => _groundDamping = value; }
+    public bool RageArmorOn { get => _rageArmorOn; set => _rageArmorOn = value; }
     #endregion
 
     #region Private Variables 
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Change Sprite Orientation
     private bool _facingRight = true;
+    private bool _rageArmorOn = false;
 
     #endregion
 

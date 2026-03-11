@@ -59,13 +59,31 @@ public class Dummy_Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().PlayerTakeDamage(_bulletDamage);
-            collision.GetComponent<PlayerMovement>().PlayerKnockback(transform, _knockBackForce, _knockBackUp);
+            var playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
+            var playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+
+            if(playerHealth == null || playerMovement == null)
+            {
+                Debug.LogWarning("Le joueur n'a pas le composant attendu !");
+                return;
+            }
+
+            if (collision.GetComponent<PlayerMovement>().RageArmorOn)
+            {
+                playerHealth.PlayerTakeDamage(_bulletDamage);
+            }
+            else
+            {
+                playerHealth.PlayerTakeDamage(_bulletDamage);
+                playerMovement.PlayerKnockback(transform, _knockBackForce, _knockBackUp);
+            }
+
             Destroy(gameObject);
         }
-        else if(collision.gameObject.tag == "Untagged")
+        
+        if(collision.gameObject.tag == "Untagged")
         {
             Destroy(gameObject);
         }

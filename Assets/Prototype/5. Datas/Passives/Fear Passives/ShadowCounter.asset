@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722d66d8e541c0d4da2be3707f6f0ace, type: 3}
+  m_Name: ShadowCounter
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveData
+  passiveName: ShadowCounter
+  passiveDesc: ___
+  passiveType: 1
+  passiveEmoType: 4
