@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4852070485397200772}
   - component: {fileID: 2683560736365294020}
   - component: {fileID: 8915827164287544477}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dust Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4758,7 +4758,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8915827164287544477
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4804,6 +4804,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4835,7 +4836,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &326219660339728513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4857,13 +4857,16 @@ GameObject:
   - component: {fileID: 7251464022312781367}
   - component: {fileID: 1194656677575337942}
   - component: {fileID: 6356893102524356246}
+  - component: {fileID: 3462296501194704318}
   - component: {fileID: 6552183750730044424}
   - component: {fileID: 77095570392752736}
   - component: {fileID: 6373411154915904671}
   - component: {fileID: 6533114038455266367}
+  - component: {fileID: 2650709953628111218}
   - component: {fileID: 6836797249725165388}
   - component: {fileID: 2419476809153418278}
   - component: {fileID: 1162830390850318163}
+  - component: {fileID: 8116304218805774384}
   - component: {fileID: 5963230689107362163}
   - component: {fileID: 8980222335749710964}
   - component: {fileID: 2163276733682960593}
@@ -4873,12 +4876,13 @@ GameObject:
   - component: {fileID: 6265371777180606106}
   - component: {fileID: 3704330217438021967}
   - component: {fileID: 1389114277344007266}
+  - component: {fileID: 4034426691430296879}
   - component: {fileID: 4194736800330322183}
   - component: {fileID: 4841483539617668844}
   - component: {fileID: 4467180138456286123}
   - component: {fileID: 6824046947188641147}
   - component: {fileID: 784132594950143224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_Actor
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4895,7 +4899,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3372154889346769726}
@@ -4904,10 +4908,12 @@ Transform:
   - {fileID: 375872912541197540}
   - {fileID: 3492236323776734839}
   - {fileID: 2849597302479388460}
+  - {fileID: 6165045356322823261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6903074477343190665
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4953,6 +4959,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7145198348311737387, guid: 9d4d175a6ea2eb24181808caa517a5cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4962,7 +4969,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!70 &4206294358426110087
 CapsuleCollider2D:
@@ -5049,6 +5055,7 @@ MonoBehaviour:
   _canMove: 1
   _canJump: 1
   _canAttack: 1
+  _openSkillTab: 0
   _dustFX: {fileID: 2683560736365294020}
   _landingFX: {fileID: 2591175111452526137}
 --- !u!114 &6599821910571612152
@@ -5113,6 +5120,7 @@ MonoBehaviour:
   _downAttackPoint: {fileID: 2607201340593147807}
   _impactFX: {fileID: 2302081879188016086, guid: 74c886b79e520c047a6ed1a4bf093e5a, type: 3}
   _isAttacking: 0
+  _angerBuildUpOn: 0
 --- !u!114 &1511681540775153318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5131,7 +5139,10 @@ MonoBehaviour:
   _startHealingRate: 2
   _playerCurrentHealth: 1
   _playerHealthText: {fileID: 0}
+  _playerHealthBar: {fileID: 0}
+  _isHealing: 0
   _isReceivingDamage: 0
+  _isGriefFaceOn: 0
 --- !u!114 &8837996798423167425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5162,7 +5173,7 @@ MonoBehaviour:
   _currentActiveEmotion: 0
   _startControllerCooldownTime: 8
   _currControllerCooldown: 0
-  _canSwitch: 1
+  canSwitch: 0
   _coolDownIsOn: 0
   _hasFused: 0
   _gatherFX: {fileID: 4690444483057672958}
@@ -5200,15 +5211,24 @@ MonoBehaviour:
   _emotionName: Joy
   _emotionEffect: {fileID: 3768894653532576522}
   _emotionColor: {r: 1, g: 0.65038824, b: 0, a: 1}
+  _emotionMeterPad: {fileID: 0}
+  _emotionMeterKey: {fileID: 0}
   _openSkillTab: 0
   _canUseSkill: 1
   _canUseUSkill: 1
+  _isCrashOutAvailable: 0
   _skillIndicator: {fileID: 0}
   _skillListIndicator: {fileID: 0}
-  _skillNames:
+  _skillNamesPAD:
   - {fileID: 0}
   - {fileID: 0}
-  _skillCooldowns:
+  _skillCooldownsPAD:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillNamesKEY:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillCooldownsKEY:
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &7251464022312781367
@@ -5267,8 +5287,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _passiveData: {fileID: 11400000, guid: cfbd497d79aa83c46a00a0b4da0dbaf4, type: 2}
   _passiveState: 1
+  _passiveMode: 0
   _sprintTime: 0
   _maxSprintTime: 3
+  _sprintSpeed: 0
+  _defaultSpeed: 0
+  _canAutoDash: 0
+--- !u!114 &3462296501194704318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e989b6c5e89bb46a744a351110d527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EsctasyRush
+  _passiveData: {fileID: 11400000, guid: 2f890a181ebe1ab469a0bd2520e91e54, type: 2}
+  _passiveState: 0
+  _passiveMode: 1
+  _sprintTime: 0
+  _maxSprintTime: 2
+  _attackPoint: {fileID: 8522001112793348026}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackRange: 2
+  _knockBackForce: 10
+  _knockBackUp: 1
+  _damage: 5
+  _canEsctaDash: 0
 --- !u!114 &6552183750730044424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5315,15 +5365,24 @@ MonoBehaviour:
   _emotionName: Anger
   _emotionEffect: {fileID: 3768894653532576522}
   _emotionColor: {r: 0.7830189, g: 0, b: 0, a: 1}
+  _emotionMeterPad: {fileID: 0}
+  _emotionMeterKey: {fileID: 0}
   _openSkillTab: 0
   _canUseSkill: 1
   _canUseUSkill: 1
+  _isCrashOutAvailable: 0
   _skillIndicator: {fileID: 0}
   _skillListIndicator: {fileID: 0}
-  _skillNames:
+  _skillNamesPAD:
   - {fileID: 0}
   - {fileID: 0}
-  _skillCooldowns:
+  _skillCooldownsPAD:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillNamesKEY:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillCooldownsKEY:
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &6373411154915904671
@@ -5359,6 +5418,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _passiveData: {fileID: 11400000, guid: 92a9f4029c8ea8c42aaa266bb2f8ff3d, type: 2}
   _passiveState: 1
+  _passiveMode: 0
+--- !u!114 &2650709953628111218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123882d49c02a8144ab92bce9e2dc4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RageArmor
+  _passiveData: {fileID: 11400000, guid: 6f37a6eef94c0b54b9fb54fe101c79eb, type: 2}
+  _passiveState: 0
+  _passiveMode: 1
 --- !u!114 &6836797249725165388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5415,7 +5490,7 @@ MonoBehaviour:
   _attackRange: 2
   _knockBackForce: 10
   _knockBackUp: 1
-  _recoilForce: 10
+  _recoilForce: 15
   _dashForce: 5
   _maxDashTime: 3
   _damage: 20
@@ -5446,17 +5521,41 @@ MonoBehaviour:
   _emotionName: Sadness
   _emotionEffect: {fileID: 3768894653532576522}
   _emotionColor: {r: 0.254902, g: 0.4117647, b: 0.882353, a: 1}
+  _emotionMeterPad: {fileID: 0}
+  _emotionMeterKey: {fileID: 0}
   _openSkillTab: 0
   _canUseSkill: 1
   _canUseUSkill: 1
+  _isCrashOutAvailable: 0
   _skillIndicator: {fileID: 0}
   _skillListIndicator: {fileID: 0}
-  _skillNames:
+  _skillNamesPAD:
   - {fileID: 0}
   - {fileID: 0}
-  _skillCooldowns:
+  _skillCooldownsPAD:
   - {fileID: 0}
   - {fileID: 0}
+  _skillNamesKEY:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillCooldownsKEY:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &8116304218805774384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee36682264cafd4e95ca7cafa3f247c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GriefFacade
+  _passiveData: {fileID: 11400000, guid: 0e9a3b32155faeb498261159a408fc36, type: 2}
+  _passiveState: 0
+  _passiveMode: 1
 --- !u!114 &5963230689107362163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5533,6 +5632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _passiveData: {fileID: 11400000, guid: e16bfc4bccd85f141bc5f993e7fbf643, type: 2}
   _passiveState: 0
+  _passiveMode: 0
 --- !u!114 &6966040123615785730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5559,15 +5659,24 @@ MonoBehaviour:
   _emotionName: Fear
   _emotionEffect: {fileID: 3768894653532576522}
   _emotionColor: {r: 0.7294118, g: 0.3333333, b: 0.8274511, a: 1}
+  _emotionMeterPad: {fileID: 0}
+  _emotionMeterKey: {fileID: 0}
   _openSkillTab: 0
   _canUseSkill: 1
   _canUseUSkill: 1
+  _isCrashOutAvailable: 0
   _skillIndicator: {fileID: 0}
   _skillListIndicator: {fileID: 0}
-  _skillNames:
+  _skillNamesPAD:
   - {fileID: 0}
   - {fileID: 0}
-  _skillCooldowns:
+  _skillCooldownsPAD:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillNamesKEY:
+  - {fileID: 0}
+  - {fileID: 0}
+  _skillCooldownsKEY:
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &642283467219489893
@@ -5645,11 +5754,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _passiveData: {fileID: 11400000, guid: 8309dfef517d53d4ba443a4bd95c9ffb, type: 2}
   _passiveState: 0
+  _passiveMode: 0
   _paraShot: {fileID: 3704330217438021967}
   _upgradedValue: 0
   _defaultValue: 0
   _focusTime: 0
   _maxFocusTime: 5
+  _canNervShot: 0
+--- !u!114 &4034426691430296879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326219660339728513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9780cf1074cf14da3457ed7ee8b73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShadowCounter
+  _passiveData: {fileID: 11400000, guid: 02766b97976254a4793b1928bb7d8968, type: 2}
+  _passiveState: 0
+  _passiveMode: 1
+  _remainingDodges: 0
+  _maxDodges: 3
+  _dodgePoint: {fileID: 6165045356322823261}
 --- !u!114 &4194736800330322183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5674,13 +5803,18 @@ MonoBehaviour:
   _emotionName: 
   _emotionEffect: {fileID: 3768894653532576522}
   _emotionColor: {r: 0, g: 0, b: 0, a: 0}
+  _emotionMeterPad: {fileID: 0}
+  _emotionMeterKey: {fileID: 0}
   _openSkillTab: 0
   _canUseSkill: 1
   _canUseUSkill: 1
+  _isCrashOutAvailable: 0
   _skillIndicator: {fileID: 0}
   _skillListIndicator: {fileID: 0}
-  _skillNames: []
-  _skillCooldowns: []
+  _skillNamesPAD: []
+  _skillCooldownsPAD: []
+  _skillNamesKEY: []
+  _skillCooldownsKEY: []
 --- !u!114 &4841483539617668844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5705,13 +5839,18 @@ MonoBehaviour:
   _emotionName: 
   _emotionEffect: {fileID: 3768894653532576522}
   _emotionColor: {r: 0, g: 0, b: 0, a: 0}
+  _emotionMeterPad: {fileID: 0}
+  _emotionMeterKey: {fileID: 0}
   _openSkillTab: 0
   _canUseSkill: 1
   _canUseUSkill: 1
+  _isCrashOutAvailable: 0
   _skillIndicator: {fileID: 0}
   _skillListIndicator: {fileID: 0}
-  _skillNames: []
-  _skillCooldowns: []
+  _skillNamesPAD: []
+  _skillCooldownsPAD: []
+  _skillNamesKEY: []
+  _skillCooldownsKEY: []
 --- !u!114 &4467180138456286123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5726,6 +5865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _passiveData: {fileID: 11400000, guid: 274d526fe70f0624187d7a74238e7eb1, type: 2}
   _passiveState: 0
+  _passiveMode: 0
 --- !u!95 &6824046947188641147
 Animator:
   serializedVersion: 7
@@ -5812,7 +5952,7 @@ GameObject:
   - component: {fileID: 6884400406625552050}
   - component: {fileID: 9161665166445047783}
   - component: {fileID: 2948970672119715722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Anima Defusion Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10617,7 +10757,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &2948970672119715722
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10663,6 +10803,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -10694,7 +10835,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &757606831383189604
 GameObject:
   m_ObjectHideFlags: 0
@@ -10706,7 +10846,7 @@ GameObject:
   - component: {fileID: 3749194291345609500}
   - component: {fileID: 2305163475175308372}
   - component: {fileID: 3245122793424339058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChargePunch Gather Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15453,7 +15593,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &3245122793424339058
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15499,6 +15639,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -15530,7 +15671,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &1127898733221714138
 GameObject:
   m_ObjectHideFlags: 0
@@ -15542,7 +15682,7 @@ GameObject:
   - component: {fileID: 5703688931947523686}
   - component: {fileID: 959329059354803210}
   - component: {fileID: 3373121478360878013}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Anima Fusion Burst Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20347,7 +20487,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &3373121478360878013
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -20393,6 +20533,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -20424,7 +20565,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &1302592410489748321
 GameObject:
   m_ObjectHideFlags: 0
@@ -20436,7 +20576,7 @@ GameObject:
   - component: {fileID: 2765019425726360704}
   - component: {fileID: 1477778391963597084}
   - component: {fileID: 8190716615753869956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WarmUp Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25241,7 +25381,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8190716615753869956
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -25287,6 +25427,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -25318,7 +25459,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &1326228799350361662
 GameObject:
   m_ObjectHideFlags: 0
@@ -25330,7 +25470,7 @@ GameObject:
   - component: {fileID: 1077595433386336861}
   - component: {fileID: 8497034833100534420}
   - component: {fileID: 8813762119222743406}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Healing Burst Effect '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30135,7 +30275,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8813762119222743406
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -30181,6 +30321,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -30212,7 +30353,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &2141875813244074251
 GameObject:
   m_ObjectHideFlags: 0
@@ -30222,7 +30362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2607201340593147807}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DownAttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -30253,7 +30393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6837803070927067115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChargePunchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -30286,7 +30426,7 @@ GameObject:
   - component: {fileID: 4938469033913239412}
   - component: {fileID: 1443642068124628383}
   - component: {fileID: 7948981948264161198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Emotion Shift Effect '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35091,7 +35231,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &7948981948264161198
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -35137,6 +35277,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -35168,7 +35309,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &3429505257311964814
 GameObject:
   m_ObjectHideFlags: 0
@@ -35178,7 +35318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8522001112793348026}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DashCrushPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -35200,6 +35340,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3372154889346769726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3492163272782689384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6165045356322823261}
+  m_Layer: 8
+  m_Name: DodgePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6165045356322823261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3492163272782689384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.9999998, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2552198136806316451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3531317173952069412
 GameObject:
   m_ObjectHideFlags: 0
@@ -35211,7 +35382,7 @@ GameObject:
   - component: {fileID: 5213581472767741268}
   - component: {fileID: 3768894653532576522}
   - component: {fileID: 1227417029766581649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Emotion Aura Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39958,7 +40129,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &1227417029766581649
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -40004,6 +40175,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -40035,7 +40207,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &4128705163767325073
 GameObject:
   m_ObjectHideFlags: 0
@@ -40045,7 +40216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4917172403273255132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StartAttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -40078,7 +40249,7 @@ GameObject:
   - component: {fileID: 4424675741821393225}
   - component: {fileID: 887575286265273141}
   - component: {fileID: 3494468414678669525}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Burst Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44883,7 +45054,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &3494468414678669525
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44929,6 +45100,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -44960,7 +45132,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &4617978685680606167
 GameObject:
   m_ObjectHideFlags: 0
@@ -44973,7 +45144,7 @@ GameObject:
   - component: {fileID: 6487467853787790033}
   - component: {fileID: 3148722138448757004}
   - component: {fileID: 3772429073915754473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Isolation Shield '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44997,6 +45168,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6487467853787790033
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -45042,6 +45214,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
@@ -45051,7 +45224,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &3148722138448757004
 CircleCollider2D:
@@ -45112,7 +45284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069385141755389268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'AttackPoint '
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -45143,7 +45315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3937694113891967951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpAttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -45176,7 +45348,7 @@ GameObject:
   - component: {fileID: 4558056360130558166}
   - component: {fileID: 5142044443446286378}
   - component: {fileID: 4780025037676348390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Healing Gather Effect '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49923,7 +50095,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &4780025037676348390
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -49969,6 +50141,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -50000,7 +50173,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &6090919219571461311
 GameObject:
   m_ObjectHideFlags: 0
@@ -50010,7 +50182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3492236323776734839}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ClonePoint
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -50041,7 +50213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3372154889346769726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackTransforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50078,7 +50250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2849597302479388460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackTransforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50111,7 +50283,7 @@ GameObject:
   - component: {fileID: 310431392540934563}
   - component: {fileID: 4690444483057672958}
   - component: {fileID: 8148751562877889671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Anima Fusion Gather Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54858,7 +55030,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8148751562877889671
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -54904,6 +55076,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -54935,7 +55108,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &7185331631149913734
 GameObject:
   m_ObjectHideFlags: 0
@@ -54945,7 +55117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4175014620769083168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54988,7 +55160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5787895122326549106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -55021,7 +55193,7 @@ GameObject:
   - component: {fileID: 9100087943039384699}
   - component: {fileID: 2591175111452526137}
   - component: {fileID: 3070447017247147207}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Landing Effect '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59768,7 +59940,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &3070447017247147207
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -59814,6 +59986,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -59845,4 +60018,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
