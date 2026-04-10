@@ -9,6 +9,7 @@ public class SlamAttackAction : BossAction
 
     private Transform _bossTransform;
     private Transform _target;
+    private GameObject _impactZone;
 
     private LayerMask _groundLayer;
 
@@ -16,12 +17,13 @@ public class SlamAttackAction : BossAction
 
     private SlamAttackPhase _currentPhase = SlamAttackPhase.Follow;
 
-    public SlamAttackAction(SlamAttackSO data, Transform bossTransform, Transform target, LayerMask groundLayer) : base(data)
+    public SlamAttackAction(SlamAttackSO data, Transform bossTransform, Transform target, LayerMask groundLayer, GameObject impactZone) : base(data)
     {
         _actionData = data;
         _bossTransform = bossTransform;
         _target = target;
         _groundLayer = groundLayer;
+        _impactZone = impactZone;
     }
 
     public enum SlamAttackPhase
@@ -37,6 +39,7 @@ public class SlamAttackAction : BossAction
         _currentReps = 0;
         _currentPhase = SlamAttackPhase.Follow;
         _initialY = _bossTransform.position.y;
+        _impactZone.SetActive(false);
     }
 
     public override void UpdateAction()
@@ -44,10 +47,10 @@ public class SlamAttackAction : BossAction
         switch (_currentPhase)
         {
             case SlamAttackPhase.Follow:
+                //CubeMan Smooth Follow 
                 float followSpeed = 5f;
                 float maxOffset = 2f;
 
-                // Calculer une position cible avec offset aléatoire
                 float targetX = _target.position.x + Random.Range(-maxOffset, maxOffset);
 
                 float newX = Mathf.Lerp(_bossTransform.position.x, targetX, followSpeed * Time.deltaTime);
@@ -61,24 +64,25 @@ public class SlamAttackAction : BossAction
                 }
                 break;
             case SlamAttackPhase.Falling:
-                // Déplacement
+                // Down Movement
                 _bossTransform.position += Vector3.down * _actionData.fallSpeed * Time.deltaTime;
+                _impactZone.SetActive(true);
 
-                // Raycast 2D depuis le bas du boss
                 Vector2 rayOrigin = new Vector2(_bossTransform.position.x, _bossTransform.position.y - (_bossTransform.localScale.y / 2f));
                 float rayDistance = _actionData.fallSpeed * Time.deltaTime + 0.2f;
 
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, rayDistance, _groundLayer);
+                
                 if (hit.collider != null)
                 {
-                    Debug.Log("Impacted at y=" + hit.point.y);
+                    //Debug.Log("Impacted at y=" + hit.point.y);
                     OnImpact();
                 }
 
                 Debug.DrawRay(rayOrigin, Vector2.down * rayDistance, Color.red);
                 break;
             case SlamAttackPhase.Rising:
-                Debug.Log("Rising");
+                //Debug.Log("Rising");
                 Vector3 pos = _bossTransform.position;
                 pos.y = Mathf.Lerp(pos.y, _initialY, _riseSpeed * Time.deltaTime);
                 _bossTransform.position = pos;
@@ -107,6 +111,7 @@ public class SlamAttackAction : BossAction
             GameObject.Instantiate(_actionData.shockWavePrefab, _bossTransform.position, Quaternion.identity);
         }
 
+        _impactZone.SetActive(false);
         _currentReps++;
         _currentPhase = SlamAttackPhase.Rising;
     }

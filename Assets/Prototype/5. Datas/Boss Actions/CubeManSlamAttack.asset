@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec71b1419acc8ea4b94316d8151c5605, type: 3}
   m_Name: CubeManSlamAttack
   m_EditorClassIdentifier: Assembly-CSharp::SlamAttackSO
-  actionName: 
+  actionName: SlamAttack
   duration: 0
   speed: 0
-  damage: 0
+  damage: 50
+  upKnockback: 10
+  knockBackForce: 30
   followDuration: 2
   fallSpeed: 12
   repetitions: 3

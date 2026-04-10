@@ -94,14 +94,28 @@ public class PlayerCombat : MonoBehaviour
                     _pController.Attack = false;
                 }
 
-                enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
-                Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
-                PlayerAttackRecoil(enemy.transform, _recoilForce);
-                _isAttacking = true;
-                _warmUp.IsWarmnedUp = false;
-                _damageMultiplier = 1f;
-                _playerComboCounter++;
-                SetComboTimer();
+                if (enemy.gameObject.CompareTag("Enemy"))
+                {
+                    enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
+                    Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
+                    PlayerAttackRecoil(enemy.transform, _recoilForce);
+                    _isAttacking = true;
+                    _warmUp.IsWarmnedUp = false;
+                    _damageMultiplier = 1f;
+                    _playerComboCounter++;
+                    SetComboTimer();
+                }
+                else if (enemy.gameObject.CompareTag("Boss"))
+                {
+                    Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
+                    PlayerAttackRecoil(enemy.transform, _recoilForce);
+                    _isAttacking = true;
+                    _warmUp.IsWarmnedUp = false;
+                    _damageMultiplier = 1f;
+                    _playerComboCounter++;
+                    SetComboTimer();
+                }
+                
             }
         }
         //_pController.Attack = false;

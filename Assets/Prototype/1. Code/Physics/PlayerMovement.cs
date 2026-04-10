@@ -82,8 +82,12 @@ public class PlayerMovement : MonoBehaviour
     #region Public Methods 
     public void PlayerKnockback(Transform pTransform, float pknockbackForce, float pknockbackUp)
     {
-        Vector2 direction = (transform.position - pTransform.position).normalized;
-        _rb.linearVelocity = new Vector2(direction.x, pknockbackUp) * pknockbackForce;
+        float directionX = Mathf.Sign(transform.position.x - pTransform.position.x);
+        if (directionX == 0)
+            directionX = Random.value > 0.5f ? 1f : -1;
+
+        Vector2 force = new Vector2(directionX, pknockbackUp).normalized * pknockbackForce;
+        _rb.linearVelocity = force;
     }
     #endregion
 
