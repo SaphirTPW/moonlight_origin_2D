@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &72078937
 Transform:
   m_ObjectHideFlags: 0
@@ -211,6 +211,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 56735240187986110, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 56735240187986110, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: bd9f4b6bae54d6a4cb97fb50779a0bb0, type: 3}
     - target: {fileID: 638672694680752008, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -727,7 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8243762eef5d3d94ba873878bbd22b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  _enemyMaxHealth: 500
+  _enemyMaxHealth: 750
   _enemyCurrentHealth: 0
   _damageTextPrefab: {fileID: 263118507038060585, guid: cd6b7dfe4a6961942a9f42d226198e0b, type: 3}
 --- !u!114 &1889542377
@@ -856,6 +864,21 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
+--- !u!114 &1889542383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255204386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecf531203b41704bb45557649201cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactZone
+  _knockBackForce: 100
+  _knockBackUp: 0
+  _damage: 50
 --- !u!1 &1920243940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,14 +1322,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: _actionSOList.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: '_actionSOList.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 375275e8364d5144d926ca4603c36d01, type: 2}
+      objectReference: {fileID: 11400000, guid: df4e375c40d27d145b8878a363ba229d, type: 2}
     - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: '_actionSOList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 375275e8364d5144d926ca4603c36d01, type: 2}
+    - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
+      propertyPath: '_actionSOList.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: 3e242b8a93b2d8d4bb76436602e81979, type: 2}
     - target: {fileID: 3263417892323868651, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
@@ -1414,6 +1441,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1730000818018891808, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1889542379}
+    - targetCorrespondingSourceObject: {fileID: 1730000818018891808, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1889542383}
   m_SourcePrefab: {fileID: 100100000, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

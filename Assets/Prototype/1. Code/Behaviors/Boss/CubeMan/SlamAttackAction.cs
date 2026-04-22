@@ -6,6 +6,7 @@ public class SlamAttackAction : BossAction
     private int _currentReps = 0;
     private float _timer = 0f;
     private float _riseSpeed = 5f;
+    private float _waitDuration;
 
     private Transform _bossTransform;
     private Transform _target;
@@ -30,6 +31,7 @@ public class SlamAttackAction : BossAction
     {
         Follow,
         Falling,
+        Wating,
         Rising
     }
 
@@ -37,8 +39,16 @@ public class SlamAttackAction : BossAction
     {
         _timer = 0;
         _currentReps = 0;
-        _currentPhase = SlamAttackPhase.Follow;
-        _initialY = _bossTransform.position.y;
+        //_initialY = _bossTransform.position.y;
+        _initialY = 8f;
+
+        if (_bossTransform.position.y < _initialY)
+        {
+            _currentPhase = SlamAttackPhase.Rising;
+        }
+        else
+            _currentPhase = SlamAttackPhase.Follow;
+
         _impactZone.SetActive(false);
     }
 
@@ -55,9 +65,9 @@ public class SlamAttackAction : BossAction
 
                 float newX = Mathf.Lerp(_bossTransform.position.x, targetX, followSpeed * Time.deltaTime);
                 _bossTransform.position = new Vector3(newX, _bossTransform.position.y, _bossTransform.position.z);
-                
+
                 _timer += Time.deltaTime;
-                if(_timer >= _actionData.followDuration)
+                if (_timer >= _actionData.followDuration)
                 {
                     _timer = 0f;
                     _currentPhase = SlamAttackPhase.Falling;
@@ -81,6 +91,15 @@ public class SlamAttackAction : BossAction
 
                 Debug.DrawRay(rayOrigin, Vector2.down * rayDistance, Color.red);
                 break;
+            case SlamAttackPhase.Wating:
+                _timer += Time.deltaTime;
+
+                if (_timer >= _waitDuration)
+                {
+                    _timer = 0f;
+                    _currentPhase = SlamAttackPhase.Rising;
+                }
+                break;
             case SlamAttackPhase.Rising:
                 //Debug.Log("Rising");
                 Vector3 pos = _bossTransform.position;
@@ -96,7 +115,7 @@ public class SlamAttackAction : BossAction
                     if (_currentReps < _actionData.repetitions)
                         _currentPhase = SlamAttackPhase.Follow;
                     else
-                        NotifyFinised();
+                        NotifyFinished();
                 }
                 break;
             default:
@@ -113,7 +132,14 @@ public class SlamAttackAction : BossAction
 
         _impactZone.SetActive(false);
         _currentReps++;
-        _currentPhase = SlamAttackPhase.Rising;
+
+        if (_currentReps < _actionData.repetitions)
+            _waitDuration = 1f;
+        else
+            _waitDuration = 3f;
+
+        _timer = 0f;
+        _currentPhase = SlamAttackPhase.Wating;
     }
 
 }

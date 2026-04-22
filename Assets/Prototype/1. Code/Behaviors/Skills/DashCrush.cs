@@ -87,12 +87,23 @@ public class DashCrush : Skill
 
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
-                WarmUp.IsWarmnedUp = false;
-                PCom.DamageMultiplier = 1f;
-                enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
-                PlayerAttackRecoil(enemy.transform, _recoilForce);
-                _isActive = false;
+                if (enemy.CompareTag("Enemy"))
+                {
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
+                    WarmUp.IsWarmnedUp = false;
+                    PCom.DamageMultiplier = 1f;
+                    enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
+                    PlayerAttackRecoil(enemy.transform, _recoilForce);
+                    _isActive = false;
+                }
+                else
+                {
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
+                    WarmUp.IsWarmnedUp = false;
+                    PCom.DamageMultiplier = 1f;
+                    PlayerAttackRecoil(enemy.transform, _recoilForce);
+                    _isActive = false;
+                }
             }
         }
     }

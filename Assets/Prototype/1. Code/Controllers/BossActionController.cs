@@ -72,6 +72,15 @@ public class BossActionController : MonoBehaviour
                 );
         }
 
+        if(pActionSO is CubeDashSO cubeDashSO)
+        {
+            return new CubeDashAction(
+                cubeDashSO,
+                _bossTransform,
+                _playerTransform
+                );
+        }
+
         Debug.LogError("Unknown BossActionSO type: " + pActionSO);
         return null;
     }

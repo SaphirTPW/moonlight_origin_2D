@@ -13,7 +13,7 @@ public abstract class BossAction
 
     public abstract void StartAction();
     public abstract void UpdateAction();
-    protected void NotifyFinised()
+    protected void NotifyFinished()
     {
         ActionFinished?.Invoke();
     }

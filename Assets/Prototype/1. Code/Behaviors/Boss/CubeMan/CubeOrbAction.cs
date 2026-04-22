@@ -70,7 +70,7 @@ public class CubeOrbAction : BossAction
 
         if(_finishedOrbCount >= _actionData.orbCount)
         {
-            NotifyFinised();
+            NotifyFinished();
         }
     }
 }
