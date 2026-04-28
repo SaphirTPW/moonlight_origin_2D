@@ -15,5 +15,5 @@ MonoBehaviour:
   skillName: Burst Jump
   skillDesc: "Donne un saut suppl\xE9mentaire dans les aires"
   skillEmoType: 1
-  coolDownTime: 2
-  skillCost: 5
+  coolDownTime: 1.5
+  skillCost: 3

@@ -5,7 +5,7 @@ public class HelpIcon : MonoBehaviour
 {
     [SerializeField] private TMP_Text _helpText;
     [SerializeField] private GameObject _helpObjBox;
-    [SerializeField] private string _helpString;
+    [SerializeField][TextArea] private string _helpString;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
