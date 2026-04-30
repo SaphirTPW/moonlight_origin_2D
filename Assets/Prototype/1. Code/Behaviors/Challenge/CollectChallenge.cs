@@ -7,7 +7,7 @@ public class CollectChallenge : Challenge
 
     public void Collect(int amount)
     {
-        if (!_isActive) return;
+        if (!IsActive) return;
 
         AddProgress(amount);
     }

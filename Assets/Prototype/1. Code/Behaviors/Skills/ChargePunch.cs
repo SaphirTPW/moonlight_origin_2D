@@ -115,6 +115,14 @@ public class ChargePunch : Skill
                     PlayerAttackRecoil(enemy.transform, _recoilForce);
                     _isActive = false;
                 }
+                else if (enemy.CompareTag("ChallengeObstacle"))
+                {
+                    enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(pDamage * PCom.AttackMod);
+                    WarmUp.IsWarmnedUp = false;
+                    PCom.DamageMultiplier = 1f;
+                    PlayerAttackRecoil(enemy.transform, _recoilForce);
+                    _isActive = false;
+                }
                 else
                 {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);

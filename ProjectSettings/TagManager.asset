@@ -10,6 +10,7 @@ TagManager:
   - Boss
   - Ground
   - Wall
+  - ChallengeObstacle
   layers:
   - Default
   - TransparentFX

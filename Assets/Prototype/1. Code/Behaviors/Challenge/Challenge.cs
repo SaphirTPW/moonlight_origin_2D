@@ -3,19 +3,24 @@ using System;
 
 public abstract class Challenge
 {
-    protected ChallengeSO _data;
+    private ChallengeSO _data;
 
-    protected int _currentAmount = 0;
+    private int _currentAmount = 0;
     protected float _timer = 0f;
 
     protected bool _isCompleted = false;
-    protected bool _isActive = false;
+    private bool _isActive = false;
 
     protected Transform _rewardSpawnPoint;
     protected ChallengeController _controller;
 
     public Action OnChallengeCompleted;
     public Action OnChallengeFailed;
+    public Action OnChallengeStarted;
+
+    public bool IsActive => _isActive;
+    public int CurrentAmount => _currentAmount;
+    public ChallengeSO Data => _data;
 
     public Challenge(ChallengeSO pData, Transform pRewardSpawn, ChallengeController pController)
     {
@@ -26,12 +31,20 @@ public abstract class Challenge
 
     public virtual void StartChallenge()
     {
+        if (_isActive)
+            return;
+
+        if (_isCompleted)
+            return;
+
         _isActive = true;
         _isCompleted = false;
         _currentAmount = 0;
 
         if (_data.useTimer)
             _timer = _data.timeLimit;
+
+        OnChallengeStarted?.Invoke();
     }
 
     public virtual void UpdateChallenge()

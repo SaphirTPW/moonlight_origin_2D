@@ -7,7 +7,7 @@ public class ReachChallenge : Challenge
 
     public void ReachGoal()
     {
-        if (!_isActive) return;
+        if (!IsActive) return;
 
         AddProgress(1);
     }

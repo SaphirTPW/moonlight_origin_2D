@@ -85,12 +85,26 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (_angerBuildUpOn)
                 {
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
+                    if (enemy.gameObject.CompareTag("Enemy"))
+                    {
+                        enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
+                    }
+                    else if (enemy.gameObject.CompareTag("ChallengeObstacle"))
+                    {
+                        enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
+                    }
                     _pController.Attack = false;
                 }
                 else
                 {
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
+                    if (enemy.gameObject.CompareTag("Enemy"))
+                    {
+                        enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
+                    }
+                    else if (enemy.gameObject.CompareTag("ChallengeObstacle"))
+                    {
+                        enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
+                    }
                     _pController.Attack = false;
                 }
 
@@ -105,7 +119,7 @@ public class PlayerCombat : MonoBehaviour
                     _playerComboCounter++;
                     SetComboTimer();
                 }
-                else if (enemy.gameObject.CompareTag("Boss"))
+                else if (enemy.gameObject.CompareTag("Boss") || enemy.gameObject.CompareTag("ChallengeObstacle"))
                 {
                     Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
                     PlayerAttackRecoil(enemy.transform, _recoilForce);

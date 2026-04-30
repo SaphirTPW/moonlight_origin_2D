@@ -7,7 +7,7 @@ public class DestroyChallenge : Challenge
 
     public void DestroyObject()
     {
-        if (!_isActive) return;
+        if (!IsActive) return;
 
         AddProgress(1);
     }

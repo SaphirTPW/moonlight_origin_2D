@@ -3,23 +3,23 @@ using System.Collections;
 
 public class EnableScript : MonoBehaviour
 {
-    [SerializeField] private GameObject objToEnable;
+    [SerializeField] private ChallengeController challengeToEnable;
 
     private void Start()
     {
-        objToEnable.GetComponent<ChallengeController>();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            objToEnable.SetActive(true);
-            StartCoroutine(StartNextFrame(objToEnable));
+            challengeToEnable.gameObject.SetActive(true);
+            StartCoroutine(StartNextFrame(challengeToEnable));
         }
     }
 
-    private IEnumerator StartNextFrame(GameObject obj)
+    private IEnumerator StartNextFrame(ChallengeController obj)
     {
         yield return null;
 

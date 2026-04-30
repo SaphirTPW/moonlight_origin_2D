@@ -7,13 +7,12 @@ public class ChallengeController : MonoBehaviour
     [SerializeField] private GameObject rewardPrefab;
     [SerializeField] private Transform rewardSpawnPoint;
 
-    [SerializeField] private GameObject[] _collectibles;
-
     [SerializeField] private ChallengeController collectChallengeController;
 
     private Challenge _challenge;
 
     public Challenge Challenge { get => _challenge; set => _challenge = value; }
+
 
     //private int _keyCollected = 0;
 
@@ -21,7 +20,6 @@ public class ChallengeController : MonoBehaviour
     {
         CreateChallenge();
         _challenge.OnChallengeCompleted += OnChallengeCompleted;
-        _challenge.OnChallengeFailed += OnChallengeFailed;
         _challenge.StartChallenge();
     }
 
@@ -52,7 +50,7 @@ public class ChallengeController : MonoBehaviour
     //    Debug.Log("Key collected by challenge: " + gameObject.name);
     //}
 
-    private void OnChallengeCompleted()
+    public void OnChallengeCompleted()
     {
         GameObject rewardGO = Instantiate(
             rewardPrefab,
@@ -65,18 +63,6 @@ public class ChallengeController : MonoBehaviour
         if (key != null)
         {
             key.SetOwner(collectChallengeController);
-        }
-    }
-
-    private void OnChallengeFailed()
-    {
-        Debug.Log("Failed Mission");
-        gameObject.SetActive(false);
-
-        for (int i = 0; i < _collectibles.Length; i++)
-        {
-            _collectibles[i].SetActive(true);
-            _collectibles[i].gameObject.GetComponent<Collider2D>().enabled = true;
         }
     }
 
