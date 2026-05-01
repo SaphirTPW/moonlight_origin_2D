@@ -13,14 +13,11 @@ public class ChallengeController : MonoBehaviour
 
     public Challenge Challenge { get => _challenge; set => _challenge = value; }
 
-
-    //private int _keyCollected = 0;
-
     private void Start()
     {
         CreateChallenge();
         _challenge.OnChallengeCompleted += OnChallengeCompleted;
-        _challenge.StartChallenge();
+        //_challenge.StartChallenge();
     }
 
     private void Update()
@@ -43,12 +40,6 @@ public class ChallengeController : MonoBehaviour
                 break;
         }
     }
-
-    //public void OnKeyCollected()
-    //{
-    //    _keyCollected++;
-    //    Debug.Log("Key collected by challenge: " + gameObject.name);
-    //}
 
     public void OnChallengeCompleted()
     {

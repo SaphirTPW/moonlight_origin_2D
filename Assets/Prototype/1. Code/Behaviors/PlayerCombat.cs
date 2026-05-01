@@ -39,6 +39,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float _playerComboTimer;
 
     private Vector2 _attackDirectionInput;
+    private Vector2 _attackDirectionKey;
     [SerializeField] private Transform _startAttackPoint;
     [SerializeField] private Transform _upAttackPoint;
     [SerializeField] private Transform _downAttackPoint;
@@ -173,11 +174,14 @@ public class PlayerCombat : MonoBehaviour
         _attackDirectionInput.x = Input.GetAxisRaw("Horizontal");
         _attackDirectionInput.y = Input.GetAxisRaw("Vertical");
 
-        if(_attackDirectionInput.y > 0)
+        _attackDirectionKey.x = Input.GetAxisRaw("KEYHorizontal");
+        _attackDirectionKey.y = Input.GetAxisRaw("KEYVertical");
+
+        if (_attackDirectionInput.y > 0 || _attackDirectionKey.y > 0)
         {
             _attackPoint.position = _upAttackPoint.position;
         }
-        else if(_attackDirectionInput.y < 0)
+        else if(_attackDirectionInput.y < 0 || _attackDirectionKey.y < 0)
         {
             _attackPoint.position = _downAttackPoint.position;
         }

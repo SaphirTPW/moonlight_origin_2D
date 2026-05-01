@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (InputBlocker.IsPointerOverUI())
+            return;
+
         HandleMoveInput();
         HandleJumpInput();
         HandleAttackInput();
@@ -95,8 +98,8 @@ public class PlayerController : MonoBehaviour
             }
             else if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Keyboard)
             {
-                _inputDirection.x = Input.GetAxis("KEYHorizontal");
-                _inputDirection.y = Input.GetAxis("KEYVertical");
+                _inputDirection.x = Input.GetAxisRaw("KEYHorizontal");
+                _inputDirection.y = Input.GetAxisRaw("KEYVertical");
 
                 //Debug.Log($"InputDirectionX {_inputDirection.x} ; InputDirectionY {_inputDirection.y}");
             }
@@ -154,7 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_canAttack)
         {
-            if (Input.GetButtonDown("Attack") || Input.GetKeyDown(KeyCode.F))
+            if (Input.GetButtonDown("Attack") || Input.GetMouseButtonDown(0))
             {
                 _isAttacking = true;
                 _playerAnim.SetTrigger("Attack");
@@ -164,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Attack"))
                 InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Gamepad;
-            else if (Input.GetKeyDown(KeyCode.F))
+            else if (Input.GetMouseButtonDown(0))
                 InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Keyboard;
         }
     }

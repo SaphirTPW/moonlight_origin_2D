@@ -18,8 +18,6 @@ public class RandomSpawner : MonoBehaviour
         {
             _spawnPoints.Add(child);
         }
-
-        SpawnObject();
     }
 
     private void Start()
@@ -29,11 +27,11 @@ public class RandomSpawner : MonoBehaviour
         _challengeController.Challenge.OnChallengeStarted += HandleChallengeStarted;
     }
 
-    //private void OnDisable()
-    //{
-    //    _challengeController.Challenge.OnChallengeFailed -= HandleChallengeFailed;
-    //    _challengeController.Challenge.OnChallengeStarted -= SpawnObject;
-    //}
+    private void OnDisable()
+    {
+        _challengeController.Challenge.OnChallengeFailed -= HandleChallengeFailed;
+        _challengeController.Challenge.OnChallengeStarted -= HandleChallengeStarted;
+    }
 
     private void TrySpawn()
     {

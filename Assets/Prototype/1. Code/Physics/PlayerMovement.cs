@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _playerSpeed;
     [SerializeField] private float _speedMod;
     [SerializeField][Range(0, 0.75f)] private float _playerMoveSmoothing;
+    private float _lastDirection;
     private Vector3 _velocity = Vector3.zero;
 
     //Jump Variables

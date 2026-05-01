@@ -33,11 +33,15 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private ActiveEmotionState _currentActiveEmotion;
     [SerializeField] private float _startControllerCooldownTime;
     [SerializeField] private float _currControllerCooldown;
+
     public bool canSwitch = false;
+
     [SerializeField] private bool _coolDownIsOn = false;
     [SerializeField] private bool _hasFused = false;
+
     private float _dPadH;
     private float _dPadV;
+    private int _currentEmotionIndex = 0;
     private Coroutine neutralDelayCall = null;
     private CinemachineImpulseSource _impulseSource;
 
@@ -105,35 +109,55 @@ public class EmotionController : MonoBehaviour
 
         if (canSwitch)
         {
-            _dPadH = Input.GetAxisRaw("DPAD-H");
-            _dPadV = Input.GetAxisRaw("DPAD-V");
+            if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
+            {
+                _dPadH = Input.GetAxisRaw("DPAD-H");
+                _dPadV = Input.GetAxisRaw("DPAD-V");
 
-            if (_dPadV < 0 && _currentActiveEmotion != ActiveEmotionState.Joy || Input.GetKeyDown(KeyCode.W) && _currentActiveEmotion != ActiveEmotionState.Joy)
-            {
-                EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
-                _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
+                if (_dPadV < 0 && _currentActiveEmotion != ActiveEmotionState.Joy)
+                {
+                    EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
+                    _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
+                }
+                else if (_dPadV > 0 && _currentActiveEmotion != ActiveEmotionState.Sadness)
+                {
+                    EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
+                    _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
+                }
+                else if (_dPadH < 0 && _currentActiveEmotion != ActiveEmotionState.Anger)
+                {
+                    EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
+                    _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
+                }
+                else if (_dPadH > 0 && _currentActiveEmotion != ActiveEmotionState.Fear)
+                {
+                    EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
+                    _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
+                }
+                else if (Input.GetButtonDown("Neutral"))
+                {
+                    EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
+                    _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+                }
             }
-            else if (_dPadV > 0 && _currentActiveEmotion != ActiveEmotionState.Sadness || Input.GetKeyDown(KeyCode.S) && _currentActiveEmotion != ActiveEmotionState.Sadness)
+            else if (InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Keyboard)
             {
-                EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
-                _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
+                float scroll = Input.mouseScrollDelta.y;
+
+                if (scroll > 0f)
+                {
+                    ChangeEmotion(1);
+                }
+                else if (scroll < 0f)
+                {
+                    ChangeEmotion(-1);
+                }
+                else if (Input.GetMouseButtonDown(2))
+                {
+                    _currentEmotionIndex = 0;
+                    ApplyEmotion(0);
+                }
             }
-            else if (_dPadH < 0 && _currentActiveEmotion != ActiveEmotionState.Anger || Input.GetKeyDown(KeyCode.D) && _currentActiveEmotion != ActiveEmotionState.Anger)
-            {
-                EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
-                _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
-            }
-            else if (_dPadH > 0 && _currentActiveEmotion != ActiveEmotionState.Fear || Input.GetKeyDown(KeyCode.A) && _currentActiveEmotion != ActiveEmotionState.Fear)
-            {
-                EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
-                _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
-            }
-            else if (Input.GetButtonDown("Neutral") || Input.GetKeyDown(KeyCode.R))
-            {
-                EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
-                _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
-            }
-                
         }
     }
 
@@ -240,6 +264,47 @@ public class EmotionController : MonoBehaviour
     #endregion
 
     #region Private Methods 
+
+    private void ChangeEmotion(int direction)
+    {
+        _currentEmotionIndex += direction;
+
+        // loop entre 1 et 4 uniquement
+        if (_currentEmotionIndex < 1)
+            _currentEmotionIndex = 4;
+
+        if (_currentEmotionIndex > 4)
+            _currentEmotionIndex = 1;
+
+        ApplyEmotion(_currentEmotionIndex);
+    }
+
+    private void ApplyEmotion(int index)
+    {
+        if ((int)_currentActiveEmotion == _currentEmotionIndex)
+            return;
+
+        switch (index)
+        {
+            case 0:
+                EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
+                break;
+            case 1:
+                EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
+                break;
+            case 2:
+                EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
+                break;
+            case 3:
+                EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
+                break;
+            case 4:
+                EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
+                break;
+        }
+
+        _emotionIndacatorText.text = ((ActiveEmotionState)index).ToString();
+    }
     private void SetDebugTextValue()
     {
         _joyValueText.text = Mathf.Round(_emotions[1].CurrentEmotionEnergy).ToString();

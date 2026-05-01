@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 using static EmotionController;
 
 public class Emotion : MonoBehaviour
@@ -35,6 +36,8 @@ public class Emotion : MonoBehaviour
     [SerializeField] private float _coolDownRate;
     [SerializeField] private string _emotionName;
     [SerializeField] private ParticleSystem _emotionEffect;
+    [SerializeField] private ParticleSystem _coGatherFX;
+    [SerializeField] private ParticleSystem _coBurstFX;
     [SerializeField] private Color _emotionColor;
     [SerializeField] private Image _emotionMeterPad;
     [SerializeField] private Image _emotionMeterKey;
@@ -65,6 +68,8 @@ public class Emotion : MonoBehaviour
     [SerializeField] private TMP_Text[] _skillNamesKEY;
     [SerializeField] private TMP_Text[] _skillCooldownsKEY;
 
+    [SerializeField] private CinemachineImpulseSource _impulseSource;
+
     public static event Action<EmotionState> OnEmotionStateChanged;
     public static event Action<bool> OnCrashOutAvailability;
 
@@ -90,6 +95,7 @@ public class Emotion : MonoBehaviour
         _pCom = GetComponent<PlayerCombat>();
         _ec = GetComponent<EmotionController>();
         _pc = GetComponent<PlayerController>();
+        //_impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public virtual void Start()
@@ -98,6 +104,8 @@ public class Emotion : MonoBehaviour
         SetCoEmotionStat();
         var main = _emotionEffect.main;
         main.startColor = _emotionColor;
+        //_coGatherFX.startColor = _emotionColor;
+        //_coBurstFX.startColor = _emotionColor;
         _emotionMeterPad.color = _emotionColor;
         _emotionMeterKey.color = _emotionColor;
         _emotionEffect.gameObject.SetActive(false);
@@ -164,7 +172,7 @@ public class Emotion : MonoBehaviour
                 HandleSleepEmotion();
                 break;
             case EmotionState.CrashOut:
-                HandleCrashOut();
+                StartCoroutine(EnableCrashOut(_coGatherFX, _coBurstFX));
                 break;
             case EmotionState.Fatigue:
                 HandleFatigueState();
@@ -309,7 +317,7 @@ public class Emotion : MonoBehaviour
         }
         else if ((int)_emotionData.emotionType == (int)_ec.CurrentActiveEmotion && _canUseUSkill)
         {
-            if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.G))
+            if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.E))
             {
                 _uskill.EnableUSkill();
             }
@@ -336,6 +344,7 @@ public class Emotion : MonoBehaviour
             if (_pc.OpenSkillTab)
             {
                 _pc.CanJump = false;
+                _pc.CanAttack = false;
                 _canUseUSkill = false;
 
                 if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
@@ -361,12 +370,12 @@ public class Emotion : MonoBehaviour
                     }
                 }
 
-                if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Q))
+                if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
                 {
                     _skills[0].EnableSkill(_skills[0].SkillCost);
                     //Debug.Log("Input Called 1");
                 }
-                else if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.E))
+                else if (Input.GetButtonDown("Cancel") || Input.GetMouseButtonDown(1))
                 {
                     _skills[1].EnableSkill(_skills[1].SkillCost);
                     //Debug.Log("Input Called 2");
@@ -375,6 +384,7 @@ public class Emotion : MonoBehaviour
             else if (!_openSkillTab)
             {
                 _pc.CanJump = true;
+                _pc.CanAttack = true;
                 _canUseUSkill = true;
             }
         }
@@ -419,5 +429,22 @@ public class Emotion : MonoBehaviour
     #endregion
 
     #region Coroutines
+    public IEnumerator EnableCrashOut(ParticleSystem pStartFX, ParticleSystem pEndFX)
+    {
+        _pc.CanMove = false;
+        _pc.CanJump = false;
+        _pm.Rb.simulated = false;
+        //yield return new WaitUntil(() => !pStartFX.IsAlive());
+        pStartFX.startColor = _emotionColor;
+        pStartFX.Play();
+        yield return new WaitForSeconds(pStartFX.duration);
+        pEndFX.Play();
+        CameraShakeManager.instance.CameraShake(_impulseSource);
+        yield return new WaitUntil(() => !pEndFX.IsAlive());
+        _pc.CanMove = true;
+        _pc.CanJump = true;
+        _pm.Rb.simulated = true;
+        HandleCrashOut();
+    }
     #endregion
 }
