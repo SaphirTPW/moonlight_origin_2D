@@ -15,7 +15,7 @@ MonoBehaviour:
   emotionName: 
   emotionType: 0
   powerModifier: 0.25
-  defenseModifier: 0.25
+  defenseModifier: 2
   speedModifier: 0.25
   moveSmoothing: 0.075
   coPowerModifier: 0

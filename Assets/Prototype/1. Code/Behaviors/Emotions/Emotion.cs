@@ -15,6 +15,7 @@ public class Emotion : MonoBehaviour
     public Passive Passive { get => _passive; set => _passive = value; }
     public float MaxEmotionEnergy { get => _maxEmotionEnergy; set => _maxEmotionEnergy = value; }
     public bool IsCrashOutAvailable { get => _isCrashOutAvailable; set => _isCrashOutAvailable = value; }
+    public SpriteRenderer PlayerSprite { get => _playerSprite; set => _playerSprite = value; }
     #endregion
 
     #region Private Variables 
@@ -28,6 +29,7 @@ public class Emotion : MonoBehaviour
     private PlayerCombat _pCom;
     private EmotionController _ec;
     private PlayerController _pc;
+    private SpriteRenderer _playerSprite;
 
     [SerializeField] private EmotionState _emotionState;
     [SerializeField] private float _maxEmotionEnergy = 100f;
@@ -95,6 +97,7 @@ public class Emotion : MonoBehaviour
         _pCom = GetComponent<PlayerCombat>();
         _ec = GetComponent<EmotionController>();
         _pc = GetComponent<PlayerController>();
+        _playerSprite = GetComponent<SpriteRenderer>();
         //_impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
@@ -185,7 +188,6 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleAwakeEmotion()
     {
-
         _emotionState = EmotionState.Awake;
         _pH.DefenseMod = _defenseModifier;
         _pm.SpeedMod = _speedModifier;
@@ -197,12 +199,13 @@ public class Emotion : MonoBehaviour
 
     public virtual void HandleFatigueState()
     {
+        _playerSprite.color = _ec.fatigueColor;
         _isCrashOutAvailable = false;
         InputDeviceManager.Instance.DisablePrompt();
         _currentEmotionEnergy = 0;
         _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
         _ec.EnableEmotion(_ec.Emotions[5], EmotionController.ActiveEmotionState.Fatigue, _ec.fatigueColor, null);
-        _ec.EmotionIndacatorText.text = "Fatigue";
+        //_ec.EmotionIndacatorText.text = "Fatigue";
         _ec.CanSwitch = false;
         HideSkill();
         _canUseSkill = true;
@@ -299,7 +302,7 @@ public class Emotion : MonoBehaviour
             _ec.EmotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
             _currentEmotionEnergy = 0;
             _ec.EmoControllerState = EmotionController.EmotionControllerState.Cooldown;
-            _ec.EmotionIndacatorText.text = "CoolDown";
+            //_ec.EmotionIndacatorText.text = "CoolDown";
             _ec.EnableEmotion(_ec.Emotions[0], EmotionController.ActiveEmotionState.Neutral, _ec.neutralColor, null);
             _canUseSkill = true;
         }
@@ -384,7 +387,6 @@ public class Emotion : MonoBehaviour
             else if (!_openSkillTab)
             {
                 _pc.CanJump = true;
-                _pc.CanAttack = true;
                 _canUseUSkill = true;
             }
         }

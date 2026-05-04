@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype/4. Levels/playroom/playroom.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Prototype/4. Levels/playroom 2.0/playroom_2.0.unity
+    guid: b975bfab1ca318a408b9f96a829c1079
+  - enabled: 1
+    path: Assets/Prototype/4. Levels/cube_man_boss_.unity
+    guid: 6f5fc977351051b48b7432b9da5b425b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

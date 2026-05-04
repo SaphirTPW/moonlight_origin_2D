@@ -122,14 +122,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 _playerGrounded = true;
                 _rb.linearDamping = _groundDamping;
-                _pCom.RecoilForce = 20;
+                _pCom.RecoilForce = 20f;
             }
         }
 
         if (!_playerGrounded)
         {
             _rb.linearDamping = _airDamping;
-            _pCom.RecoilForce = 12.5f;
+            _pCom.RecoilForce = 25f;
         }
 
         if(_playerGrounded && !_wasGrounded)

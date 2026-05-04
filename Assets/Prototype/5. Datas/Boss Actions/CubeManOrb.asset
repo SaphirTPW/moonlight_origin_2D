@@ -18,6 +18,6 @@ MonoBehaviour:
   spawnDelay: 1.25
   orbCount: 3
   followDuration: 0.5
-  followSpeed: 5
-  projectileSpeed: 8
+  followSpeed: 8
+  projectileSpeed: 5
   orbPrefab: {fileID: 6015365498457570997, guid: fa47fb06a94de6a4194c462ad5a8b43a, type: 3}

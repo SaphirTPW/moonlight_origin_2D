@@ -9,7 +9,8 @@ public class VoidOut : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameManager.Instance.PlayerVoidOut();
+            //GameManager.Instance.PlayerVoidOut();
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Dead);
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1220637661622725384}
   m_Layer: 0
   m_Name: TrackProjectile
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

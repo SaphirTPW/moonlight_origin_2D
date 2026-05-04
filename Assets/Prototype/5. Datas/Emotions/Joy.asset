@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionName: Joy
   emotionType: 1
-  powerModifier: 1
-  defenseModifier: 1.5
+  powerModifier: 0.5
+  defenseModifier: 1.25
   speedModifier: 1.25
   moveSmoothing: 0.1
-  coPowerModifier: 1.05
-  coDefenseModifier: 0.15
-  coSpeedModifier: 1.8
+  coPowerModifier: 1.25
+  coDefenseModifier: 1.75
+  coSpeedModifier: 1.75
   coMoveSmoothing: 0.4
-  buildUpRate: 2
-  coolDownRate: 4
+  buildUpRate: 1
+  coolDownRate: 3
   crashCoolDownRate: 3

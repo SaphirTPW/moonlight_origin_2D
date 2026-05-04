@@ -13,10 +13,13 @@ public class IsolationSheild : UniqueSkill
     private float _sheildTime;
     private bool _sheildisActive;
     [SerializeField] private GameObject _isolationSheildObj;
+
+    public bool SheildIsActive { get => _sheildisActive; set => _sheildisActive = value; }
+    public GameObject IsolationSheildObj { get => _isolationSheildObj; set => _isolationSheildObj = value; }
     #endregion
 
     #region Unity Methods 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         base.Start();

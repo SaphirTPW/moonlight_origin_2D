@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionName: Fear
   emotionType: 4
-  powerModifier: 0.5
-  defenseModifier: 1.75
-  speedModifier: 1.25
-  moveSmoothing: 0.2
-  coPowerModifier: 0.35
+  powerModifier: 0.75
+  defenseModifier: 1.5
+  speedModifier: 1.5
+  moveSmoothing: 0.25
+  coPowerModifier: 1
   coDefenseModifier: 2
-  coSpeedModifier: 2
+  coSpeedModifier: 1.75
   coMoveSmoothing: 0.6
-  buildUpRate: 2
-  coolDownRate: 4
+  buildUpRate: 1
+  coolDownRate: 3
   crashCoolDownRate: 3

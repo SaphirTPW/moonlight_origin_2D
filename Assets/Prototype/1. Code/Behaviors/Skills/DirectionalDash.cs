@@ -58,6 +58,7 @@ public class DirectionalDash : Skill
         //_inputDirection.y = Input.GetAxis("Vertical");
 
         PM.Rb.linearVelocity = new Vector2(PC.InputDirection.x, PC.InputDirection.y / 2) * _dashForce;
+        _dashFX.Play();
         CurrentSkillState = SkillState.CoolDown;
     }
     #endregion

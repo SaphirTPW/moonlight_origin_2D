@@ -15,10 +15,7 @@ MonoBehaviour:
   actionName: SlamAttack
   duration: 0
   speed: 0
-  damage: 50
-  upKnockback: 10
-  knockBackForce: 30
   followDuration: 2
-  fallSpeed: 12
+  fallSpeed: 14
   repetitions: 3
   shockWavePrefab: {fileID: 1055126974539077436, guid: ed35a97a03f203d4ba0106221fc4fdc0, type: 3}

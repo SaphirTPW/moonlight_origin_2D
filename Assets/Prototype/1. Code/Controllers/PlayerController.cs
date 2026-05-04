@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator _playerAnim;
     private PlayerMovement _pm;
+    private EmotionController _ec;
     #endregion
 
     #region Unity Methods 
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerAnim = GetComponent<Animator>();
         _pm = GetComponent<PlayerMovement>();
+        _ec = GetComponent<EmotionController>();
     }
 
     // Update is called once per frame
@@ -155,21 +157,25 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAttackInput()
     {
+        if (_openSkillTab)
+            return;
+
         if (_canAttack)
         {
             if (Input.GetButtonDown("Attack") || Input.GetMouseButtonDown(0))
             {
                 _isAttacking = true;
+                _pm.PlayerSpeed = _pm.PlayerSpeed / 3;
                 _playerAnim.SetTrigger("Attack");
                 _canAttack = false;
                 _pm.Rb.linearDamping = 1000f;
             }
-
-            if (Input.GetButtonDown("Attack"))
-                InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Gamepad;
-            else if (Input.GetMouseButtonDown(0))
-                InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Keyboard;
         }
+
+        if (Input.GetButtonDown("Attack"))
+            InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Gamepad;
+        else if (Input.GetMouseButtonDown(0))
+            InputDeviceManager.Instance.CurrentControl = InputDeviceManager.ControlType.Keyboard;
     }
 
     private void HandleSkillTab()
@@ -194,6 +200,7 @@ public class PlayerController : MonoBehaviour
             {
                 _canAttack = true;
                 _isAttacking = false;
+                _pm.PlayerSpeed = 10;
                 _attackTime = 0;
             }
         }

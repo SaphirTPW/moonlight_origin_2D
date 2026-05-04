@@ -58,6 +58,7 @@ public class HealingBurst : Skill
             if (_chargeHealBurstTime != _maxChargeHealBurstTime)
             {
                 PC.CanMove = false;
+                PC.InputDirection = Vector2.zero;
                 PM.Rb.linearVelocity = Vector2.zero;
                 PH.IsHealing = false;
                 _gatherFX.Play();

@@ -62,15 +62,15 @@ public class DummyEnemy : MonoBehaviour
     #endregion
 
     #region Private Methods 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "ParaShot")
-    //    {
-    //        _isStunned = true;
-    //        SetStunTime(collision.gameObject.GetComponent<ParaShotBullet>().StunValue);
-    //        Destroy(collision.gameObject);
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "ParaShot")
+        {
+            _isStunned = true;
+            SetStunTime(collision.gameObject.GetComponent<ParaShotBullet>().StunValue);
+            Destroy(collision.gameObject);
+        }
+    }
     #endregion
 
     #region Coroutines

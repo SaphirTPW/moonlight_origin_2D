@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Cinemachine;
 
 public class ChargePunch : Skill
 {
@@ -22,6 +23,7 @@ public class ChargePunch : Skill
     [SerializeField] private float _maxChargePunchTime;
     [SerializeField] private ParticleSystem _gatherFX;
     [SerializeField] private bool _isActive;
+    [SerializeField] private CinemachineImpulseSource _impulse;
     #endregion
 
     #region Unity Methods 
@@ -81,6 +83,7 @@ public class ChargePunch : Skill
             if (_chargePunchTime != _maxChargePunchTime)
             {
                 PC.CanMove = false;
+                PC.InputDirection = Vector2.zero;
                 PM.Rb.linearVelocity = Vector2.zero;
                 _gatherFX.Play();
             }
@@ -126,6 +129,7 @@ public class ChargePunch : Skill
                 else
                 {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
+                    CameraShakeManager.instance.CameraShake(_impulse);
                     WarmUp.IsWarmnedUp = false;
                     PCom.DamageMultiplier = 1f;
                     PlayerAttackRecoil(enemy.transform, _recoilForce);

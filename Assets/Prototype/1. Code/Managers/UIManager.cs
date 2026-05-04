@@ -4,6 +4,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [SerializeField] private GameObject _gameOverScreenObj;
+
     [SerializeField] private GameObject _padEDriveUI;
     [SerializeField] private GameObject _padSkillUI;
     [SerializeField] private GameObject _padSkillListUI;
@@ -25,6 +27,16 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnGameStateChanged += DisableGameOverScreen;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= DisableGameOverScreen;
     }
 
     // Update is called once per frame
@@ -60,6 +72,19 @@ public class UIManager : MonoBehaviour
 
             _keyEDriveUI.SetActive(false);
             _keySkillUI.SetActive(false);
+        }
+    }
+
+    public void EnableGameOverScreen()
+    {
+        _gameOverScreenObj.SetActive(true);
+    }
+
+    public void DisableGameOverScreen(GameManager.GameState gameState)
+    {
+        if(gameState == GameManager.GameState.Playing)
+        {
+            _gameOverScreenObj.SetActive(false);
         }
     }
 }

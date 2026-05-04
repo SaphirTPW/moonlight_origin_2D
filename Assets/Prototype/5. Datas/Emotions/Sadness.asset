@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionName: Sadness
   emotionType: 3
-  powerModifier: 0.35
+  powerModifier: 0.25
   defenseModifier: 1.75
   speedModifier: 0.5
   moveSmoothing: 0.05
@@ -22,6 +22,6 @@ MonoBehaviour:
   coDefenseModifier: 0.75
   coSpeedModifier: 0.7
   coMoveSmoothing: 0.3
-  buildUpRate: 2
-  coolDownRate: 4
+  buildUpRate: 1
+  coolDownRate: 3
   crashCoolDownRate: 3

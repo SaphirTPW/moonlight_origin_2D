@@ -49,6 +49,7 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private ParticleSystem _burstFX;
     [SerializeField] private ParticleSystem _defusionFX;
     [SerializeField] private ParticleSystem _emoShiftFX;
+    private SpriteRenderer _playerSprite;
 
     #endregion
 
@@ -68,6 +69,7 @@ public class EmotionController : MonoBehaviour
         _pc = GetComponent<PlayerController>();
         _pm = GetComponent<PlayerMovement>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+        _playerSprite = GetComponent<SpriteRenderer>();
     }
 
     private void OnDestroy()
@@ -87,7 +89,7 @@ public class EmotionController : MonoBehaviour
     void Update()
     {
         EmotionSwitch();
-        SetDebugTextValue();
+        //SetDebugTextValue();
         ControllerCooldown();
         StartControllerCoolDown();
     }
@@ -117,27 +119,27 @@ public class EmotionController : MonoBehaviour
                 if (_dPadV < 0 && _currentActiveEmotion != ActiveEmotionState.Joy)
                 {
                     EnableEmotion(_emotions[1], ActiveEmotionState.Joy, joyColor, _emoShiftFX);
-                    _emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
+                    //_emotionIndacatorText.text = ActiveEmotionState.Joy.ToString();
                 }
                 else if (_dPadV > 0 && _currentActiveEmotion != ActiveEmotionState.Sadness)
                 {
                     EnableEmotion(_emotions[3], ActiveEmotionState.Sadness, sadnessColor, _emoShiftFX);
-                    _emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
+                    //_emotionIndacatorText.text = ActiveEmotionState.Sadness.ToString();
                 }
                 else if (_dPadH < 0 && _currentActiveEmotion != ActiveEmotionState.Anger)
                 {
                     EnableEmotion(_emotions[2], ActiveEmotionState.Anger, angerColor, _emoShiftFX);
-                    _emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
+                    //_emotionIndacatorText.text = ActiveEmotionState.Anger.ToString();
                 }
                 else if (_dPadH > 0 && _currentActiveEmotion != ActiveEmotionState.Fear)
                 {
                     EnableEmotion(_emotions[4], ActiveEmotionState.Fear, fearColor, _emoShiftFX);
-                    _emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
+                    //_emotionIndacatorText.text = ActiveEmotionState.Fear.ToString();
                 }
                 else if (Input.GetButtonDown("Neutral"))
                 {
                     EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
-                    _emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
+                    //_emotionIndacatorText.text = ActiveEmotionState.Neutral.ToString();
                 }
             }
             else if (InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Keyboard)
@@ -229,7 +231,8 @@ public class EmotionController : MonoBehaviour
         _currControllerCooldown = _startControllerCooldownTime;
         _emoControllerState = EmotionControllerState.Ready;
         EnableEmotion(_emotions[0], ActiveEmotionState.Neutral, neutralColor, null);
-        _emotionIndacatorText.text = "Neutral";
+        //_emotionIndacatorText.text = "Neutral";
+        _playerSprite.color = neutralColor;
         _coolDownIsOn = false;
     }
 
@@ -303,15 +306,15 @@ public class EmotionController : MonoBehaviour
                 break;
         }
 
-        _emotionIndacatorText.text = ((ActiveEmotionState)index).ToString();
+        //_emotionIndacatorText.text = ((ActiveEmotionState)index).ToString();
     }
-    private void SetDebugTextValue()
-    {
-        _joyValueText.text = Mathf.Round(_emotions[1].CurrentEmotionEnergy).ToString();
-        _angerValueText.text = Mathf.Round(_emotions[2].CurrentEmotionEnergy).ToString();
-        _sadnessValueText.text = Mathf.Round(_emotions[3].CurrentEmotionEnergy).ToString();
-        _fearValueText.text = Mathf.Round(_emotions[4].CurrentEmotionEnergy).ToString();
-    }
+    //private void SetDebugTextValue()
+    //{
+    //    _joyValueText.text = Mathf.Round(_emotions[1].CurrentEmotionEnergy).ToString();
+    //    _angerValueText.text = Mathf.Round(_emotions[2].CurrentEmotionEnergy).ToString();
+    //    _sadnessValueText.text = Mathf.Round(_emotions[3].CurrentEmotionEnergy).ToString();
+    //    _fearValueText.text = Mathf.Round(_emotions[4].CurrentEmotionEnergy).ToString();
+    //}
 
     private void AnimaFusion(Emotion pEmotion, Color pColor)
     {
@@ -350,6 +353,8 @@ public class EmotionController : MonoBehaviour
     {
         _pc.CanMove = false;
         _pc.CanJump = false;
+        _pc.InputDirection = Vector2.zero;
+        _pm.Rb.linearVelocity = Vector2.zero;
         _pm.Rb.simulated = false;
         yield return new WaitUntil(() => !pStartFX.IsAlive());
         pEndFX.Play();
@@ -366,6 +371,7 @@ public class EmotionController : MonoBehaviour
     {
         _pc.CanMove = false;
         _pc.CanJump = false;
+        _pc.InputDirection = Vector2.zero;
         _pm.Rb.linearVelocity = Vector2.zero;
         yield return new WaitUntil(() => !pDefusionFX.IsAlive());
         _pc.CanMove = true;

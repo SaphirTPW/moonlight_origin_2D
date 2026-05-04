@@ -167,8 +167,8 @@ public class PlayerHealth : MonoBehaviour
 
         if (_isDead)
         {
-            //GameManager.Instance.UpdateGameState(GameManager.GameState.Dead);
-            GameManager.Instance.PlayerVoidOut();
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Dead);
+            //GameManager.Instance.PlayerVoidOut();
             SetPlayerHealth();
             _isDead = false;
         }

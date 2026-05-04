@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4925704985739896449}
   - component: {fileID: 3375882098015118075}
   - component: {fileID: 1482258579644441100}
-  - component: {fileID: 8851734203754358993}
   - component: {fileID: 1779055505409868694}
   m_Layer: 7
   m_Name: Proto_Enemy_Actor
@@ -190,20 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isStunned: 0
   _stunTime: 0
---- !u!114 &8851734203754358993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3469763568394322885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfc2c096585693498b1cc23c0cb89e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  _flashColor: {r: 1, g: 0.2028302, b: 0.2028302, a: 1}
-  _flashTime: 0.25
 --- !u!114 &1779055505409868694
 MonoBehaviour:
   m_ObjectHideFlags: 0

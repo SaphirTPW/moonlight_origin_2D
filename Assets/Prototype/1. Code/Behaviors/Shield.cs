@@ -11,11 +11,13 @@ public class Shield : MonoBehaviour
     #region Private Variables 
     [SerializeField][Range(2f, 2.75f)] private float _damageReduction;
     [SerializeField] private GameObject _player;
-   
+
+    public float DamageReduction { get => _damageReduction; set => _damageReduction = value; }
+
     #endregion
 
     #region Unity Methods 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
@@ -32,14 +34,14 @@ public class Shield : MonoBehaviour
     #endregion
 
     #region Private Methods 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "EnemyAttack")
-        {
-            _player.GetComponent<PlayerHealth>().PlayerTakeDamage(collision.GetComponent<Dummy_Bullet>().BulletDamage / _damageReduction);
-            Destroy(collision.gameObject);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.gameObject.tag == "EnemyAttack")
+    //    {
+    //        _player.GetComponent<PlayerHealth>().PlayerTakeDamage(collision.GetComponent<Dummy_Bullet>().BulletDamage / _damageReduction);
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
     #endregion
 
     #region Coroutines

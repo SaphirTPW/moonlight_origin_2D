@@ -42,7 +42,7 @@ public class ChallengeObstacleHealth : MonoBehaviour
     public void TakeDamage(float pDamage)
     {
         _enemyCurrentHealth -= pDamage;
-        _damageFlash.CallDamageFlash();
+        //_damageFlash.CallDamageFlash();
         ShowDamage(pDamage.ToString("F1"));
         CameraShakeManager.instance.CameraShake(_impulseSource);
     }

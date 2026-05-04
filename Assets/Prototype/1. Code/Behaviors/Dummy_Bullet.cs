@@ -82,11 +82,11 @@ public class Dummy_Bullet : MonoBehaviour
 
             Destroy(gameObject);
         }
-        
-        //if(collision.gameObject.tag == "Untagged")
-        //{
-        //    Destroy(gameObject);
-        //}
+
+        if (collision.gameObject.tag == "Untagged")
+        {
+            Destroy(gameObject);
+        }
     }
     #endregion
 

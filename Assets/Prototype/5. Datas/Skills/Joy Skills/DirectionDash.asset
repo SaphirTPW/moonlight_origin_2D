@@ -16,5 +16,5 @@ MonoBehaviour:
   skillDesc: " Permet d'effectuer un dash dans la direction indiqu\xE9 par le joystick
     du joueur. "
   skillEmoType: 1
-  coolDownTime: 1.5
-  skillCost: 3
+  coolDownTime: 2
+  skillCost: 5

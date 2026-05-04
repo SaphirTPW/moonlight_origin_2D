@@ -24,12 +24,13 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _attackRange;
+    [SerializeField] private float _attackSpeed;
     [SerializeField] private float _knockBackForce = 50f;
     [SerializeField] private float _knockBackUp = 10f;
     [SerializeField] private float _recoilForce;
 
-    [SerializeField] private float _startAttackTime;
-    public float _attackTime;
+    //[SerializeField] private float _startAttackTime;
+    //public float _attackTime;
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _buildUpDamage;
     [SerializeField] private float _damageMultiplier = 1f;
@@ -77,62 +78,69 @@ public class PlayerCombat : MonoBehaviour
     #region Private Methods 
     private void PlayerAttack(float pDamage)
     {
-        if (_pController.Attack)
+        if (!_pController.Attack)
+            return;
+
+        _pController.Attack = false;
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
+        _buildUpDamage = pDamage * (1 + (_playerComboCounter / 100));
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
-            _buildUpDamage = pDamage * (1 + (_playerComboCounter / 100));
-
-            foreach (Collider2D enemy in hitEnemies)
+            if (_angerBuildUpOn)
             {
-                if (_angerBuildUpOn)
+                if (enemy.gameObject.CompareTag("Enemy") || enemy.gameObject.CompareTag("Boss"))
                 {
-                    if (enemy.gameObject.CompareTag("Enemy"))
-                    {
-                        enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
-                    }
-                    else if (enemy.gameObject.CompareTag("ChallengeObstacle"))
-                    {
-                        enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
-                    }
-                    _pController.Attack = false;
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
                 }
-                else
+                else if (enemy.gameObject.CompareTag("ChallengeObstacle"))
                 {
-                    if (enemy.gameObject.CompareTag("Enemy"))
-                    {
-                        enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
-                    }
-                    else if (enemy.gameObject.CompareTag("ChallengeObstacle"))
-                    {
-                        enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
-                    }
-                    _pController.Attack = false;
+                    enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(_buildUpDamage * _attackMod * _damageMultiplier);
                 }
-
-                if (enemy.gameObject.CompareTag("Enemy"))
-                {
-                    enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
-                    Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
-                    PlayerAttackRecoil(enemy.transform, _recoilForce);
-                    _isAttacking = true;
-                    _warmUp.IsWarmnedUp = false;
-                    _damageMultiplier = 1f;
-                    _playerComboCounter++;
-                    SetComboTimer();
-                }
-                else if (enemy.gameObject.CompareTag("Boss") || enemy.gameObject.CompareTag("ChallengeObstacle"))
-                {
-                    Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
-                    PlayerAttackRecoil(enemy.transform, _recoilForce);
-                    _isAttacking = true;
-                    _warmUp.IsWarmnedUp = false;
-                    _damageMultiplier = 1f;
-                    _playerComboCounter++;
-                    SetComboTimer();
-                }
-                
+                _pController.Attack = false;
             }
+            else
+            {
+                if (enemy.gameObject.CompareTag("Enemy") || enemy.gameObject.CompareTag("Boss"))
+                {
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
+                }
+                else if (enemy.gameObject.CompareTag("ChallengeObstacle"))
+                {
+                    enemy.GetComponent<ChallengeObstacleHealth>().TakeDamage(pDamage * _attackMod * _damageMultiplier);
+                }
+                _pController.Attack = false;
+            }
+
+            if (enemy.gameObject.CompareTag("Enemy"))
+            {
+                enemy.GetComponent<DummyEnemy>().Knockback(transform, _knockBackForce, _knockBackUp);
+                Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
+                PlayerAttackRecoil(enemy.transform, _recoilForce);
+                _isAttacking = true;
+                _warmUp.IsWarmnedUp = false;
+                _damageMultiplier = 1f;
+                _playerComboCounter++;
+                SetComboTimer();
+            }
+            else if (enemy.gameObject.CompareTag("Boss") || enemy.gameObject.CompareTag("ChallengeObstacle"))
+            {
+                Instantiate(_impactFX, _attackPoint.position, _attackPoint.rotation);
+                PlayerAttackRecoil(enemy.transform, _recoilForce);
+                _isAttacking = true;
+                _warmUp.IsWarmnedUp = false;
+                _damageMultiplier = 1f;
+                _playerComboCounter++;
+                SetComboTimer();
+            }
+
         }
+
+        //if (_pController.Attack)
+        //{
+           
+        //}
         //_pController.Attack = false;
     }
 

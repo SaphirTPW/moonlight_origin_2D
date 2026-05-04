@@ -86,10 +86,17 @@ public class OrbProjectile : MonoBehaviour
         {
             var playerHealth = collision.GetComponent<PlayerHealth>();
             var playerMovement = collision.GetComponent<PlayerMovement>();
+            var sheildReduction = collision.GetComponent<IsolationSheild>().IsolationSheildObj;
 
             if (collision.GetComponent<PlayerMovement>().RageArmorOn)
             {
                 playerHealth.PlayerTakeDamage(_damage);
+                Finish();
+            }
+            else if (collision.GetComponent<IsolationSheild>().SheildIsActive)
+            {
+                playerHealth.PlayerTakeDamage(_damage / sheildReduction.GetComponent<Shield>().DamageReduction);
+                playerMovement.PlayerKnockback(transform, _knockBackForce/2, _knockBackUp);
                 Finish();
             }
             else

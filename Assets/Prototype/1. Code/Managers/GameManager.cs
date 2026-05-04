@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour
             case GameState.Stop:
                 break;
             case GameState.Dead:
-                break;
-            default:
                 HandlePlayerDeath();
                 break;
         }
@@ -80,6 +78,9 @@ public class GameManager : MonoBehaviour
     public void PlayerVoidOut()
     {
         player.transform.position = currentCheckpoint.transform.position;
+        player.gameObject.SetActive(true);
+        player.GetComponent<Rigidbody2D>().simulated = true;
+        Time.timeScale = 1f;
     }
 
     public void UpdateCheckpoint(Transform pNewCheckpoint)
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void SetStartCheckPoint()
     {
-        currentCheckpoint = startPosition;
+        //currentCheckpoint = startPosition;
         player.transform.position = startPosition.transform.position;
     }
 
@@ -107,7 +108,7 @@ public class GameManager : MonoBehaviour
     #region Private Methods 
     private void HandlePlayerDeath()
     {
-
+        StartCoroutine(PlayerDeathCo());
     }
 
     private void HandlePause()
@@ -125,5 +126,14 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Coroutines
+    private IEnumerator PlayerDeathCo()
+    {
+        yield return null;
+        player.gameObject.SetActive(false);
+        player.GetComponent<Rigidbody2D>().simulated = false;
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 0f;
+        UIManager.Instance.EnableGameOverScreen();
+    }
     #endregion
 }
