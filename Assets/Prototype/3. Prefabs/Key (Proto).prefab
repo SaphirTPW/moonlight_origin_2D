@@ -5000,3 +5000,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fcaeea852780f4dbeeceed2e7cb0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Key
+  _collectController: {fileID: 0}
+  _collectKeySFX: {fileID: 8300000, guid: a68727c04ba8ae241a5816459e578958, type: 3}

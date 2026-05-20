@@ -50,6 +50,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private bool _isAttacking;
     [SerializeField] private bool _angerBuildUpOn = false;
 
+    [SerializeField] private AudioClip _smallSlashSFX;
+
     #endregion
 
     #region Unity Methods 
@@ -88,6 +90,8 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            AudioManager.Instance.PlaySFX(_smallSlashSFX);
+
             if (_angerBuildUpOn)
             {
                 if (enemy.gameObject.CompareTag("Enemy") || enemy.gameObject.CompareTag("Boss"))

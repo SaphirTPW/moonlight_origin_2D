@@ -18,6 +18,7 @@ public class EsctasyRush : Passive
     [SerializeField] private float _knockBackForce = 50f;
     [SerializeField] private float _knockBackUp = 10f;
     [SerializeField] private float _damage;
+    [SerializeField] private AudioClip _boostSFX;
 
     [SerializeField] private bool _canEsctaDash = false;
     private bool _barrierActive = false;
@@ -65,9 +66,9 @@ public class EsctasyRush : Passive
 
     public override void EnablePassive()
     {
-
         Pm.PlayerSpeed = _sprintSpeed;
         PC.PlayerAnim.speed = _newAnimSpeed;
+        AudioManager.Instance.PlaySFX(_boostSFX);
     }
 
     public override void DisablePassive()

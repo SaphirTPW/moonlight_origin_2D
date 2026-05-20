@@ -5,6 +5,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [SerializeField] private GameObject _gameOverScreenObj;
+    [SerializeField] private GameObject _victoryScreenObj;
+    [SerializeField] private GameObject _fadePanelObj;
 
     [SerializeField] private GameObject _padEDriveUI;
     [SerializeField] private GameObject _padSkillUI;
@@ -78,6 +80,16 @@ public class UIManager : MonoBehaviour
     public void EnableGameOverScreen()
     {
         _gameOverScreenObj.SetActive(true);
+    }
+
+    public void EnableVictoryScreen()
+    {
+        _victoryScreenObj.SetActive(true);
+    }
+
+    public void EnableFadePanel()
+    {
+        _fadePanelObj.SetActive(true);
     }
 
     public void DisableGameOverScreen(GameManager.GameState gameState)

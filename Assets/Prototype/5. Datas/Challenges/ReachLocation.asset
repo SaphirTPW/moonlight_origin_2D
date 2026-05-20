@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChallengeSO
   type: 0
   targetAmount: 1
-  useTimer: 0
-  timeLimit: 10
+  useTimer: 1
+  timeLimit: 30
   rewardPrefab: {fileID: 7953879327877266685, guid: b41e75dfcad13924eb8856cc32b2a1e1, type: 3}

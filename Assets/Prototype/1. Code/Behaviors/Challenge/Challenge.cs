@@ -19,6 +19,7 @@ public abstract class Challenge
     public Action OnChallengeStarted;
 
     public bool IsActive => _isActive;
+    public bool IsCompleted => _isCompleted;
     public int CurrentAmount => _currentAmount;
     public ChallengeSO Data => _data;
 
@@ -31,6 +32,7 @@ public abstract class Challenge
 
     public virtual void StartChallenge()
     {
+
         if (_isActive)
             return;
 

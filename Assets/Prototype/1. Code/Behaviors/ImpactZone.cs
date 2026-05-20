@@ -5,6 +5,7 @@ public class ImpactZone : MonoBehaviour
     [SerializeField] private float _knockBackForce = 5f;
     [SerializeField] private float _knockBackUp = 3f;
     [SerializeField] private float _damage = 50f;
+    [SerializeField] private AudioClip _damageSound;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,6 +13,7 @@ public class ImpactZone : MonoBehaviour
         {
             var playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
             var playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            AudioManager.Instance.PlaySFX(_damageSound);
 
             if (playerHealth == null || playerMovement == null)
             {

@@ -24,6 +24,8 @@ public class ChargePunch : Skill
     [SerializeField] private ParticleSystem _gatherFX;
     [SerializeField] private bool _isActive;
     [SerializeField] private CinemachineImpulseSource _impulse;
+    [SerializeField] private AudioClip _chargeSlashSFX;
+    [SerializeField] private AudioClip _chargeSFX;
     #endregion
 
     #region Unity Methods 
@@ -51,6 +53,8 @@ public class ChargePunch : Skill
         {
             base.EnableSkill(pSkillCost);
             _isActive = true;
+            _gatherFX.Play();
+            AudioManager.Instance.PlaySFX(_chargeSFX);
         }
     }
 
@@ -85,7 +89,6 @@ public class ChargePunch : Skill
                 PC.CanMove = false;
                 PC.InputDirection = Vector2.zero;
                 PM.Rb.linearVelocity = Vector2.zero;
-                _gatherFX.Play();
             }
 
             if (_chargePunchTime >= _maxChargePunchTime)
@@ -109,6 +112,8 @@ public class ChargePunch : Skill
 
             foreach (Collider2D enemy in hitEnemies)
             {
+                AudioManager.Instance.PlaySFX(_chargeSlashSFX);
+                CameraShakeManager.instance.CameraShake(_impulse);
                 if (enemy.CompareTag("Enemy"))
                 {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
@@ -129,7 +134,6 @@ public class ChargePunch : Skill
                 else
                 {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);
-                    CameraShakeManager.instance.CameraShake(_impulse);
                     WarmUp.IsWarmnedUp = false;
                     PCom.DamageMultiplier = 1f;
                     PlayerAttackRecoil(enemy.transform, _recoilForce);

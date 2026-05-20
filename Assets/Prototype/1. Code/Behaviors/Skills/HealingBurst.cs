@@ -7,6 +7,8 @@ public class HealingBurst : Skill
     [SerializeField] private float _healingAmount;
     [SerializeField] private ParticleSystem _gatherFX;
     [SerializeField] private ParticleSystem _busrtFX;
+    [SerializeField] private AudioClip _loadHealingSFX;
+    [SerializeField] private AudioClip _healingSFX;
     private bool _isActive = false;
 
     #region Unity Methods 
@@ -34,6 +36,8 @@ public class HealingBurst : Skill
         {
             base.EnableSkill(pSkillCost);
             _isActive = true;
+            _gatherFX.Play();
+            AudioManager.Instance.PlaySFX(_loadHealingSFX, false);
         }
     }
 
@@ -52,16 +56,17 @@ public class HealingBurst : Skill
 
     private void HandleCharge()
     {
+
         if (_isActive)
         {
             _chargeHealBurstTime += Time.deltaTime;
+           
             if (_chargeHealBurstTime != _maxChargeHealBurstTime)
             {
                 PC.CanMove = false;
                 PC.InputDirection = Vector2.zero;
                 PM.Rb.linearVelocity = Vector2.zero;
                 PH.IsHealing = false;
-                _gatherFX.Play();
             }
 
             if (_chargeHealBurstTime >= _maxChargeHealBurstTime)
@@ -85,7 +90,8 @@ public class HealingBurst : Skill
         {
             
             Debug.Log(pAmount);
-            PH.PlayerCurrentHealth += pAmount;
+            PH.PlayerGainHealth(pAmount);
+            AudioManager.Instance.PlaySFX(_healingSFX);
             _isActive = false;
         }
 

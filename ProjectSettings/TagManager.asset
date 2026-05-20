@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - Wall
   - ChallengeObstacle
+  - Clone
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,8 @@ public class PauseManager : MonoBehaviour
     public static PauseManager Instance;
     public static bool isPaused;
 
+    public bool canPause = true;
+
     public PauseState pauseState;
 
     public static event Action<PauseState> OnGamePaused;
@@ -25,13 +27,16 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause") && !isPaused)
+        if (canPause)
         {
-            UpdatePauseState(PauseState.Pause);
-        }
-        else if (Input.GetButtonDown("Pause") && isPaused)
-        {
-            UpdatePauseState(PauseState.Unpause);
+            if (Input.GetButtonDown("Pause") && !isPaused)
+            {
+                UpdatePauseState(PauseState.Pause);
+            }
+            else if (Input.GetButtonDown("Pause") && isPaused)
+            {
+                UpdatePauseState(PauseState.Unpause);
+            }
         }
     }
 

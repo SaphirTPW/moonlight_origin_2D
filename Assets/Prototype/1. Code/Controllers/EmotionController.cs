@@ -43,13 +43,19 @@ public class EmotionController : MonoBehaviour
     private float _dPadV;
     private int _currentEmotionIndex = 0;
     private Coroutine neutralDelayCall = null;
-    private CinemachineImpulseSource _impulseSource;
+    
+    [SerializeField] private CinemachineImpulseSource _impulseSource;
 
     [SerializeField] private ParticleSystem _gatherFX;
     [SerializeField] private ParticleSystem _burstFX;
     [SerializeField] private ParticleSystem _defusionFX;
     [SerializeField] private ParticleSystem _emoShiftFX;
     private SpriteRenderer _playerSprite;
+
+    [SerializeField] private AudioClip _loadFusionSFX;
+    [SerializeField] private AudioClip _triggerFusionSFX;
+    [SerializeField] private AudioClip _triggerDefusionSFX;
+    [SerializeField] private AudioClip _switchFusionSFX;
 
     #endregion
 
@@ -68,7 +74,7 @@ public class EmotionController : MonoBehaviour
         SetEmotionController();
         _pc = GetComponent<PlayerController>();
         _pm = GetComponent<PlayerMovement>();
-        _impulseSource = GetComponent<CinemachineImpulseSource>();
+        //_impulseSource = GetComponent<CinemachineImpulseSource>();
         _playerSprite = GetComponent<SpriteRenderer>();
     }
 
@@ -189,6 +195,7 @@ public class EmotionController : MonoBehaviour
         if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
             pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
+            AudioManager.Instance.PlaySFX(_switchFusionSFX);
 
             if(pFX != null)
             {
@@ -204,7 +211,7 @@ public class EmotionController : MonoBehaviour
 
         if (!_hasFused && _currentActiveEmotion == ActiveEmotionState.Neutral)
         {
-            Debug.Log("isNeutral");
+            //Debug.Log("isNeutral");
             pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
         }
     }
@@ -321,12 +328,14 @@ public class EmotionController : MonoBehaviour
         _gatherFX.startColor = pColor;
         _burstFX.startColor = pColor;
         _gatherFX.Play();
+        AudioManager.Instance.PlaySFX(_loadFusionSFX);
         StartCoroutine(AnimaFusionCo(_gatherFX, _burstFX, pEmotion));
     }
 
     private void AnimaDefusion(Emotion pEmotion)
     {
         _defusionFX.Play();
+        AudioManager.Instance.PlaySFX(_triggerDefusionSFX);
         StartCoroutine(AnimaDefusionCo(_defusionFX, pEmotion));
     }
 
@@ -359,6 +368,7 @@ public class EmotionController : MonoBehaviour
         yield return new WaitUntil(() => !pStartFX.IsAlive());
         pEndFX.Play();
         CameraShakeManager.instance.CameraShake(_impulseSource);
+        AudioManager.Instance.PlaySFX(_triggerFusionSFX);
         yield return new WaitUntil(() => !pEndFX.IsAlive());
         pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
         _pc.CanMove = true;
@@ -373,10 +383,12 @@ public class EmotionController : MonoBehaviour
         _pc.CanJump = false;
         _pc.InputDirection = Vector2.zero;
         _pm.Rb.linearVelocity = Vector2.zero;
+        _pm.Rb.simulated = false;
         yield return new WaitUntil(() => !pDefusionFX.IsAlive());
         _pc.CanMove = true;
         _pc.CanJump = true;
         pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
+        _pm.Rb.simulated = true;
         _hasFused = false;
     }
     #endregion

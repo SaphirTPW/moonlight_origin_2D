@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class GameManager : MonoBehaviour
     public Transform currentCheckpoint;
     public Transform startPosition;
     public Transform player;
+
+    public AudioClip musicLevel;
+    public AudioClip _gameOverJingle;
+    public AudioClip _playerDyingSFX;
 
     public GameObject pauseMenuObj;
     #endregion
@@ -39,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        SetStartCheckPoint();
+        UpdateGameState(GameState.SetUp);
     }
 
     // Update is called once per frame
@@ -57,6 +62,7 @@ public class GameManager : MonoBehaviour
         switch (pGameState)
         {
             case GameState.SetUp:
+                SetStartCheckPoint();
                 break;
             case GameState.Start:
                 break;
@@ -75,14 +81,6 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(pGameState);
     }
 
-    public void PlayerVoidOut()
-    {
-        player.transform.position = currentCheckpoint.transform.position;
-        player.gameObject.SetActive(true);
-        player.GetComponent<Rigidbody2D>().simulated = true;
-        Time.timeScale = 1f;
-    }
-
     public void UpdateCheckpoint(Transform pNewCheckpoint)
     {
         currentCheckpoint = pNewCheckpoint;
@@ -91,7 +89,23 @@ public class GameManager : MonoBehaviour
     public void SetStartCheckPoint()
     {
         //currentCheckpoint = startPosition;
-        player.transform.position = startPosition.transform.position;
+        if(currentCheckpoint == null)
+        {
+            AudioManager.Instance.PlayMusic(musicLevel);
+            player.transform.position = startPosition.transform.position;
+            UpdateGameState(GameState.Playing);
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            AudioManager.Instance.PlayMusic(musicLevel);
+            player.transform.position = currentCheckpoint.transform.position;
+            player.gameObject.SetActive(true);
+            player.GetComponent<Rigidbody2D>().simulated = true;
+            UpdateGameState(GameState.Playing);
+            Time.timeScale = 1f;
+        }
+
     }
 
     public enum GameState
@@ -116,6 +130,11 @@ public class GameManager : MonoBehaviour
         pauseMenuObj.SetActive(PauseManager.isPaused);
     }
 
+    public void LoadMainMenu(int pSceneIndex)
+    {
+        SceneManager.LoadScene(pSceneIndex);
+    }
+
     private void PauseManagerOnGamePaused(PauseManager.PauseState pauseState)
     {
         if(pauseState == PauseManager.PauseState.Pause)
@@ -129,10 +148,16 @@ public class GameManager : MonoBehaviour
     private IEnumerator PlayerDeathCo()
     {
         yield return null;
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.MusicSource.clip = null;
+        AudioManager.Instance.PlaySFX(_playerDyingSFX);
+        Time.timeScale = 0.5f;
         player.gameObject.SetActive(false);
         player.GetComponent<Rigidbody2D>().simulated = false;
         yield return new WaitForSeconds(2f);
         Time.timeScale = 0f;
+        AudioManager.Instance.StopLoopingSFX();
+        AudioManager.Instance.PlaySFX(_gameOverJingle);
         UIManager.Instance.EnableGameOverScreen();
     }
     #endregion

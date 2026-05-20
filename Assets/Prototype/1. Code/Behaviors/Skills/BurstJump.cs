@@ -10,6 +10,7 @@ public class BurstJump : Skill
     [SerializeField] private float _startBurstCount;
     [SerializeField] private float _burstJumpCount = 1f;
     [SerializeField] private ParticleSystem _burstFX;
+    [SerializeField] private AudioClip _burstJumpSFX;
     #endregion
 
     #region Private Variables 
@@ -57,6 +58,7 @@ public class BurstJump : Skill
             PM.Rb.linearVelocity = Vector2.zero;
             PM.Rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
             _burstFX.Play();
+            AudioManager.Instance.PlaySFX(_burstJumpSFX);
             _burstJumpCount -= 1f;
         }
 

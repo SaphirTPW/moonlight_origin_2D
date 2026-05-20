@@ -12,6 +12,7 @@ public class IsolationClone : Skill
     [SerializeField] private float _recoilForce;
     [SerializeField] private GameObject _isolationClone;
     [SerializeField] private Transform _clonePosition;
+    [SerializeField] private AudioClip _cloneSummon;
     #endregion
 
     #region Unity Methods 
@@ -36,6 +37,7 @@ public class IsolationClone : Skill
     {
         base.EnableSkill(pSkillCost);
         HandleIsolationClone();
+        AudioManager.Instance.PlaySFX(_cloneSummon);
     }
 
     public override void SkillOnCoolDown()

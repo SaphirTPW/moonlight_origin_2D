@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class DashCrush : Skill
 {
@@ -21,6 +22,9 @@ public class DashCrush : Skill
     private float _dashTime;
     private Vector2 _savedVelocity;
     [SerializeField] private bool _isActive;
+    [SerializeField] private AudioClip _dashSFX;
+    [SerializeField] private AudioClip _dashImpactSFX;
+    [SerializeField] private CinemachineImpulseSource _dashImpulse;
     #endregion
 
     #region Unity Methods 
@@ -44,6 +48,7 @@ public class DashCrush : Skill
         base.EnableSkill(pSkillCost);
         if (CurrentSkillState == SkillState.Ready)
         {
+            AudioManager.Instance.PlaySFX(_dashSFX);
             HandleDashCrush();
         }
     }
@@ -87,6 +92,9 @@ public class DashCrush : Skill
 
             foreach (Collider2D enemy in hitEnemies)
             {
+                AudioManager.Instance.PlaySFX(_dashImpactSFX);
+                CameraShakeManager.instance.CameraShake(_dashImpulse);
+
                 if (enemy.CompareTag("Enemy"))
                 {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(pDamage * PCom.AttackMod);

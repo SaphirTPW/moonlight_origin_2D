@@ -146,6 +146,7 @@ MonoBehaviour:
   _knockBackForce: 20
   _knockBackUp: 5
   _autoDestroyTime: 1
+  _damageSound: {fileID: 8300000, guid: 73bf6532b26c3c7438939794c1cc68d1, type: 3}
 --- !u!50 &1220637661622725384
 Rigidbody2D:
   serializedVersion: 5

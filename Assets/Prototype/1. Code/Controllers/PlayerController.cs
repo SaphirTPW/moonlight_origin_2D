@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float JumpBufferCounter { get => _jumpBufferCounter; set => _jumpBufferCounter = value; }
     public float JumpBufferTime { get => _jumpBufferTime; set => _jumpBufferTime = value; }
     public bool OpenSkillTab { get => _openSkillTab; set => _openSkillTab = value; }
+    public AudioClip NormalSwingSFX { get => _normalSwingSFX; set => _normalSwingSFX = value; }
+    public AudioClip NormalJumpSFX { get => _normalJumpSFX; set => _normalJumpSFX = value; }
     #endregion
 
     #region Private Variables 
@@ -44,6 +46,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private ParticleSystem _dustFX;
     [SerializeField] private ParticleSystem _landingFX;
+
+    [SerializeField] private AudioClip _normalSwingSFX;
+    [SerializeField] private AudioClip _normalJumpSFX;
 
     private Animator _playerAnim;
     private PlayerMovement _pm;
@@ -93,6 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
             {
+
                 _inputDirection.x = Input.GetAxis("Horizontal");
                 _inputDirection.y = Input.GetAxis("Vertical");
 
@@ -108,14 +114,16 @@ public class PlayerController : MonoBehaviour
 
                 _currentInputDirValue = _inputDirection.x;
 
-            if (_inputDirection.x > 0 || _inputDirection.x < 0)
-            {
-                _IsMoving = true;
-            }
-            else
-            {
-                _IsMoving = false;
-            }
+            //if (_inputDirection.x > 0 || _inputDirection.x < 0)
+            //{
+            //    _IsMoving = true;
+            //}
+            //else
+            //{
+            //    _IsMoving = false;
+            //}
+
+            _IsMoving = Mathf.Abs(_inputDirection.x) > 0.1f;
 
             if (Mathf.Abs(_currentInputDirValue) > _inputDirThreshold && Mathf.Abs(_inputDirPrevValue) <= _inputDirThreshold)
             {
@@ -167,6 +175,7 @@ public class PlayerController : MonoBehaviour
                 _isAttacking = true;
                 _pm.PlayerSpeed = _pm.PlayerSpeed / 3;
                 _playerAnim.SetTrigger("Attack");
+                AudioManager.Instance.PlaySFX(_normalSwingSFX);
                 _canAttack = false;
                 _pm.Rb.linearDamping = 1000f;
             }

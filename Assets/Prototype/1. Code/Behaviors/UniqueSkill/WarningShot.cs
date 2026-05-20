@@ -4,6 +4,7 @@ public class WarningShot : UniqueSkill
 {
     [SerializeField] private GameObject _warningShotObj;
     [SerializeField] private Transform _warningShotPoint;
+    [SerializeField] private AudioClip _shotSFX;
 
 
     public override void Start()
@@ -23,6 +24,7 @@ public class WarningShot : UniqueSkill
         if (CurrentUSkillState == USkillState.Ready)
         {
             HandleWarningShotSkill();
+            AudioManager.Instance.PlaySFX(_shotSFX);
         }
     }
 

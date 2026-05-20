@@ -8,6 +8,7 @@ public class Slide : UniqueSkill
     [SerializeField] private float _maxDashTime;
     [SerializeField] private float _dashTime;
     private bool _isActive = false;
+    [SerializeField] private AudioClip _dashSFX;
     #endregion
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -42,6 +43,7 @@ public class Slide : UniqueSkill
         {
             PC.CanJump = false;
             PM.Rb.linearVelocity = new Vector2(PM.Rb.linearVelocity.x * _dashForce, PM.Rb.linearVelocity.y);
+            AudioManager.Instance.PlaySFX(_dashSFX);
             _isActive = true;
         }
     }

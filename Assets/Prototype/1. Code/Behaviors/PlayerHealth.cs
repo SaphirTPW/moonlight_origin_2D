@@ -33,7 +33,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private bool _isHealing = false;
     [SerializeField] private bool _isReceivingDamage = false;
     [SerializeField] private bool _isGriefFaceOn = false;
+    private bool _isLowHealth = false;
 
+    [SerializeField] private AudioClip _lowHealthSFX;
+    [SerializeField] private AudioClip _hitSFX;
+    public static Action<bool> OnLowHealth;
+
+    
     public delegate bool OnPlayerHitDelegate(float damage);
     public static event OnPlayerHitDelegate OnPlayerHit;
     #endregion
@@ -42,11 +48,13 @@ public class PlayerHealth : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnGameStateChanged += GameManagerOnGameStateChange;
+        OnLowHealth += HandleLowHealth;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameManager.OnGameStateChanged -= GameManagerOnGameStateChange;
+        OnLowHealth -= HandleLowHealth;
     }
     private void Awake()
     {
@@ -62,7 +70,6 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdatePlayerHealth();
         ProgressiveHealing(_healingAmount);
         ProgressiveDamage(_damageAmount);
     }
@@ -80,6 +87,7 @@ public class PlayerHealth : MonoBehaviour
                 if (subscriber.Invoke(pDamage))
                 {
                     cancelHit = true;
+                    //CheckLowHealth();
                     break;
                 }
             }
@@ -92,14 +100,23 @@ public class PlayerHealth : MonoBehaviour
         if (!IsGriefFaceOn)
         {
             _playerCurrentHealth -= pDamage * _defenseModifier;
+            UpdatePlayerHealth();
+            CheckLowHealth();
+            AudioManager.Instance.PlaySFX(_hitSFX);
         }
         else
+        {
             _playerCurrentHealth -= pDamage * _griefDefendMod;
+            UpdatePlayerHealth();
+            CheckLowHealth();
+        }
     }
 
     public void PlayerGainHealth(float pHealthAmount)
     {
         _playerCurrentHealth += pHealthAmount;
+        UpdatePlayerHealth();
+        CheckLowHealth();
     }
 
     public void ProgressiveHealing(float pHealthAmount)
@@ -107,9 +124,12 @@ public class PlayerHealth : MonoBehaviour
         if (_isHealing && _playerCurrentHealth < _playerMaxHealth)
         {
             _healingRate -= Time.deltaTime;
-            if(_healingRate <= 0f)
+            
+
+            if (_healingRate <= 0f)
             {
                 PlayerGainHealth(pHealthAmount);
+                CheckLowHealth();
                 _healingRate = _startHealingRate;
             }
         }
@@ -142,13 +162,15 @@ public class PlayerHealth : MonoBehaviour
     {
         if (pState == GameManager.GameState.SetUp)
         {
+            //Debug.Log("Full Health");
             SetPlayerHealth();
         }
     }
 
-    private void SetPlayerHealth()
+    public void SetPlayerHealth()
     {
         _playerCurrentHealth = _playerMaxHealth;
+        _playerHealthBar.fillAmount = _playerCurrentHealth / 100;
 
         if (_playerCurrentHealth >= _playerMaxHealth)
             _playerCurrentHealth = _playerMaxHealth;
@@ -164,13 +186,32 @@ public class PlayerHealth : MonoBehaviour
             _playerCurrentHealth = 0f;
             _isDead = true;
         }
-
+       
         if (_isDead)
         {
             GameManager.Instance.UpdateGameState(GameManager.GameState.Dead);
-            //GameManager.Instance.PlayerVoidOut();
-            SetPlayerHealth();
             _isDead = false;
+        }
+    }
+
+    private void CheckLowHealth()
+    {
+        bool isLow = _playerCurrentHealth <= (_playerMaxHealth * 0.25f);
+
+        if (isLow != _isLowHealth)
+        {
+            _isLowHealth = isLow;
+            OnLowHealth?.Invoke(isLow);
+        }
+    }
+
+    private void HandleLowHealth(bool pIsLow)
+    {
+        if (pIsLow)
+            AudioManager.Instance.PlaySFX(_lowHealthSFX, true);
+        else
+        {
+            AudioManager.Instance.StopLoopingSFX();
         }
     }
     #endregion

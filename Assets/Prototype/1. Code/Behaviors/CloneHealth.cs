@@ -30,6 +30,10 @@ public class CloneHealth : MonoBehaviour
     #endregion
 
     #region Public Methods 
+    public void CloneTakeDamage(float pDamage)
+    {
+        _cloneHealth -= pDamage;
+    }
     #endregion
 
     #region Private Methods 
@@ -37,12 +41,6 @@ public class CloneHealth : MonoBehaviour
     {
         _cloneHealth = _cloneMaxHealth;
     }
-
-    private void CloneTakeDamage(float pDamage)
-    {
-        _cloneHealth -= pDamage;
-    }
-
     private void UpdateCloneHealth()
     {
         if(_cloneHealth <= 0)
@@ -56,14 +54,14 @@ public class CloneHealth : MonoBehaviour
         Destroy(gameObject, _cloneAutoDestroyTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "EnemyAttack")
-        {
-            CloneTakeDamage(collision.GetComponent<Dummy_Bullet>().BulletDamage);
-            Destroy(collision.gameObject);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.gameObject.tag == "EnemyAttack")
+    //    {
+    //        CloneTakeDamage(collision.GetComponent<Dummy_Bullet>().BulletDamage);
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
     #endregion
 
     #region Coroutines

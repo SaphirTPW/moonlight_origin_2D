@@ -147,3 +147,4 @@ MonoBehaviour:
   _enemyMaxHealth: 30
   _enemyCurrentHealth: 0
   _damageTextPrefab: {fileID: 263118507038060585, guid: cd6b7dfe4a6961942a9f42d226198e0b, type: 3}
+  _destroySFX: {fileID: 8300000, guid: de67777e462b6b8449e5f1a66bb3ab47, type: 3}

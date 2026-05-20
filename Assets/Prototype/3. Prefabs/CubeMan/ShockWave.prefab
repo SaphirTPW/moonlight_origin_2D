@@ -233,6 +233,7 @@ MonoBehaviour:
   _knockBackForce: 5
   _knockBackUp: 3
   _bulletDamage: 30
+  _damageSound: {fileID: 8300000, guid: e42686669c9d51543bce0e8fab819b6d, type: 3}
 --- !u!1 &6630003144696216450
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,3 +434,4 @@ MonoBehaviour:
   _knockBackForce: 5
   _knockBackUp: 3
   _bulletDamage: 30
+  _damageSound: {fileID: 8300000, guid: e42686669c9d51543bce0e8fab819b6d, type: 3}

@@ -13,6 +13,7 @@ public class IsolationSheild : UniqueSkill
     private float _sheildTime;
     private bool _sheildisActive;
     [SerializeField] private GameObject _isolationSheildObj;
+    [SerializeField] private AudioClip _sheildSFX;
 
     public bool SheildIsActive { get => _sheildisActive; set => _sheildisActive = value; }
     public GameObject IsolationSheildObj { get => _isolationSheildObj; set => _isolationSheildObj = value; }
@@ -41,6 +42,7 @@ public class IsolationSheild : UniqueSkill
     {
         base.EnableUSkill();
         _sheildisActive = true;
+        AudioManager.Instance.PlaySFX(_sheildSFX);
     }
 
     public override void USkillOnCoolDown()

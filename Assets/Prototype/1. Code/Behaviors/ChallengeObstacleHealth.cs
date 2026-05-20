@@ -17,6 +17,7 @@ public class ChallengeObstacleHealth : MonoBehaviour
     [SerializeField] private GameObject _damageTextPrefab;
 
     private CinemachineImpulseSource _impulseSource;
+    [SerializeField] private AudioClip _destroySFX;
 
     private ChallengeController _challengeController;
     private RandomSpawner _spawner;
@@ -70,6 +71,7 @@ public class ChallengeObstacleHealth : MonoBehaviour
         if (_isDead)
         {
             _challengeController.AddDestroy();
+            AudioManager.Instance.PlaySFX(_destroySFX);
             _spawner.OnObjectDestroyed();
             Destroy(gameObject);
         }

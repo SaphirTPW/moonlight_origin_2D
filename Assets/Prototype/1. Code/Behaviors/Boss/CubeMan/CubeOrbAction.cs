@@ -7,16 +7,18 @@ public class CubeOrbAction : BossAction
 
     private Transform _bossTransform;
     private Transform _playerTransform;
+    private AudioClip _orbShotSFX;
 
     private int _currentOrbIndex = 0;
     private GameObject[] _spawnedOrbs;
     private int _finishedOrbCount;
 
-    public CubeOrbAction(CubeOrbSO data, Transform boss, Transform player) : base(data)
+    public CubeOrbAction(CubeOrbSO data, Transform boss, Transform player, AudioClip orbShotSFX) : base(data)
     {
         _actionData = data;
         _bossTransform = boss;
         _playerTransform = player;
+        _orbShotSFX = orbShotSFX;
     }
 
     public override void StartAction()
@@ -55,6 +57,7 @@ public class CubeOrbAction : BossAction
 
             orbScript.OnOrbFinished += HandleOrbFinished;
 
+            AudioManager.Instance.PlaySFX(_orbShotSFX);
             orbScript.Launch(_playerTransform, 
                 _actionData.followDuration, 
                 _actionData.followSpeed, 

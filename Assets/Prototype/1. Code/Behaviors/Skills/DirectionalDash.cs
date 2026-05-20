@@ -13,6 +13,7 @@ public class DirectionalDash : Skill
     private Vector2 _savedVelocity;
     private Vector2 _inputDirection;
     [SerializeField] private ParticleSystem _dashFX;
+    [SerializeField] private AudioClip _dashSFX;
     #endregion
 
     #region Unity Methods 
@@ -59,6 +60,7 @@ public class DirectionalDash : Skill
 
         PM.Rb.linearVelocity = new Vector2(PC.InputDirection.x, PC.InputDirection.y / 2) * _dashForce;
         _dashFX.Play();
+        AudioManager.Instance.PlaySFX(_dashSFX);
         CurrentSkillState = SkillState.CoolDown;
     }
     #endregion

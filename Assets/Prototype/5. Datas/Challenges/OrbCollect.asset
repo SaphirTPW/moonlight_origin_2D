@@ -15,5 +15,5 @@ MonoBehaviour:
   type: 1
   targetAmount: 55
   useTimer: 1
-  timeLimit: 60
+  timeLimit: 50
   rewardPrefab: {fileID: 0}

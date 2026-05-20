@@ -72,6 +72,9 @@ public class InputDeviceManager : MonoBehaviour
 
     private void CheckForInput()
     {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+
         if(Input.GetAxisRaw("Horizontal") != 0f || 
             Input.GetAxisRaw("Vertical") != 0f || 
             Input.GetButtonDown("Attack") ||

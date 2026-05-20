@@ -122,7 +122,7 @@ public class Passive : MonoBehaviour
             CheckCondition();
         }
 
-        Debug.Log($"{name} - EmotionState reçu : p{pEmotionState}");
+        //Debug.Log($"{name} - EmotionState reçu : p{pEmotionState}");
     }
 
     public virtual void HandlePassiveOff()

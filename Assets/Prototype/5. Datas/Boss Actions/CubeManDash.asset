@@ -17,7 +17,7 @@ MonoBehaviour:
   speed: 0
   dashCount: 3
   dashSpeed: 30
-  dashDuration: 0.4
+  dashDuration: 0.45
   preDashDelay: 1
   delayBetweenDash: 1
   finalRecoveryTime: 2

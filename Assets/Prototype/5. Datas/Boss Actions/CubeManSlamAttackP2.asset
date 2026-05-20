@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec71b1419acc8ea4b94316d8151c5605, type: 3}
+  m_Name: CubeManSlamAttackP2
+  m_EditorClassIdentifier: Assembly-CSharp::SlamAttackSO
+  actionName: SlamAttack
+  duration: 0
+  speed: 0
+  followDuration: 1.25
+  fallSpeed: 15.5
+  repetitions: 3
+  shockWavePrefab: {fileID: 1055126974539077436, guid: ed35a97a03f203d4ba0106221fc4fdc0, type: 3}

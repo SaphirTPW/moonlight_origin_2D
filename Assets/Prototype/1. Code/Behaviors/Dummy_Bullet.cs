@@ -18,6 +18,7 @@ public class Dummy_Bullet : MonoBehaviour
     [SerializeField] private float _knockBackUp = 3f;
     [SerializeField] private float _bulletDamage;
     private Rigidbody2D _bulletBody;
+    [SerializeField] private AudioClip _damageSound;
     #endregion
 
     #region Unity Methods 
@@ -64,6 +65,7 @@ public class Dummy_Bullet : MonoBehaviour
             var playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
             var playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
+            AudioManager.Instance.PlaySFX(_damageSound);
             if(playerHealth == null || playerMovement == null)
             {
                 Debug.LogWarning("Le joueur n'a pas le composant attendu !");

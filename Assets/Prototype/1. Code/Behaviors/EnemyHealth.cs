@@ -7,6 +7,8 @@ using Cinemachine;
 public class EnemyHealth : MonoBehaviour
 {
     #region Public Variables 
+    public float EnemyCurrentHealth { get => _enemyCurrentHealth; set => _enemyCurrentHealth = value; }
+    public float EnemyMaxHealth { get => _enemyMaxHealth; set => _enemyMaxHealth = value; }
     #endregion
 
     #region Private Variables 
@@ -17,6 +19,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject _damageTextPrefab;
 
     private CinemachineImpulseSource _impulseSource;
+
+    public event Action OnEnemyDeath;
+
     #endregion
 
     #region Unity Methods 
@@ -42,6 +47,11 @@ public class EnemyHealth : MonoBehaviour
         //_damageFlash.CallDamageFlash();
         ShowDamage(pDamage.ToString("F1"));
         CameraShakeManager.instance.CameraShake(_impulseSource);
+
+        if(_enemyCurrentHealth <= 0)
+        {
+            OnEnemyDeath?.Invoke();
+        }
     }
     #endregion
 
@@ -57,8 +67,14 @@ public class EnemyHealth : MonoBehaviour
         if (_enemyCurrentHealth <= 0)
             _isDead = true;
 
-        if(_isDead)
+        if(_isDead && gameObject.CompareTag("Enemy"))
+        {
             Destroy(gameObject);
+        }
+        //else if(_isDead && gameObject.CompareTag("Boss"))
+        //{
+
+        //}
     }
 
     private void ShowDamage(string text)

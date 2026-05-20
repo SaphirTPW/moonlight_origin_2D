@@ -24,6 +24,8 @@ public class OrbProjectile : MonoBehaviour
 
     [SerializeField] private float _autoDestroyTime;
 
+    [SerializeField] private AudioClip _damageSound;
+
     public void Launch(Transform pTarget, float pFollowDuration, float pFollowSpeed, float pProjectileSpeed)
     {
         _target = pTarget;
@@ -87,7 +89,7 @@ public class OrbProjectile : MonoBehaviour
             var playerHealth = collision.GetComponent<PlayerHealth>();
             var playerMovement = collision.GetComponent<PlayerMovement>();
             var sheildReduction = collision.GetComponent<IsolationSheild>().IsolationSheildObj;
-
+            AudioManager.Instance.PlaySFX(_damageSound);
             if (collision.GetComponent<PlayerMovement>().RageArmorOn)
             {
                 playerHealth.PlayerTakeDamage(_damage);
@@ -105,6 +107,11 @@ public class OrbProjectile : MonoBehaviour
                 playerMovement.PlayerKnockback(transform, _knockBackForce, _knockBackUp);
                 Finish();
             }
+        }
+        else if (collision.CompareTag("Clone"))
+        {
+            collision.GetComponent<CloneHealth>().CloneTakeDamage(_damage);
+            Finish();
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Wall") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {

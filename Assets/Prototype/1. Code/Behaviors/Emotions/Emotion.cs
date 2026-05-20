@@ -288,7 +288,7 @@ public class Emotion : MonoBehaviour
             _pc.CanJump = true;
         }
 
-        _ec.EmotionIndacatorText.text = $"{_ec.CurrentActiveEmotion.ToString()} CRASH OUT";
+        //_ec.EmotionIndacatorText.text = $"{_ec.CurrentActiveEmotion.ToString()} CRASH OUT";
         _pH.DefenseMod = _coDefenseModifier;
         _pm.SpeedMod = _coSpeedModifier;
         _pCom.AttackMod = _coPowerModifier;

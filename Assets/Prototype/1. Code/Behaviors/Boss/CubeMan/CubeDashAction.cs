@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class CubeDashAction : BossAction
 {
@@ -6,6 +7,10 @@ public class CubeDashAction : BossAction
 
     private Transform _bossTransform;
     private Transform _playerTransform;
+    private AudioClip _teleportSFX;
+    private AudioClip _impactSFX;
+    private CinemachineImpulseSource _groundImpulse;
+
 
     private int _currentDash = 0;
     private float _timer = 0f;
@@ -23,11 +28,19 @@ public class CubeDashAction : BossAction
         Recovery
     }
 
-    public CubeDashAction(CubeDashSO data, Transform boss, Transform player) : base(data)
+    public CubeDashAction(CubeDashSO data, 
+        Transform boss, Transform player, 
+        AudioClip teleportSFX,
+        AudioClip impactSFX,
+        CinemachineImpulseSource groundImpulse) 
+        : base(data)
     {
         _data = data;
         _bossTransform = boss;
         _playerTransform = player;
+        _teleportSFX = teleportSFX;
+        _impactSFX = impactSFX;
+        _groundImpulse = groundImpulse;
     }
 
     public override void StartAction()
@@ -90,6 +103,7 @@ public class CubeDashAction : BossAction
         targetPos.y += _data.teleportOffsetY;
 
         _bossTransform.position = targetPos;
+        AudioManager.Instance.PlaySFX(_teleportSFX);
 
         _timer = 0f;
         _currentPhase = CubeDashPhase.WindUp;
@@ -107,22 +121,32 @@ public class CubeDashAction : BossAction
 
         _timer += Time.deltaTime;
 
-        if(_timer >= _data.dashDuration || HitWall())
+        if(_timer >= _data.dashDuration/* || HitWall()*/)
         {
             _timer = 0f;
             _currentPhase = CubeDashPhase.Waiting;
+        }
+        else if (HitWall())
+        {
+            _timer = 0f;
+            _currentPhase = CubeDashPhase.Waiting;
+            AudioManager.Instance.PlaySFX(_impactSFX);
+            CameraShakeManager.instance.CameraShake(_groundImpulse);
         }
     }
 
     private bool HitWall()
     {
+        float offset = 4f;
+
         RaycastHit2D hit = Physics2D.Raycast(
-            _bossTransform.position,
+            (Vector2)_bossTransform.position + Vector2.down * offset,
             _dashDirection,
             0.5f,
             LayerMask.GetMask("Ground", "Wall")
             );
 
+        Debug.DrawRay((Vector2)_bossTransform.position + Vector2.down * offset,_dashDirection * 0.5f, Color.red);
         return hit.collider != null;
     }
 }

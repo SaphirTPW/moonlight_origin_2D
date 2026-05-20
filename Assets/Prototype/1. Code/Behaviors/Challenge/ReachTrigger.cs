@@ -6,7 +6,7 @@ public class ReachTrigger : MonoBehaviour
 
     private void Start()
     {
-        _challenge.Challenge.StartChallenge();
+        //_challenge.Challenge.StartChallenge();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

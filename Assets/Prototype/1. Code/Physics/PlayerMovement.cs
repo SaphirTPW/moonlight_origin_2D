@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     #region Public Variables 
     public float SpeedMod { get => _speedMod; set => _speedMod = value; }
-    public float PlayerSpeed { get => _playerSpeed; set { _playerSpeed = value; Debug.Log("PlayerSpeed set to: " + value); } }
+    public float PlayerSpeed { get => _playerSpeed; set { _playerSpeed = value; /*Debug.Log("PlayerSpeed set to: " + value); } */} }
     public Rigidbody2D Rb { get => _rb; set => _rb = value; }
     public float PlayerMoveSmoothing { get => _playerMoveSmoothing; set => _playerMoveSmoothing = value; }
     public bool PlayerGrounded { get => _playerGrounded; set => _playerGrounded = value; }
@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_playerGrounded)
         {
             _rb.linearDamping = _airDamping;
-            _pCom.RecoilForce = 25f;
+            _pCom.RecoilForce = 12.5f;
         }
 
         if(_playerGrounded && !_wasGrounded)
@@ -172,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
             _pc.JumpBufferCounter = 0;
             _playerGrounded = false;
             _pc.Jump = false;
+            AudioManager.Instance.PlaySFX(_pc.NormalJumpSFX);
             _rb.AddForce(new Vector2(0f, _playerJumpForce), ForceMode2D.Impulse);
         }
     }

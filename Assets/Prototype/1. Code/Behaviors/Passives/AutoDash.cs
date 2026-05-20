@@ -16,6 +16,7 @@ public class AutoDash : Passive
     private float _defaultAnimSpeed;
 
     [SerializeField] private bool _canAutoDash = false;
+    [SerializeField] private AudioClip _autoDashSFX;
     #endregion
 
     #region Private Variables 
@@ -66,6 +67,7 @@ public class AutoDash : Passive
     {
         Pm.PlayerSpeed = _sprintSpeed;
         PC.PlayerAnim.speed = _newAnimSpeed;
+        AudioManager.Instance.PlaySFX(_autoDashSFX);
     }
 
     public override void DisablePassive()

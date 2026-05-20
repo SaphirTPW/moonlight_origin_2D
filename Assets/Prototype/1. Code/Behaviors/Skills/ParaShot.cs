@@ -13,6 +13,7 @@ public class ParaShot : Skill
     [SerializeField] private GameObject _paraShotObj;
     [SerializeField] private Transform _paraShotPoint;
     private float _dir;
+    [SerializeField] private AudioClip _shotSFX;
     #endregion
 
     #region Unity Methods 
@@ -33,6 +34,7 @@ public class ParaShot : Skill
     {
         base.EnableSkill(pSkillCost);
         HandleParaShot();
+        AudioManager.Instance.PlaySFX(_shotSFX);
     }
 
     public override void SkillOnCoolDown()

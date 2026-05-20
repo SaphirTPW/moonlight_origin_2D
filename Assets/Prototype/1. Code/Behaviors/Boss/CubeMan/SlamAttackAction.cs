@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class SlamAttackAction : BossAction
 {
@@ -12,19 +13,30 @@ public class SlamAttackAction : BossAction
     private Transform _target;
     private GameObject _impactZone;
 
+    private AudioClip _impactSFX;
+    private CinemachineImpulseSource _groundImpulse;
+
     private LayerMask _groundLayer;
 
     private float _initialY;
 
     private SlamAttackPhase _currentPhase = SlamAttackPhase.Follow;
 
-    public SlamAttackAction(SlamAttackSO data, Transform bossTransform, Transform target, LayerMask groundLayer, GameObject impactZone) : base(data)
+    public SlamAttackAction(SlamAttackSO data, 
+        Transform bossTransform, 
+        Transform target, 
+        LayerMask groundLayer, 
+        GameObject impactZone, 
+        AudioClip impactSFX,
+        CinemachineImpulseSource groundImpulse) : base(data)
     {
         _actionData = data;
         _bossTransform = bossTransform;
         _target = target;
         _groundLayer = groundLayer;
         _impactZone = impactZone;
+        _impactSFX = impactSFX;
+        _groundImpulse = groundImpulse;
     }
 
     public enum SlamAttackPhase
@@ -86,6 +98,8 @@ public class SlamAttackAction : BossAction
                 if (hit.collider != null)
                 {
                     //Debug.Log("Impacted at y=" + hit.point.y);
+                    AudioManager.Instance.PlaySFX(_impactSFX);
+                    CameraShakeManager.instance.CameraShake(_groundImpulse);
                     OnImpact();
                 }
 
