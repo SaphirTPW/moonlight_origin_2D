@@ -163,6 +163,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2087125433729264966, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087125433729264966, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087125433729264966, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087125433729264966, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2459837141833342629, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -250,6 +266,22 @@ PrefabInstance:
     - target: {fileID: 4610158016421718234, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474449814917679065, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: field of view
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474449814917679065, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474449814917679065, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: near clip plane
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224848611367162750, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6505345428557571665, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_AnchorMax.y
@@ -320,9 +352,17 @@ PrefabInstance:
       value: SceneBase
       objectReference: {fileID: 0}
     - target: {fileID: 8094923171966165007, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: _musicVolume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094923171966165007, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: startPosition
       value: 
       objectReference: {fileID: 1197415870}
+    - target: {fileID: 8731236058774968067, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_Volume
+      value: 0.65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -408,6 +448,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachineImpulseSource
+--- !u!1 &597068876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597068878}
+  - component: {fileID: 597068877}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &597068877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597068876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 3f9215ea0144899419cfbc0957140d3f, type: 2}
+--- !u!4 &597068878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597068876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.7458425, y: -2.168681, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &606926981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1190269148317034444, guid: 25f00203f7ccd7241b98954168743456, type: 3}
@@ -449,6 +538,7 @@ MonoBehaviour:
   _challengeMusic: {fileID: 8300000, guid: adb24728488ffa0439e1fce4a1077500, type: 3}
   _rewardMusic: {fileID: 8300000, guid: a909c53a37a5eee4ea2c9012e3a978d3, type: 3}
   _failMusic: {fileID: 8300000, guid: ca325143a1098374e99b24d4a8dfaa86, type: 3}
+  _volume: 0.35
 --- !u!4 &1104301576
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,6 +1316,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
+      propertyPath: _audioCue
+      value: 
+      objectReference: {fileID: 8300000, guid: 46a20f6f4baef274183b12b748e31474, type: 3}
+    - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: _impactSFX
       value: 
       objectReference: {fileID: 8300000, guid: 54412612ef064c445b8f1a7e752d0af9, type: 3}
@@ -1237,6 +1331,10 @@ PrefabInstance:
       propertyPath: _orbShotSFX
       value: 
       objectReference: {fileID: 8300000, guid: 8b4f0ec353a5bb34eac3917130824430, type: 3}
+    - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
+      propertyPath: _p2audioCue
+      value: 
+      objectReference: {fileID: 8300000, guid: bc594476db9b14e40aef4dea5845e173, type: 3}
     - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: _teleportSFX
       value: 
@@ -1397,3 +1495,4 @@ SceneRoots:
   - {fileID: 1429076105}
   - {fileID: 2023749993}
   - {fileID: 1104301576}
+  - {fileID: 597068878}

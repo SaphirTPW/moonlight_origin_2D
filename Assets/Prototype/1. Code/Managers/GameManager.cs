@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Transform player;
 
     public AudioClip musicLevel;
+    public float _musicVolume = 0.35f;
     public AudioClip _gameOverJingle;
     public AudioClip _playerDyingSFX;
 
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
         //currentCheckpoint = startPosition;
         if(currentCheckpoint == null)
         {
-            AudioManager.Instance.PlayMusic(musicLevel);
+            AudioManager.Instance.PlayMusic(musicLevel, true, _musicVolume);
             player.transform.position = startPosition.transform.position;
             UpdateGameState(GameState.Playing);
             Time.timeScale = 1f;

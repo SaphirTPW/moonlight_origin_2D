@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool HoldJump { get => _holdJump; set => _holdJump = value; }
     public bool Attack { get => _isAttacking; set => _isAttacking = value; }
     public bool IsMoving { get => _IsMoving; set => _IsMoving = value; }
-    public bool CanMove { get => _canMove; set => _canMove = value; }
+    public bool CanMove { get => _canMove; set => _canMove = value;  /*{ Debug.Log("CanMove changed to : " + value); _canMove = value; }*/ }
     public bool CanJump { get => _canJump; set => _canJump = value; }
     public bool CanAttack { get => _canAttack; set => _canAttack = value; }
     public Animator PlayerAnim { get => _playerAnim; set => _playerAnim = value; }
@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
     {
         if (InputBlocker.IsPointerOverUI())
             return;
+
+        //if (!_canMove)
+        //{
+        //    Debug.Log("PLAYER CANT MOVE");
+        //}
 
         HandleMoveInput();
         HandleJumpInput();

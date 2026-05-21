@@ -151,7 +151,8 @@ public class PlayerCombat : MonoBehaviour
     private void PlayerAttackRecoil(Transform pTransform, float pRecoilForce)
     {
         Vector2 direction = (transform.position - pTransform.position).normalized;
-        _pMovement.Rb.linearVelocity = direction * pRecoilForce;
+        _pMovement.Rb.AddForce(direction * pRecoilForce, ForceMode2D.Impulse);
+        //_pMovement.Rb.linearVelocity = direction * pRecoilForce;
     }
 
     //private void UpdateAttackState()

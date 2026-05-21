@@ -16,10 +16,12 @@ public class ParaShotBullet : MonoBehaviour
     [SerializeField] private float _autoDestroyTime;
     [SerializeField] private float _stunValue;
     private Rigidbody2D _paraBody;
+    [SerializeField] private AudioClip _nullDamageSfx;
+    [SerializeField] private AudioClip _DamageSfx;
     #endregion
 
     #region Unity Methods 
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -70,10 +72,12 @@ public class ParaShotBullet : MonoBehaviour
             //collision.GetComponent<DummyEnemy>().Stun(_stunValue);
             collision.GetComponent<DummyEnemy>().IsStunned = true;
             collision.GetComponent<DummyEnemy>().StunTime = _stunValue;
+            AudioManager.Instance.PlaySFX(_DamageSfx);
             Destroy(gameObject);
         }
-        else if(collision.gameObject.tag == "Untagged")
+        else if(collision.gameObject.tag == "Untagged" || collision.gameObject.tag == "Boss")
         {
+            AudioManager.Instance.PlaySFX(_nullDamageSfx, false, 0.75f);
             Destroy(gameObject);
         }
     }

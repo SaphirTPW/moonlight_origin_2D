@@ -33,8 +33,11 @@ public class EmotionController : MonoBehaviour
     [SerializeField] private ActiveEmotionState _currentActiveEmotion;
     [SerializeField] private float _startControllerCooldownTime;
     [SerializeField] private float _currControllerCooldown;
+    [SerializeField] private float _switchCooldown = 0.2f;
+    private float _switchCooldownTimer;
 
     public bool canSwitch = false;
+    [SerializeField] private bool _isFusing = false;
 
     [SerializeField] private bool _coolDownIsOn = false;
     [SerializeField] private bool _hasFused = false;
@@ -98,6 +101,11 @@ public class EmotionController : MonoBehaviour
         //SetDebugTextValue();
         ControllerCooldown();
         StartControllerCoolDown();
+
+        if(_switchCooldownTimer > 0)
+        {
+            _switchCooldownTimer -= Time.deltaTime;
+        }
     }
 
     private void OnDisable()
@@ -117,6 +125,8 @@ public class EmotionController : MonoBehaviour
 
         if (canSwitch)
         {
+            if (_isFusing)
+                return;
             if(InputDeviceManager.Instance.CurrentControl == InputDeviceManager.ControlType.Gamepad)
             {
                 _dPadH = Input.GetAxisRaw("DPAD-H");
@@ -171,6 +181,9 @@ public class EmotionController : MonoBehaviour
 
     public void EnableEmotion(Emotion pEmotion, ActiveEmotionState pActiveEmoState, Color pColor, ParticleSystem pFX)
     {
+        if (_switchCooldownTimer > 0)
+            return;
+
         for (int i = 0; i < _emotions.Length; i++)
         {
             //_emotions[i].EmoState = Emotion.EmotionState.Sleep;
@@ -194,6 +207,7 @@ public class EmotionController : MonoBehaviour
 
         if(_hasFused && _currentActiveEmotion != ActiveEmotionState.Neutral)
         {
+            _switchCooldownTimer = _switchCooldown;
             pEmotion.UpdateEmotionState(Emotion.EmotionState.Awake);
             AudioManager.Instance.PlaySFX(_switchFusionSFX);
 
@@ -325,6 +339,7 @@ public class EmotionController : MonoBehaviour
 
     private void AnimaFusion(Emotion pEmotion, Color pColor)
     {
+        _isFusing = true;
         _gatherFX.startColor = pColor;
         _burstFX.startColor = pColor;
         _gatherFX.Play();
@@ -375,6 +390,7 @@ public class EmotionController : MonoBehaviour
         _pc.CanJump = true;
         _pm.Rb.simulated = true;
         _hasFused = true;
+        _isFusing = false;
     }
 
     private IEnumerator AnimaDefusionCo(ParticleSystem pDefusionFX, Emotion pEmotion)

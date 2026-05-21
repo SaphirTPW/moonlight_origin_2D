@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _bulletForceUp;
     [SerializeField] private float _autoDestroyTime;
     private Rigidbody2D _bulletBody;
+    [SerializeField] private AudioClip _DamageSfx;
+
     #endregion
 
     #region Unity Methods 
@@ -65,9 +67,10 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.GetComponent<DummyEnemy>().Knockback(transform,_bulletForce, _bulletForceUp);
+            AudioManager.Instance.PlaySFX(_DamageSfx);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Untagged")
+        else if (collision.gameObject.tag == "Untagged" || collision.gameObject.tag == "Boss")
         {
             Destroy(gameObject);
         }

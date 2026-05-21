@@ -10,10 +10,25 @@ public class EnableScript : MonoBehaviour
     [SerializeField] [TextArea] private string _challengeString;
     [SerializeField] private TimedObj _timedObj;
     private bool _canEnableChallenge = false;
+    [SerializeField] private bool _isAutomatic;
 
     private void Start()
     {
-        
+        if (_challengeToEnable == null)
+        {
+            Debug.LogError("ChallengeController manquant sur EnableScript");
+            return;
+        }
+
+        if (_isAutomatic)
+        {
+            _challengeToEnable.Challenge.StartChallenge();
+
+            if (_timedObj != null)
+            {
+                _timedObj.EnableObj();
+            }
+        }
     }
 
     private void Update()

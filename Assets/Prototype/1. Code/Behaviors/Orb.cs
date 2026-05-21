@@ -12,7 +12,7 @@ public class Orb : MonoBehaviour
             _challenge.AddCollect(1);
             gameObject.SetActive(false);
             gameObject.GetComponent<Collider2D>().enabled = false;
-            AudioManager.Instance.PlaySFX(_collectSFX);
+            AudioManager.Instance.PlaySFX(_collectSFX, false, 0.75f);
         }
     }
 }

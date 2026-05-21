@@ -103,7 +103,7 @@ public class CubeDashAction : BossAction
         targetPos.y += _data.teleportOffsetY;
 
         _bossTransform.position = targetPos;
-        AudioManager.Instance.PlaySFX(_teleportSFX);
+        AudioManager.Instance.PlaySFX(_teleportSFX, false, 0.65f);
 
         _timer = 0f;
         _currentPhase = CubeDashPhase.WindUp;

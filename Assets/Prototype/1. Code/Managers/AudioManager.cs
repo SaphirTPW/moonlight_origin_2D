@@ -16,17 +16,18 @@ public class AudioManager : MonoBehaviour
         Instance = this;
     }
 
-    public void PlayMusic(AudioClip pClip, bool pLoop = true)
+    public void PlayMusic(AudioClip pClip, bool pLoop = true, float pVolume = 0.35f)
     {
         if (_musicSource.clip == pClip)
             return;
 
         _musicSource.clip = pClip;
         _musicSource.loop = pLoop;
+        _musicSource.volume = pVolume;
         _musicSource.Play();
     }
 
-    public void PlaySFX(AudioClip pClip, bool pLoop = false)
+    public void PlaySFX(AudioClip pClip, bool pLoop = false, float pVolume = 0.35f)
     {
         if (pLoop)
         {
@@ -35,10 +36,13 @@ public class AudioManager : MonoBehaviour
 
             _loopSFXSource.clip = pClip;
             _loopSFXSource.loop = true;
+            _loopSFXSource.volume = pVolume;
             _loopSFXSource.Play();
         }
         else
         {
+            _sfxSource.clip = pClip;
+            _sfxSource.volume = pVolume;
             _sfxSource.PlayOneShot(pClip);
         }
     }

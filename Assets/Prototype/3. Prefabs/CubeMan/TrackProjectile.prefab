@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7583271364903380295}
   - component: {fileID: 6147271925390565788}
   - component: {fileID: 1220637661622725384}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TrackProjectile
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}

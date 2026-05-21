@@ -19,7 +19,7 @@ MonoBehaviour:
   dashSpeed: 30
   dashDuration: 0.45
   preDashDelay: 1
-  delayBetweenDash: 0.85
+  delayBetweenDash: 0.65
   finalRecoveryTime: 2
-  teleportOffsetX: 6.5
+  teleportOffsetX: 6.25
   teleportOffsetY: 10

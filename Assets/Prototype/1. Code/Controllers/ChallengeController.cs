@@ -11,12 +11,13 @@ public class ChallengeController : MonoBehaviour
     [SerializeField] private AudioClip _challengeMusic;
     [SerializeField] private AudioClip _rewardMusic;
     [SerializeField] private AudioClip _failMusic;
+    [SerializeField] private float _volume = 0.35f;
 
     private Challenge _challenge;
 
     public Challenge Challenge { get => _challenge; set => _challenge = value; }
 
-    private void Start()
+    private void Awake()
     {
         CreateChallenge();
         _challenge.OnChallengeCompleted += OnChallengeCompleted;
@@ -76,7 +77,7 @@ public class ChallengeController : MonoBehaviour
 
     public void StartChallengeMusic()
     {
-        AudioManager.Instance.PlayMusic(_challengeMusic);
+        AudioManager.Instance.PlayMusic(_challengeMusic, true, _volume);
     }
 
     public void ChallengeFailed()

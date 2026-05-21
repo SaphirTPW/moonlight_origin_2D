@@ -9274,11 +9274,15 @@ PrefabInstance:
       objectReference: {fileID: 117427756}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: _challengeString
-      value: 'Reach the top of this area to find a Cube-Key
+      value: 'Reach the top of this area[WHITE AREA] to find a Cube Key !
 
 
-        PRESS : [Y]
-        or [ENTER] to start this challenge. '
+        PRESS
+        : [CONTROLLER][Y] or [KEYBOARD][C] to start this challenge.
+
+
+        INFO
+        : 30sec to complete the challenge. '
       objectReference: {fileID: 0}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: challengeToEnable
@@ -13532,6 +13536,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 866753476}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
+      propertyPath: _isAutomatic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: _challengeText
       value: 
       objectReference: {fileID: 971774874}
@@ -13541,11 +13549,9 @@ PrefabInstance:
       objectReference: {fileID: 117427756}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: _challengeString
-      value: 'Collect all the orbs before the time limit !
-
-
-        PRESS : [Y]
-        or [ENTER] to start this challenge. '
+      value: "Collect all the orbs before the time limit to find a Cube Key !\n\nPRESS
+        : [CONTROLLER][Y] or [KEYBOARD][C] to start this challenge. \n\nINFO : 50sec
+        to complete this challenge.  "
       objectReference: {fileID: 0}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: challengeToEnable
@@ -15456,6 +15462,7 @@ MonoBehaviour:
   _challengeMusic: {fileID: 8300000, guid: 02ecb9c24f376b64ea9d0a82a7278444, type: 3}
   _rewardMusic: {fileID: 8300000, guid: a909c53a37a5eee4ea2c9012e3a978d3, type: 3}
   _failMusic: {fileID: 8300000, guid: ca325143a1098374e99b24d4a8dfaa86, type: 3}
+  _volume: 0.35
 --- !u!1 &949500866
 GameObject:
   m_ObjectHideFlags: 0
@@ -16367,6 +16374,7 @@ MonoBehaviour:
   _challengeMusic: {fileID: 8300000, guid: 3b30bd2d4e2387f4395932ed1157db4b, type: 3}
   _rewardMusic: {fileID: 8300000, guid: a909c53a37a5eee4ea2c9012e3a978d3, type: 3}
   _failMusic: {fileID: 8300000, guid: ca325143a1098374e99b24d4a8dfaa86, type: 3}
+  _volume: 0.35
 --- !u!1 &963012831
 GameObject:
   m_ObjectHideFlags: 0
@@ -18788,6 +18796,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 866753476}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
+      propertyPath: _isAutomatic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: _challengeText
       value: 
       objectReference: {fileID: 971774874}
@@ -18797,8 +18809,8 @@ PrefabInstance:
       objectReference: {fileID: 117427756}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: _challengeString
-      value: "Find all Cube-Keys to challenge CubeMan ! \n\nPRESS : [Y] or [ENTER]
-        to start this challenge. "
+      value: "Find 3 Cube Keys to challenge CubeMan ! \n\nReturn here once you find
+        them all to challenge HIM.  "
       objectReference: {fileID: 0}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: challengeToEnable
@@ -20935,7 +20947,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1205287977}
-  - component: {fileID: 1205287978}
   m_Layer: 0
   m_Name: Challenge
   m_TagString: Untagged
@@ -20958,18 +20969,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 962407472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1205287978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205287976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2405fbc43776b0e48a0a95e8c1acd68a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KeyHuntingChallenge
 --- !u!1 &1209893687
 GameObject:
   m_ObjectHideFlags: 0
@@ -23146,8 +23145,9 @@ PrefabInstance:
       objectReference: {fileID: 117427756}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: _challengeString
-      value: "Destroy all boxes before the time limit. \n\nPRESS : [Y] or [ENTER]
-        to start this challenge. "
+      value: "Destroy all boxes before the time limit to find a Cube Key ! \n\nPRESS
+        : [CONTROLLER][Y] or [KEYBOARD][C] to start this challenge.\n\nINFO : 60sec
+        to complete this challenge.  "
       objectReference: {fileID: 0}
     - target: {fileID: 8385042570072925003, guid: 561a860c800ce7340a37f81eabdaee8d, type: 3}
       propertyPath: challengeToEnable
@@ -23499,6 +23499,7 @@ MonoBehaviour:
   _challengeMusic: {fileID: 8300000, guid: 02ecb9c24f376b64ea9d0a82a7278444, type: 3}
   _rewardMusic: {fileID: 8300000, guid: a909c53a37a5eee4ea2c9012e3a978d3, type: 3}
   _failMusic: {fileID: 8300000, guid: ca325143a1098374e99b24d4a8dfaa86, type: 3}
+  _volume: 0.35
 --- !u!1 &1433291507
 GameObject:
   m_ObjectHideFlags: 0
@@ -25754,6 +25755,7 @@ MonoBehaviour:
   _challengeMusic: {fileID: 8300000, guid: ca83ef70964c53c4486c1ba75387cea7, type: 3}
   _rewardMusic: {fileID: 8300000, guid: a909c53a37a5eee4ea2c9012e3a978d3, type: 3}
   _failMusic: {fileID: 8300000, guid: ca325143a1098374e99b24d4a8dfaa86, type: 3}
+  _volume: 0.65
 --- !u!1 &1577958268
 GameObject:
   m_ObjectHideFlags: 0

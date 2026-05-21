@@ -17,6 +17,16 @@ public class ShadowStep : Skill
     #endregion
 
     #region Unity Methods 
+    private void OnEnable()
+    {
+        PlayerHealth.OnPlayerHit += HandleShadowStepDodge;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnPlayerHit -= HandleShadowStepDodge;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
@@ -58,8 +68,19 @@ public class ShadowStep : Skill
         PC.CanJump = false;
         PM.Rb.linearVelocity = new Vector2(PM.Rb.linearVelocity.x * -_dashForce, PM.Rb.linearVelocity.y);
         PM.Rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-        PM.PlayerCollider.enabled = false;
+        //PM.PlayerCollider.enabled = false;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyAttack"), true);
         _isActive = true;
+    }
+
+    private bool HandleShadowStepDodge(float pDamage)
+    {
+        if (_isActive)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void HandleReturnToNormal()
@@ -77,7 +98,8 @@ public class ShadowStep : Skill
             PC.CanJump = true;
             PM.Rb.constraints = RigidbodyConstraints2D.None;
             PM.Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            PM.PlayerCollider.enabled = true;
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyAttack"), false);
+            //PM.PlayerCollider.enabled = true;
             CurrentSkillState = SkillState.CoolDown;
             PM.Rb.linearVelocity = _savedVelocity;
             _dashTime = 0;

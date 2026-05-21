@@ -32,7 +32,6 @@ public abstract class Challenge
 
     public virtual void StartChallenge()
     {
-
         if (_isActive)
             return;
 

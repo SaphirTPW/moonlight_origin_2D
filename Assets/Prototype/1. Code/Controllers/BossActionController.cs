@@ -23,6 +23,8 @@ public class BossActionController : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private AudioClip _teleportSFX;
     [SerializeField] private AudioClip _orbShotSFX;
+    [SerializeField] private AudioClip _audioCue;
+    [SerializeField] private AudioClip _p2audioCue;
     [SerializeField] private AudioClip _impactSFX;
     [SerializeField] private CinemachineImpulseSource _groundImpulse;
     [SerializeField] private LayerMask _groundLayer;
@@ -119,6 +121,7 @@ public class BossActionController : MonoBehaviour
     private void StartPhase2()
     {
         _phase2Started = true;
+        AudioManager.Instance.PlaySFX(_p2audioCue);
 
         _currentActionIndex = UnityEngine.Random.Range(0, _phase2Actions.Count);
 
@@ -146,7 +149,8 @@ public class BossActionController : MonoBehaviour
                 orbSO,
                 _bossTransform,
                 _playerTransform,
-                _orbShotSFX
+                _orbShotSFX,
+                _audioCue
                 );
         }
 
