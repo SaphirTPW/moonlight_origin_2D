@@ -2203,6 +2203,78 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169155918}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &178545286
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 829807682}
+    m_Modifications:
+    - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: _helpText
+      value: 
+      objectReference: {fileID: 1824691805}
+    - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: _helpObjBox
+      value: 
+      objectReference: {fileID: 713187738}
+    - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: _helpString
+      value: "Burst Jump (Joy Skill - Yellow) : \nAllows you to perform an additional
+        jump in the air. \n\nDirectional Dash (Joy Skill - Yellow) : \nAllows you
+        to dash in any direction. Use the [LEFT-JOYSTICK] or [ZQSD] to choose that
+        set direction.  "
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.0127254
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784088941365314089, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_Name
+      value: Help Icon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
 --- !u!1 &183475628
 GameObject:
   m_ObjectHideFlags: 0
@@ -13281,6 +13353,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825374770}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &829807681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 829807682}
+  m_Layer: 0
+  m_Name: Help Icons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &829807682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829807681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 983431060}
+  - {fileID: 1252171229}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &845184039
 GameObject:
   m_ObjectHideFlags: 0
@@ -17019,6 +17124,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973603908}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &983431060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+  m_PrefabInstance: {fileID: 178545286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1003871589
 GameObject:
   m_ObjectHideFlags: 0
@@ -21035,6 +21145,83 @@ Transform:
   - {fileID: 652563555}
   m_Father: {fileID: 225914539}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &1252171228
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 829807682}
+    m_Modifications:
+    - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: _helpText
+      value: 
+      objectReference: {fileID: 1824691805}
+    - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: _helpObjBox
+      value: 
+      objectReference: {fileID: 713187738}
+    - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: _helpString
+      value: "ShadowStep (Fear Skill - Purple) : \nAllows you to perform a dash in
+        the opposite direction where you're heading. Nothing can touch you during
+        the dash except platforms and walls. \n\nIsolation Clone (Sadness Skill -
+        Blue) : \nAllows you to create a \"Clone\" to use as a shield or as a platform.   "
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.012725
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784088941365314089, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+      propertyPath: m_Name
+      value: Help Icon (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+--- !u!4 &1252171229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
+  m_PrefabInstance: {fileID: 1252171228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263182039
 GameObject:
   m_ObjectHideFlags: 0
@@ -32854,3 +33041,4 @@ SceneRoots:
   - {fileID: 2007167099}
   - {fileID: 352081757}
   - {fileID: 845264409}
+  - {fileID: 829807682}

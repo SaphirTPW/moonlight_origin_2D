@@ -15,9 +15,9 @@ MonoBehaviour:
   actionName: 
   duration: 0
   speed: 0
-  spawnDelay: 1.25
-  orbCount: 5
-  followDuration: 0.55
-  followSpeed: 8
-  projectileSpeed: 5
+  spawnDelay: 1.1
+  orbCount: 6
+  followDuration: 0.5
+  followSpeed: 1
+  projectileSpeed: 72
   orbPrefab: {fileID: 6015365498457570997, guid: fa47fb06a94de6a4194c462ad5a8b43a, type: 3}

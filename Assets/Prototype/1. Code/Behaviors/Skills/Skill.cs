@@ -20,7 +20,7 @@ public class Skill : MonoBehaviour
 
     #region Private Variables 
     [SerializeField] private SkillData _skillData;
-    [SerializeField] private Emotion _emotion;
+    [SerializeField] protected Emotion _emotion;
 
     private PlayerHealth _pH;
     private PlayerMovement _pM;

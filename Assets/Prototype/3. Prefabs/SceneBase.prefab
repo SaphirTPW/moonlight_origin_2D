@@ -2174,6 +2174,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9932553f12e298541ab96c7e3b7e55d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstantCrashOut
+--- !u!114 &8094923171966165007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7146748757877882913, guid: 070e8e6604fed794bb3b2af07acd7d47, type: 3}
+  m_PrefabInstance: {fileID: 1403059975283646510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911280781c89e2441a73db20a728beab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8307141278930918859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6931127133627547109, guid: 070e8e6604fed794bb3b2af07acd7d47, type: 3}
@@ -2364,9 +2375,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1710545669978236446, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710545669978236446, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4586589691780709483}
+      objectReference: {fileID: 8094923171966165007}
+    - target: {fileID: 1710545669978236446, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710545669978236446, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1752879331002460827, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2458,6 +2481,30 @@ PrefabInstance:
     - target: {fileID: 2623816973610509094, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_Name
       value: Orb Meter - Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625875441591741990, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625875441591741990, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625875441591741990, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625875441591741990, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625875441591741990, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625875441591741990, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2798075160478758076, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2618,6 +2665,18 @@ PrefabInstance:
     - target: {fileID: 3643450045433491101, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_Color.r
       value: 0.9622642
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687620714870320203, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_text
+      value: Return Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687620714870320203, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687620714870320203, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3740113729555136553, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2846,6 +2905,10 @@ PrefabInstance:
     - target: {fileID: 6782287630578928672, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_Name
       value: Orb Meter  - Anger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801835014347588779, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
+      propertyPath: m_Name
+      value: Main Menu Button
       objectReference: {fileID: 0}
     - target: {fileID: 6829754161978170581, guid: e76b6f894efa2c74c966b4524f3c1938, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3539,6 +3602,10 @@ PrefabInstance:
       propertyPath: _dashSFX
       value: 
       objectReference: {fileID: 8300000, guid: e2cebfea6b7059d4ca33acba105f095f, type: 3}
+    - target: {fileID: 588723240174479633, guid: 92b4d31e766d0f74eb7eaa3f8ed1c8ee, type: 3}
+      propertyPath: _dashForce
+      value: 38
+      objectReference: {fileID: 0}
     - target: {fileID: 620618606045667732, guid: 92b4d31e766d0f74eb7eaa3f8ed1c8ee, type: 3}
       propertyPath: _skillIndicator
       value: 
@@ -3771,9 +3838,17 @@ PrefabInstance:
       propertyPath: _dashSFX
       value: 
       objectReference: {fileID: 8300000, guid: 4117564e4d7ad8646823ec5c891a2975, type: 3}
+    - target: {fileID: 4778843851465497295, guid: 92b4d31e766d0f74eb7eaa3f8ed1c8ee, type: 3}
+      propertyPath: _dashForce
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4839278666242668863, guid: 92b4d31e766d0f74eb7eaa3f8ed1c8ee, type: 3}
       propertyPath: _airDamping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070766903430783371, guid: 92b4d31e766d0f74eb7eaa3f8ed1c8ee, type: 3}
+      propertyPath: _damage
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5070766903430783371, guid: 92b4d31e766d0f74eb7eaa3f8ed1c8ee, type: 3}
       propertyPath: _impulse

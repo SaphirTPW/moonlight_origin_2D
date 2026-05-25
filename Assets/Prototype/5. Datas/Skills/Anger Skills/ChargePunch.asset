@@ -16,4 +16,4 @@ MonoBehaviour:
   skillDesc: "Coup puissant qui inflige beaucoup de d\xE9g\xE2ts aux ennemis touch\xE9s. "
   skillEmoType: 2
   coolDownTime: 7
-  skillCost: 30
+  skillCost: 40

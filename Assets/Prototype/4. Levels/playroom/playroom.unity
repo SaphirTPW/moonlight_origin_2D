@@ -9118,8 +9118,8 @@ PrefabInstance:
       objectReference: {fileID: 1632249196}
     - target: {fileID: 2075628895216850818, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
       propertyPath: _helpString
-      value: "Healing Process : \n\nWhen hurt, use the Sadness Emotion [Blue] special
-        skill Healing Process to heal 40% of your MaxHP. "
+      value: "Healing Burst : \n\nWhen hurt, use the Sadness Emotion [Blue] special
+        skill Healing Burst to heal 40% of your MaxHP. "
       objectReference: {fileID: 0}
     - target: {fileID: 4883029020772163321, guid: 8ada70837f85b184685aad7ce56219af, type: 3}
       propertyPath: m_LocalPosition.x

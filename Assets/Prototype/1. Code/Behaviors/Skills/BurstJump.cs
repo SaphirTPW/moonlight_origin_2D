@@ -35,8 +35,16 @@ public class BurstJump : Skill
     public override void EnableSkill(float pSkillCost)
     {
         base.EnableSkill(pSkillCost);
-        if (CurrentSkillState == SkillState.Ready)
+        if (CurrentSkillState == SkillState.Ready && !PM.PlayerGrounded)
+        {
             HandleBurstJump();
+        }
+        else if (CurrentSkillState == SkillState.Ready && PM.PlayerGrounded)
+        {
+            _emotion.CurrentEmotionEnergy -= pSkillCost;
+            EC.EmoControllerState = EmotionController.EmotionControllerState.Ready;
+            return;
+        }
     }
 
     public override void SkillOnCoolDown()

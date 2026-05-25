@@ -69,7 +69,7 @@ public class ShadowStep : Skill
         PM.Rb.linearVelocity = new Vector2(PM.Rb.linearVelocity.x * -_dashForce, PM.Rb.linearVelocity.y);
         PM.Rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         //PM.PlayerCollider.enabled = false;
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyAttack"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         _isActive = true;
     }
 
@@ -98,7 +98,7 @@ public class ShadowStep : Skill
             PC.CanJump = true;
             PM.Rb.constraints = RigidbodyConstraints2D.None;
             PM.Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyAttack"), false);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
             //PM.PlayerCollider.enabled = true;
             CurrentSkillState = SkillState.CoolDown;
             PM.Rb.linearVelocity = _savedVelocity;

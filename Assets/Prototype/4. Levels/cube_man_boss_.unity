@@ -163,6 +163,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 791998969538085170, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: _startAttackTime
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2087125433729264966, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -267,6 +271,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4673761227315477807, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5474449814917679065, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: field of view
       value: 25
@@ -278,6 +286,18 @@ PrefabInstance:
     - target: {fileID: 5474449814917679065, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: near clip plane
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963564154818451961, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963564154818451961, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963564154818451961, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6224848611367162750, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_Lens.FieldOfView
@@ -306,6 +326,30 @@ PrefabInstance:
     - target: {fileID: 6505345428557571665, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023567792260611613, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023567792260611613, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023567792260611613, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023567792260611613, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 33.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023567792260611613, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023567792260611613, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.875
       objectReference: {fileID: 0}
     - target: {fileID: 7186088015458290857, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: m_LocalPosition.x
@@ -351,9 +395,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneBase
       objectReference: {fileID: 0}
+    - target: {fileID: 7527998612777716119, guid: 25f00203f7ccd7241b98954168743456, type: 3}
+      propertyPath: _groundDamping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8094923171966165007, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: _musicVolume
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8094923171966165007, guid: 25f00203f7ccd7241b98954168743456, type: 3}
       propertyPath: startPosition
@@ -448,55 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachineImpulseSource
---- !u!1 &597068876
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 597068878}
-  - component: {fileID: 597068877}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &597068877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597068876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 3f9215ea0144899419cfbc0957140d3f, type: 2}
---- !u!4 &597068878
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597068876}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.7458425, y: -2.168681, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &606926981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1190269148317034444, guid: 25f00203f7ccd7241b98954168743456, type: 3}
@@ -1348,6 +1347,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: d8f21688fb572cf43b6fb15da27d197c, type: 3}
     - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
+      propertyPath: _phase2AudioCue
+      value: 
+      objectReference: {fileID: 8300000, guid: bc594476db9b14e40aef4dea5845e173, type: 3}
+    - target: {fileID: 2369153894965110268, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: _bossDefeatedSFX
       value: 
       objectReference: {fileID: 8300000, guid: a9f42e6f08957fd4a8fee50b9369e892, type: 3}
@@ -1445,7 +1448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6280462476837859778, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: _enemyMaxHealth
-      value: 1000
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 6718893142396796273, guid: 913cc9109186d7e4299f899351630ee8, type: 3}
       propertyPath: _damageSound
@@ -1495,4 +1498,3 @@ SceneRoots:
   - {fileID: 1429076105}
   - {fileID: 2023749993}
   - {fileID: 1104301576}
-  - {fileID: 597068878}

@@ -14,6 +14,7 @@ public class CubeDashAction : BossAction
 
     private int _currentDash = 0;
     private float _timer = 0f;
+    private float _lastSide = 0f;
 
     private Vector2 _dashDirection;
 
@@ -94,8 +95,20 @@ public class CubeDashAction : BossAction
 
     private void DoTeleport()
     {
-        //Check in which side CubeMan will appear when he teleports
-        float side = Random.value > 0.5f ? 1f : -1f;
+        float side;
+
+        if (_lastSide == 0f)
+        {
+            side = Random.value > 0.5f ? 1f : -1f;
+        }
+        else
+        {
+            // 85% de chance de switch côté, 15% de rester (ajustable)
+            bool switchSide = Random.value < 0.85f;
+            side = switchSide ? -_lastSide : _lastSide;
+        }
+
+        _lastSide = side;
 
         Vector3 targetPos = _playerTransform.position;
 

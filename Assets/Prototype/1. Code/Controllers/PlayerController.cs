@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Attack") || Input.GetMouseButtonDown(0))
             {
                 _isAttacking = true;
-                _pm.PlayerSpeed = _pm.PlayerSpeed / 3;
+                _pm.PlayerSpeed = _pm.PlayerSpeed / 30;
                 _playerAnim.SetTrigger("Attack");
                 AudioManager.Instance.PlaySFX(_normalSwingSFX);
                 _canAttack = false;

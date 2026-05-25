@@ -14,6 +14,7 @@ public class BossActionController : MonoBehaviour
 
     [SerializeField] private List<BossActionSO> _phase2ActionSOList;
     private List<BossAction> _phase2Actions = new List<BossAction>();
+    private bool _phase2Pending = false;
     private bool _phase2Started = false;
 
     private int _currentActionIndex = 0;
@@ -24,7 +25,7 @@ public class BossActionController : MonoBehaviour
     [SerializeField] private AudioClip _teleportSFX;
     [SerializeField] private AudioClip _orbShotSFX;
     [SerializeField] private AudioClip _audioCue;
-    [SerializeField] private AudioClip _p2audioCue;
+    [SerializeField] private AudioClip _phase2AudioCue;
     [SerializeField] private AudioClip _impactSFX;
     [SerializeField] private CinemachineImpulseSource _groundImpulse;
     [SerializeField] private LayerMask _groundLayer;
@@ -73,15 +74,11 @@ public class BossActionController : MonoBehaviour
 
     private void Update()
     {
-        if (!_phase2Started && _bossHealth.EnemyCurrentHealth <= _bossHealth.EnemyMaxHealth / 2)
+        if (!_phase2Started && !_phase2Pending && _bossHealth.EnemyCurrentHealth <= _bossHealth.EnemyMaxHealth / 2)
         {
-            StartPhase2();
+            _phase2Pending = true;
+            //StartPhase2();
         }
-
-        //if(_bossHealth.EnemyCurrentHealth <= 0)
-        //{
-        //    OnBossDefeated?.Invoke();
-        //}
 
         if (_actions.Count == 0)
             return;
@@ -94,6 +91,13 @@ public class BossActionController : MonoBehaviour
 
     private void OnActionFinished()
     {
+        if (_phase2Pending)
+        {
+            _phase2Pending = false;
+            StartPhase2();
+            return;
+        }
+
         if (!_phase2Started)
         {
             _currentActionIndex++;
@@ -120,8 +124,9 @@ public class BossActionController : MonoBehaviour
 
     private void StartPhase2()
     {
+        Debug.Log("StartPhase2");
         _phase2Started = true;
-        AudioManager.Instance.PlaySFX(_p2audioCue);
+        AudioManager.Instance.PlaySFX(_phase2AudioCue, false, 1f);
 
         _currentActionIndex = UnityEngine.Random.Range(0, _phase2Actions.Count);
 
@@ -178,6 +183,8 @@ public class BossActionController : MonoBehaviour
     private IEnumerator BossDefeatedCo()
     {
         yield return null;
+        _playerTransform.GetComponent<Collider2D>().enabled = false;
+        _playerTransform.GetComponent<Rigidbody2D>().simulated = false;
         UIManager.Instance.EnableFadePanel();
         AudioManager.Instance.StopMusic();
         AudioManager.Instance.MusicSource.clip = null;
