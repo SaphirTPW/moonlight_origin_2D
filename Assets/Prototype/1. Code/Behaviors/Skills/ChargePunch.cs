@@ -49,7 +49,7 @@ public class ChargePunch : Skill
     #region Public Methods 
     public override void EnableSkill(float pSkillCost)
     {
-        if (!_isActive)
+        if (!_isActive && CurrentSkillState == SkillState.Ready)
         {
             base.EnableSkill(pSkillCost);
             _isActive = true;

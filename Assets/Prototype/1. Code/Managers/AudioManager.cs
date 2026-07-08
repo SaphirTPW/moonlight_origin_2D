@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _voiceSource;
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioSource _loopSFXSource;
 
@@ -45,6 +46,16 @@ public class AudioManager : MonoBehaviour
             _sfxSource.volume = pVolume;
             _sfxSource.PlayOneShot(pClip);
         }
+    }
+
+    public void PlayVoice(AudioClip pClip, bool pLoop = false, float pVolume = 1f)
+    {
+        //if (_voiceSource.clip == pClip)
+        //    return;
+
+        _voiceSource.clip = pClip;
+        _voiceSource.volume = pVolume;
+        _voiceSource.PlayOneShot(pClip);
     }
 
     public void StopSFX()

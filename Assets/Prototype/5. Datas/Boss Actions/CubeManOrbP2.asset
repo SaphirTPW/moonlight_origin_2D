@@ -15,7 +15,7 @@ MonoBehaviour:
   actionName: 
   duration: 0
   speed: 0
-  spawnDelay: 1.1
+  spawnDelay: 1
   orbCount: 6
   followDuration: 0.5
   followSpeed: 1

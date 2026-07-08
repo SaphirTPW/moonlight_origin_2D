@@ -173,7 +173,8 @@ public class PlayerMovement : MonoBehaviour
             _playerGrounded = false;
             _pc.Jump = false;
             AudioManager.Instance.PlaySFX(_pc.NormalJumpSFX);
-            _rb.AddForce(new Vector2(0f, _playerJumpForce), ForceMode2D.Impulse);
+            //_rb.AddForce(new Vector2(0f, _playerJumpForce), ForceMode2D.Impulse);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _playerJumpForce);
         }
     }
 

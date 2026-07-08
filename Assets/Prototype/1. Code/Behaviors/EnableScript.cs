@@ -38,7 +38,7 @@ public class EnableScript : MonoBehaviour
             Debug.Log("Challenge ?");
             _challengeToEnable.Challenge.StartChallenge();
             _timedObj.EnableObj();
-            DisableChallengePanel();
+            //DisableChallengePanel();
         }
         else
             return;

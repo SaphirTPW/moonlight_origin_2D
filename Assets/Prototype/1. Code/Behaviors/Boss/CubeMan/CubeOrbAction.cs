@@ -25,7 +25,7 @@ public class CubeOrbAction : BossAction
 
     public override void StartAction()
     {
-        AudioManager.Instance.PlaySFX(_audioCue);
+        AudioManager.Instance.PlayVoice(_audioCue, false, 0.75f);
         _currentOrbIndex = 0;
         _finishedOrbCount = 0;
 

@@ -126,7 +126,7 @@ public class BossActionController : MonoBehaviour
     {
         Debug.Log("StartPhase2");
         _phase2Started = true;
-        AudioManager.Instance.PlaySFX(_phase2AudioCue, false, 1f);
+        AudioManager.Instance.PlayVoice(_phase2AudioCue, false, 0.75f);
 
         _currentActionIndex = UnityEngine.Random.Range(0, _phase2Actions.Count);
 
